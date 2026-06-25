@@ -1,0 +1,72 @@
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Tenant {
+    id               String     @id @default(auto()) @map("_id") @db.ObjectId
+    name             String     @unique
+    subscriptionPlan String     @default("free") // free, premium, enterprise
+    isActive         Boolean    @default(true)
+    createdAt        DateTime   @default(now())
+    updatedAt        DateTime   @updatedAt
+    users            User[]
+    shipments        Shipment[]
+    hubs             Hub[]
+}
+
+model User {
+    id           String   @id @default(auto()) @map("_id") @db.ObjectId
+    email        String   @unique
+    passwordHash String
+    role         String   // superadmin, admin, hub, delivery
+    fullName     String
+    tenantId     String?  @db.ObjectId
+    tenant       Tenant?  @relation(fields: [tenantId], references: [id])
+    createdAt    DateTime @default(now())
+    updatedAt    DateTime @updatedAt
+}
+
+model Shipment {
+    id               String          @id @default(auto()) @map("_id") @db.ObjectId
+    trackingNumber   String          @unique
+    senderName       String
+    senderAddress    String
+    receiverName     String
+    receiverEmail    String?
+    receiverAddress  String
+    weight           Float
+    status           String          @default("pending") // pending, picked_up, at_sorting, in_transit, out_for_delivery, delivered, failed
+    tenantId         String          @db.ObjectId
+    tenant           Tenant          @relation(fields: [tenantId], references: [id])
+    createdById      String          @db.ObjectId
+    assignedHubId    String?         @db.ObjectId
+    assignedDriverId String?         @db.ObjectId
+    createdAt        DateTime        @default(now())
+    updatedAt        DateTime        @updatedAt
+    events           ShipmentEvent[]
+}
+
+model ShipmentEvent {
+    id          String   @id @default(auto()) @map("_id") @db.ObjectId
+    shipmentId  String   @db.ObjectId
+    shipment    Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+    status      String
+    description String
+    location    String?
+    createdAt   DateTime @default(now())
+}
+
+model Hub {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    address   String
+    tenantId  String   @db.ObjectId
+    tenant    Tenant   @relation(fields: [tenantId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

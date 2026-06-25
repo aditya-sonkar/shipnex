@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #ffffff;
+  --foreground: #0c0c0e;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(12, 12, 14, 0.06);
+  --world-grey: #6b6b76;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #f4f4f6;
+  --card-bg: rgba(9, 9, 11, 0.8);
+  --card-border: rgba(244, 244, 246, 0.06);
+  --world-grey: #a0a0ab;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --font-heading: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  
+  /* World Labs colors */
+  --color-world-blue: #2a679c;
+  --color-world-grey: var(--world-grey);
+  --color-[#6b6b76]: var(--world-grey);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ─── Dot-grid background (World Labs Spatial Grid theme) ─── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -50;
+  pointer-events: none;
+  background-image: radial-gradient(circle, currentColor 0.6px, transparent 0.6px);
+  background-size: 32px 32px;
+  opacity: 0.015;
+}
+
+.dark body::before {
+  opacity: 0.03;
+}
+
+/* ─── World Labs Ambient Mesh Glows ─── */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -40;
+  pointer-events: none;
+  background:
+    radial-gradient(circle 800px at 100% -200px, rgba(42, 103, 156, 0.06), transparent),
+    radial-gradient(circle 700px at -100px 300px, rgba(0, 229, 163, 0.03), transparent);
+}
+
+.dark body::after {
+  background:
+    radial-gradient(circle 800px at 100% -200px, rgba(42, 103, 156, 0.12), transparent),
+    radial-gradient(circle 700px at -100px 300px, rgba(0, 229, 163, 0.05), transparent);
+}
+
+/* Transitions */
+body,
+header,
+footer,
+button,
+a,
+input {
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Keyframes for Spatial Scanning sweep */
+@keyframes laser-sweep {
+  0%, 100% { top: 0%; opacity: 0.3; }
+  50% { top: 100%; opacity: 1; }
+}
+
+.animate-laser {
+  animation: laser-sweep 3s ease-in-out infinite;
+}
+
+/* Custom layout utility classes */
+.max-w-display {
+  max-width: 1440px;
+}
