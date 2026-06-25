@@ -8,21 +8,21 @@ export default function Features() {
     {
       id: "manifests",
       title: "Hub Package Intake",
-      image: "/api/image?path=" + encodeURIComponent("C:\\Users\\adity\\.gemini\\antigravity-ide\\brain\\e680c387-7977-40c3-80e3-0347fb471e10\\data_ingestion_editorial_1782261033571.png"),
+      image: "/images/data_ingestion.png",
       tags: ["BARCODE SCANNING", "HUB LOGISTICS", "INSTANT LOGGING"],
       description: "Hub managers can use any device camera to instantly scan incoming packages, verify their destination, and automatically log them into the facility's inventory.",
     },
     {
       id: "routing",
       title: "Live Shipment Routing",
-      image: "/api/image?path=" + encodeURIComponent("C:\\Users\\adity\\.gemini\\antigravity-ide\\brain\\e680c387-7977-40c3-80e3-0347fb471e10\\spatial_routing_editorial_1782261045203.png"),
+      image: "/images/spatial_routing.png",
       tags: ["PREDICTIVE ETA", "LIVE TRACKING", "ROUTE MAPPING"],
       description: "Company administrators can track active consignments on a live dashboard, dynamically estimating delivery times and viewing real-time status updates.",
     },
     {
       id: "federation",
       title: "Delivery Fleet App",
-      image: "/api/image?path=" + encodeURIComponent("C:\\Users\\adity\\.gemini\\antigravity-ide\\brain\\e680c387-7977-40c3-80e3-0347fb471e10\\global_fleets_editorial_1782261056952.png"),
+      image: "/images/global_fleets.png",
       tags: ["ROUTE QUEUES", "DRIVER ASSIGNMENT", "PROOF OF DELIVERY"],
       description: "Drivers receive optimized daily route queues on their mobile devices, allowing them to mark drops as completed and instantly upload photo proof of delivery.",
     }

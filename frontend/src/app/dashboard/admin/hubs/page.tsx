@@ -173,7 +173,7 @@ export default function HubsPage() {
             key={stat.label}
             className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center"
           >
-            <p className={`text-3xl font-heading font-light ${stat.color}`}>{stat.value}</p>
+            <p className={`text-3xl font-sans font-light ${stat.color}`}>{stat.value}</p>
             <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">
               {stat.label}
             </p>

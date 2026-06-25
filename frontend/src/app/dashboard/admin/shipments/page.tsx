@@ -208,7 +208,7 @@ export default function ShipmentsPage() {
       {/* Stats Bar */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-4 text-center">
-          <p className="text-2xl font-heading font-light text-foreground">
+          <p className="text-2xl font-sans font-light text-foreground">
             {shipments.length}
           </p>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider mt-1">
@@ -216,7 +216,7 @@ export default function ShipmentsPage() {
           </p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-4 text-center">
-          <p className="text-2xl font-heading font-light text-emerald-600 dark:text-emerald-400">
+          <p className="text-2xl font-sans font-light text-emerald-600 dark:text-emerald-400">
             {shipments.filter((s) => s.status === "delivered").length}
           </p>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider mt-1">
@@ -224,7 +224,7 @@ export default function ShipmentsPage() {
           </p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-4 text-center">
-          <p className="text-2xl font-heading font-light text-blue-600 dark:text-blue-400">
+          <p className="text-2xl font-sans font-light text-blue-600 dark:text-blue-400">
             {shipments.filter((s) => s.status === "in_transit").length}
           </p>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider mt-1">
@@ -232,7 +232,7 @@ export default function ShipmentsPage() {
           </p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-4 text-center">
-          <p className="text-2xl font-heading font-light text-amber-600 dark:text-amber-400">
+          <p className="text-2xl font-sans font-light text-amber-600 dark:text-amber-400">
             {shipments.filter((s) => s.status === "pending").length}
           </p>
           <p className="text-[10px] text-zinc-500 dark:text-zinc-400 font-medium uppercase tracking-wider mt-1">

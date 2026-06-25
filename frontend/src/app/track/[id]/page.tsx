@@ -147,7 +147,7 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
                     </span>
                   </div>
                   <div className="mt-4">
-                    <p className="text-3xl font-heading font-light text-foreground">{prediction.estimatedDeliveryDate}</p>
+                    <p className="text-3xl font-sans font-light text-foreground">{prediction.estimatedDeliveryDate}</p>
                     <p className="text-xs text-zinc-400 mt-1">Calculated arrival date based on parcel logistics metrics.</p>
                   </div>
                 </div>

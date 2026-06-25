@@ -59,7 +59,7 @@ export default function HubDashboardSkeleton() {
                   {item.details}
                 </span>
               </div>
-              <p className="text-3xl font-heading font-light text-foreground tracking-tight">
+              <p className="text-3xl font-sans font-light text-foreground tracking-tight">
                 {loading ? "..." : item.value}
               </p>
               <p className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest mt-1">

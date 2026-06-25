@@ -42,15 +42,15 @@ export default function AgentsPage() {
       {/* Stats */}
       <div className="grid grid-cols-3 gap-3">
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center">
-          <p className="text-3xl font-heading font-light text-foreground">{agents.length}</p>
+          <p className="text-3xl font-sans font-light text-foreground">{agents.length}</p>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">Total</p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center">
-          <p className="text-3xl font-heading font-light text-blue-600 dark:text-blue-400">{agents.filter(a => a.status === "on_route").length}</p>
+          <p className="text-3xl font-sans font-light text-blue-600 dark:text-blue-400">{agents.filter(a => a.status === "on_route").length}</p>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">On Route</p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center">
-          <p className="text-3xl font-heading font-light text-emerald-600 dark:text-emerald-400">{agents.filter(a => a.status === "at_hub").length}</p>
+          <p className="text-3xl font-sans font-light text-emerald-600 dark:text-emerald-400">{agents.filter(a => a.status === "at_hub").length}</p>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">At Hub</p>
         </div>
       </div>

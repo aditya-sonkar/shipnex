@@ -159,7 +159,7 @@ export default function Pricing() {
                                                 animate={{ y: 0, opacity: 1 }}
                                                 exit={{ y: 6, opacity: 0 }}
                                                 transition={{ duration: 0.2 }}
-                                                className="text-4xl lg:text-5xl font-heading font-light tracking-tight text-zinc-900 dark:text-white"
+                                                className="text-4xl lg:text-5xl font-sans font-light tracking-tight text-zinc-900 dark:text-white"
                                             >
                                                 {activePrice}
                                             </motion.span>

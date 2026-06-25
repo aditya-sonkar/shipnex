@@ -92,13 +92,11 @@ export default function Hero() {
                             transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                             className="relative w-full max-w-[620px] aspect-[4/3] rounded-2xl overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50 bg-zinc-900 shadow-2xl flex flex-col justify-between group cursor-pointer"
                         >
-                            {/* Background Image */}
                             <div className="absolute inset-0 z-0">
                                 <img
-                                    src={"/api/image?path=" + encodeURIComponent("C:\\Users\\adity\\.gemini\\antigravity-ide\\brain\\7b8035de-c904-4293-93f6-f862d45d4213\\hero_editorial_themed_1782342960820.png")}
+                                    src="/images/hero.png"
                                     alt="ShipNex Logistics Intelligence platform preview"
                                     className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-[1.03] transition-transform duration-[1.2s] ease-out"
-
                                 />
                                 {/* Overlay gradients for high contrast/readability */}
                                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90" />
@@ -156,7 +154,7 @@ export default function Hero() {
                         { value: "<200ms", label: "API Response" },
                     ].map(stat => (
                         <div key={stat.label}>
-                            <p className="font-heading font-light text-[2.2rem] sm:text-[2.8rem] tracking-tight text-zinc-900 dark:text-white leading-none">
+                            <p className="font-sans font-light text-[2.2rem] sm:text-[2.8rem] tracking-tight text-zinc-900 dark:text-white leading-none">
                                 {stat.value}
                             </p>
                             <p className="mt-2 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest leading-none">

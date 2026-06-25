@@ -21,7 +21,7 @@ export default function BillingPage() {
             <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-violet-50 dark:bg-violet-950/50 text-violet-600 dark:text-violet-400 border border-violet-200/50 dark:border-violet-800/50">Active</span>
           </div>
           <div className="flex items-baseline gap-1 mb-4">
-            <span className="text-4xl font-heading font-light text-foreground">$299</span>
+            <span className="text-4xl font-sans font-light text-foreground">$299</span>
             <span className="text-sm text-zinc-400">/month</span>
           </div>
           <p className="text-xs text-zinc-500 mb-5">Business Plan · Renews Jul 1, 2026</p>

@@ -344,7 +344,7 @@ export default function TeamPage() {
       {/* Team Stats */}
       <div className="grid grid-cols-3 gap-3 sm:gap-4">
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center">
-          <p className="text-3xl font-heading font-light text-foreground">
+          <p className="text-3xl font-sans font-light text-foreground">
             {admins.length}
           </p>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">
@@ -352,7 +352,7 @@ export default function TeamPage() {
           </p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center">
-          <p className="text-3xl font-heading font-light text-foreground">
+          <p className="text-3xl font-sans font-light text-foreground">
             {hubManagers.length}
           </p>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">
@@ -360,7 +360,7 @@ export default function TeamPage() {
           </p>
         </div>
         <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-2xl p-5 text-center">
-          <p className="text-3xl font-heading font-light text-foreground">
+          <p className="text-3xl font-sans font-light text-foreground">
             {deliveryPartners.length}
           </p>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-medium uppercase tracking-wider">
