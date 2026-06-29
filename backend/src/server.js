@@ -15,6 +15,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
+// Root endpoint for simple ping/status verification
+app.get("/", (req, res) => {
+  res.status(200).json({ status: "OK", message: "ShipNex Backend API is running" });
+});
+
 // Health check endpoint for deployment validation
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK", timestamp: new Date() });
