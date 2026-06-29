@@ -1,6 +1,29 @@
-// Deprecated: Authentication logic moved to standalone backend in /backend folder
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST() {
-  return NextResponse.json({ error: "Deprecated. Use backend server at http://localhost:5000" }, { status: 410 });
+const BACKEND = process.env.BACKEND_URL || "http://localhost:5000";
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json().catch(() => ({}));
+    const res = await fetch(`${BACKEND}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    const response = NextResponse.json(data, { status: res.status });
+
+    // Forward Set-Cookie headers from Express backend to client browser
+    if (res.headers.getSetCookie) {
+      const cookies = res.headers.getSetCookie();
+      cookies.forEach((cookie) => {
+        response.headers.append("Set-Cookie", cookie);
+      });
+    }
+
+    return response;
+  } catch (error: any) {
+    return NextResponse.json({ error: error.message || "Proxy failed" }, { status: 500 });
+  }
 }

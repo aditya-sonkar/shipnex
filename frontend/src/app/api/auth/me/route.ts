@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+const BACKEND = process.env.BACKEND_URL || "http://localhost:5000";
+
 export async function GET(req: NextRequest) {
   const sessionCookie = req.cookies.get("shipnex-session");
   
@@ -8,7 +10,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const response = await fetch("http://localhost:5000/api/auth/me", {
+    const response = await fetch(`${BACKEND}/api/auth/me`, {
       headers: {
         Cookie: `shipnex-session=${sessionCookie.value}`,
       },

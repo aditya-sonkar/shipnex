@@ -48,6 +48,7 @@ export default function TrackPage() {
               className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400 pointer-events-none"
             />
             <input
+              suppressHydrationWarning
               type="text"
               value={trackingId}
               onChange={(e) => {
@@ -65,6 +66,7 @@ export default function TrackPage() {
           )}
 
           <button
+            suppressHydrationWarning
             type="submit"
             className="w-full py-4 rounded-2xl bg-foreground text-background font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer"
           >

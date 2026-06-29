@@ -24,7 +24,7 @@ export default function ShippingLabelPage() {
 
   useEffect(() => {
     if (!params.id) return;
-    fetch(`http://localhost:5000/api/shipments/${params.id}`, { credentials: "include" })
+    fetch(`/api/shipments/${params.id}`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error("Not found");
         return res.json();

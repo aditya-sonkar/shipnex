@@ -156,6 +156,7 @@ export default function DeliveryMobileDashboard() {
               Completed
             </Link>
             <button
+              suppressHydrationWarning
               onClick={fetchMyRoute}
               className="p-1.5 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
               title="Refresh route"
@@ -229,6 +230,7 @@ export default function DeliveryMobileDashboard() {
             <>
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
+                  suppressHydrationWarning
                   onClick={() => handleUpdateStatus(nextStop.id, "delivered")}
                   className="py-4 rounded-2xl bg-foreground text-background font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:opacity-90 active:scale-[0.97] transition-all cursor-pointer"
                 >
@@ -236,6 +238,7 @@ export default function DeliveryMobileDashboard() {
                   Delivered
                 </button>
                 <button
+                  suppressHydrationWarning
                   onClick={() => handleUpdateStatus(nextStop.id, "failed")}
                   className="py-4 rounded-2xl bg-rose-50 text-rose-600 dark:bg-rose-950/30 dark:text-rose-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-rose-100 dark:hover:bg-rose-950/50 active:scale-[0.97] transition-all cursor-pointer"
                 >
@@ -248,6 +251,7 @@ export default function DeliveryMobileDashboard() {
               {podTargetId === nextStop.id ? (
                 <div className="space-y-2">
                   <input
+                    suppressHydrationWarning
                     ref={fileInputRef}
                     type="file"
                     accept="image/*"
@@ -255,6 +259,7 @@ export default function DeliveryMobileDashboard() {
                     onChange={(e) => setPodFile(e.target.files?.[0] || null)}
                   />
                   <button
+                    suppressHydrationWarning
                     onClick={() => fileInputRef.current?.click()}
                     className="w-full py-3 rounded-2xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 text-zinc-500 text-xs uppercase tracking-wider flex items-center justify-center gap-2"
                   >
@@ -263,6 +268,7 @@ export default function DeliveryMobileDashboard() {
                   </button>
                   {podFile && (
                     <button
+                      suppressHydrationWarning
                       onClick={() => handlePodUpload(nextStop.id)}
                       disabled={uploadingPod}
                       className="w-full py-3 rounded-2xl bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 disabled:opacity-60"
@@ -272,6 +278,7 @@ export default function DeliveryMobileDashboard() {
                     </button>
                   )}
                   <button
+                    suppressHydrationWarning
                     onClick={() => { setPodTargetId(null); setPodFile(null); }}
                     className="w-full py-2 rounded-2xl text-zinc-400 text-xs"
                   >
@@ -281,6 +288,7 @@ export default function DeliveryMobileDashboard() {
               ) : (
                 <div className="grid grid-cols-2 gap-3">
                   <button
+                    suppressHydrationWarning
                     onClick={() => setUseCamera(true)}
                     className="py-3 rounded-2xl bg-blue-50 text-blue-600 dark:bg-blue-950/30 dark:text-blue-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-blue-100 active:scale-[0.97] transition-all cursor-pointer"
                   >
@@ -288,6 +296,7 @@ export default function DeliveryMobileDashboard() {
                     Scan QR
                   </button>
                   <button
+                    suppressHydrationWarning
                     onClick={() => setPodTargetId(nextStop.id)}
                     className="py-3 rounded-2xl bg-emerald-50 text-emerald-600 dark:bg-emerald-950/30 dark:text-emerald-400 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-emerald-100 active:scale-[0.97] transition-all cursor-pointer"
                   >

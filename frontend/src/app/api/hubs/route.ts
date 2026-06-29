@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.BACKEND_URL || "http://localhost:5000";
 
 async function proxy(req: NextRequest) {
   const sessionCookie = req.cookies.get("shipnex-session");
@@ -9,7 +9,7 @@ async function proxy(req: NextRequest) {
 
   let body: string | undefined;
   if (req.method !== "GET" && req.method !== "HEAD") {
-    try { body = JSON.stringify(await req.json()); } catch {}
+    try { body = JSON.stringify(await req.json()); } catch { }
   }
 
   const res = await fetch(`${BACKEND}/api/hubs`, { method: req.method, headers, body });

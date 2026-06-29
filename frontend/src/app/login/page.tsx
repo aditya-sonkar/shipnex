@@ -90,7 +90,7 @@ function LoginFormCard({
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -183,6 +183,7 @@ function LoginFormCard({
                 <Mail size={15} />
               </span>
               <input
+                suppressHydrationWarning
                 id={`${roleId}-email`}
                 type="email"
                 placeholder={placeholder}
@@ -206,6 +207,7 @@ function LoginFormCard({
                 <Lock size={15} />
               </span>
               <input
+                suppressHydrationWarning
                 id={`${roleId}-password`}
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
@@ -215,6 +217,7 @@ function LoginFormCard({
                 className="w-full pl-10 pr-10 py-3 rounded-xl bg-zinc-50/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-sm text-foreground focus:outline-none focus:ring-1 focus:ring-zinc-400 dark:focus:ring-zinc-700 focus:border-zinc-300 dark:focus:border-zinc-700 transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-500"
               />
               <button
+                suppressHydrationWarning
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 disabled={loading || success}
@@ -228,6 +231,7 @@ function LoginFormCard({
 
         {/* Action Button - Styled as a rounded-full brand action button */}
         <button
+          suppressHydrationWarning
           type="submit"
           disabled={loading || success}
           className="w-full flex items-center justify-center rounded-full bg-foreground text-background py-3.5 text-xs font-bold tracking-widest uppercase shadow-sm hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50 mt-6"

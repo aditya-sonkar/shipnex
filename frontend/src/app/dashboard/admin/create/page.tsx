@@ -50,7 +50,7 @@ export default function CreateShipmentPage() {
 
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/shipments", {
+      const res = await fetch("/api/shipments", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

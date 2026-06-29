@@ -104,7 +104,7 @@ export default function ShipmentsPage() {
 
   const fetchShipments = (status = "all") => {
     setLoading(true);
-    let url = "http://localhost:5000/api/shipments";
+    let url = "/api/shipments";
     if (status !== "all") url += `?status=${status}`;
 
     fetch(url, { credentials: "include" })
@@ -117,7 +117,7 @@ export default function ShipmentsPage() {
   };
 
   const fetchAgents = () => {
-    fetch("http://localhost:5000/api/auth/users", { credentials: "include" })
+    fetch("/api/auth/users", { credentials: "include" })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data)) {
@@ -135,7 +135,7 @@ export default function ShipmentsPage() {
   const handleStatusUpdate = async (id: string, newStatus: string) => {
     setUpdatingStatus(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/shipments/${id}/status`, {
+      const res = await fetch(`/api/shipments/${id}/status`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
@@ -155,7 +155,7 @@ export default function ShipmentsPage() {
     if (!agentId) return;
     setAssigningAgent(true);
     try {
-      const res = await fetch(`http://localhost:5000/api/shipments/${shipmentId}/assign-agent`, {
+      const res = await fetch(`/api/shipments/${shipmentId}/assign-agent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

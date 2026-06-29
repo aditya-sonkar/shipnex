@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const BACKEND = "http://localhost:5000";
+const BACKEND = process.env.BACKEND_URL || "http://localhost:5000";
 
 async function proxy(req: NextRequest, id: string, action: string) {
   const sessionCookie = req.cookies.get("shipnex-session");

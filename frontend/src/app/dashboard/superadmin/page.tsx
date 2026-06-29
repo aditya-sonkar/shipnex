@@ -226,6 +226,7 @@ export default function SuperAdminDashboard() {
                   {field.label}
                 </label>
                 <input
+                  suppressHydrationWarning
                   type={field.type}
                   placeholder={field.placeholder}
                   value={field.value}
@@ -241,6 +242,7 @@ export default function SuperAdminDashboard() {
                 Subscription Tier
               </label>
               <select
+                suppressHydrationWarning
                 value={plan}
                 onChange={(e) => setPlan(e.target.value)}
                 className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-sm text-foreground focus:outline-none"
@@ -252,6 +254,7 @@ export default function SuperAdminDashboard() {
             </div>
 
             <button
+              suppressHydrationWarning
               type="submit"
               disabled={submitting}
               className="w-full py-3 rounded-xl bg-foreground text-background font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 hover:opacity-90 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-60"
@@ -325,6 +328,7 @@ export default function SuperAdminDashboard() {
                     {/* Plan changer */}
                     <div className="relative">
                       <select
+                        suppressHydrationWarning
                         value={tenant.subscriptionPlan}
                         onChange={(e) => handlePlanChange(tenant.id, e.target.value)}
                         disabled={planChangingId === tenant.id}
@@ -339,6 +343,7 @@ export default function SuperAdminDashboard() {
 
                     {/* Toggle */}
                     <button
+                      suppressHydrationWarning
                       onClick={() => handleToggle(tenant)}
                       disabled={togglingId === tenant.id}
                       className="p-1 rounded hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors disabled:opacity-60"

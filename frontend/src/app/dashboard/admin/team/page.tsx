@@ -69,7 +69,7 @@ export default function TeamPage() {
 
   // Fetch team
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/users", { credentials: "include" })
+    fetch("/api/auth/users", { credentials: "include" })
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) setTeam(data);
@@ -94,7 +94,7 @@ export default function TeamPage() {
     setFormLoading(true);
     try {
       const res = await fetch(
-        "http://localhost:5000/api/auth/register-member",
+        "/api/auth/register-member",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -137,7 +137,7 @@ export default function TeamPage() {
     if (!confirm(`Remove ${member.fullName} from the team? This cannot be undone.`)) return;
     setDeletingMemberId(member.id);
     try {
-      const res = await fetch(`http://localhost:5000/api/auth/users/${member.id}`, {
+      const res = await fetch(`/api/auth/users/${member.id}`, {
         method: "DELETE",
         credentials: "include",
       });

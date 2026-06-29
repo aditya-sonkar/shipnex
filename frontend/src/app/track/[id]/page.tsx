@@ -44,7 +44,7 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
   useEffect(() => {
     if (!trackingId) return;
 
-    fetch(`http://localhost:5000/api/track/${trackingId}`)
+    fetch(`/api/track/${trackingId}`)
       .then((r) => {
         if (!r.ok) throw new Error("Consignment tracking code not found.");
         return r.json();
@@ -52,7 +52,7 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
       .then((data) => {
         setShipment(data);
         setError("");
-        fetch(`http://localhost:5000/api/track/${trackingId}/predict`)
+        fetch(`/api/track/${trackingId}/predict`)
           .then(r => r.json())
           .then(predData => {
             if (!predData.error) {
