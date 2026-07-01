@@ -52,8 +52,13 @@ ShipNex is a comprehensive, modern logistics and courier management platform. It
 - **Language:** TypeScript & JavaScript
 - **Framework:** Node.js / Express
 - **Database:** MongoDB (Managed via Prisma ORM)
+- **Caching & Invalidation:** Redis (Supports local Docker container & remote Redis Cloud/Upstash)
 - **Authentication:** JWT (JSON Web Tokens) & bcryptjs
 - **File Uploads:** Multer
+
+**Deployment & DevOps:**
+- **Containerization:** Docker & Docker Compose
+- **Hosting Platforms:** Render (Backend API) & Vercel (Frontend App)
 
 ---
 
@@ -106,6 +111,18 @@ npm run dev
 ```
 
 Visit `http://localhost:3000` to view the application!
+
+### 4. Run with Docker Compose (Optional)
+If you prefer to run the entire stack (including local Redis container) automatically inside Docker:
+
+```bash
+docker-compose up --build
+```
+
+This will compile and launch:
+- **Frontend** on `http://localhost:3000`
+- **Backend** on `http://localhost:5000`
+- **Redis** on port `6379`
 
 ---
 
