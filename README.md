@@ -7,6 +7,8 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS_v4-38bdf8?style=flat-square&logo=tailwind-css)
 ![Vercel](https://img.shields.io/badge/Vercel-Frontend-black?style=flat-square&logo=vercel)
 ![Render](https://img.shields.io/badge/Render-Backend-46a2f1?style=flat-square&logo=render)
+![Docker](https://img.shields.io/badge/Docker-Container-2496ed?style=flat-square&logo=docker)
+![Redis](https://img.shields.io/badge/Redis-Caching-dc382d?style=flat-square&logo=redis)
 ![License MIT](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
 ShipNex is a comprehensive, modern logistics and courier management platform. It offers a powerful ecosystem of tools designed for Company Admins, Hub Managers, and Delivery Drivers to track, sort, and deliver packages seamlessly.
