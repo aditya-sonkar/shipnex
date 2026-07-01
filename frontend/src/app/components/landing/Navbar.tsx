@@ -52,19 +52,31 @@ export default function Navbar() {
         }
     };
 
+    const handleLogoClick = (e: React.MouseEvent) => {
+        if (window.location.pathname === "/") {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            window.history.pushState("", document.title, window.location.pathname);
+        }
+    };
+
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled
-                    ? "bg-white dark:bg-zinc-950 border-zinc-200/20 dark:border-zinc-800/20 py-4"
-                    : "bg-transparent border-transparent py-6"
+                ? "bg-white dark:bg-zinc-950 border-zinc-200/20 dark:border-zinc-800/20 py-4"
+                : "bg-transparent border-transparent py-6"
                 }`}
         >
-            <div className="mx-auto flex w-full items-center justify-between px-8 lg:px-24">
+            <div className="mx-auto flex w-full items-center justify-between px-4 md:px-8 lg:px-12">
 
                 {/* Logo */}
-                <Link href="/" className="text-3xl font-heading font-extrabold tracking-tight flex items-center select-none text-foreground">
+                <a
+                    href="/"
+                    onClick={handleLogoClick}
+                    className="text-3xl font-heading font-extrabold tracking-tight flex items-center select-none text-foreground cursor-pointer"
+                >
                     shipnex
-                </Link>
+                </a>
 
                 {/* Navigation Links */}
                 <nav className="hidden lg:flex items-center gap-8">
@@ -72,9 +84,10 @@ export default function Navbar() {
                         <a
                             key={item.label}
                             href={item.href}
-                            className="text-xl font-heading font-bold text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white transition-colors duration-250"
+                            className="relative text-xl font-heading font-bold text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white transition-colors duration-250 group"
                         >
                             {item.label}
+                            <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-zinc-950 dark:bg-white transition-all duration-300 group-hover:w-full" />
                         </a>
                     ))}
                 </nav>
@@ -136,7 +149,7 @@ export default function Navbar() {
             {/* Mobile Menu */}
             <div
                 className={`lg:hidden overflow-hidden transition-all duration-250 ease-in-out ${mobileOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
-                <div className="border-t border-zinc-200/50 dark:border-zinc-800/50 bg-white/95 dark:bg-zinc-950/95 backdrop-blur-xl px-6 py-4 space-y-4">
+                <div className="border-t border-zinc-200/50 dark:border-zinc-800/50 bg-white dark:bg-zinc-950 px-6 py-4 space-y-4">
                     <nav className="flex flex-col gap-3">
                         {navItems.map((item) => (
                             <a

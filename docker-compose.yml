@@ -1,0 +1,43 @@
+version: '3.8'
+
+services: 
+  # 1. Local Redis Service
+  redis:
+    image: redis:7-alpine
+    container_name: shipnex-redis
+    ports:
+    - "6379:6379"
+    restart: always
+
+  # 2. Node/Express Backend Service
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: shipnex-backend
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./backend/.env
+    environment: 
+      - "PORT=5000"
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    restart: always
+
+  # 3. Next.js Frontend Service
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: shipnex-frontend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./frontend/.env.local
+    environment:
+      - BACKEND_URL=http://backend:5000
+    depends_on:
+      - backend
+    restart: always

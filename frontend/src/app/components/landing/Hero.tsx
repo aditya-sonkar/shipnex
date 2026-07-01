@@ -90,7 +90,7 @@ export default function Hero() {
                             initial={{ opacity: 0, scale: 0.96, y: 15 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative w-full max-w-[620px] aspect-[4/3] rounded-2xl overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50 bg-zinc-900 shadow-2xl flex flex-col justify-between group cursor-pointer"
+                            className="relative w-full max-w-[620px] min-h-[380px] md:aspect-[4/3] rounded-2xl overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50 bg-zinc-900 shadow-2xl flex flex-col justify-between group cursor-pointer"
                         >
                             <div className="absolute inset-0 z-0">
                                 <img

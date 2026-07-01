@@ -52,18 +52,22 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
       .then((data) => {
         setShipment(data);
         setError("");
-        fetch(`/api/track/${trackingId}/predict`)
-          .then(r => r.json())
-          .then(predData => {
-            if (!predData.error) {
-              setPrediction({
-                predictedDays: predData.predictedDays,
-                estimatedDeliveryDate: new Date(predData.estimatedDeliveryDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
-                confidence: predData.confidence,
-              });
-            }
-          })
-          .catch(() => {});
+        if (data.status !== "delivered" && data.status !== "failed") {
+          fetch(`/api/track/${trackingId}/predict`)
+            .then(r => r.json())
+            .then(predData => {
+              if (!predData.error) {
+                setPrediction({
+                  predictedDays: predData.predictedDays,
+                  estimatedDeliveryDate: new Date(predData.estimatedDeliveryDate).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
+                  confidence: predData.confidence,
+                });
+              }
+            })
+            .catch(() => { });
+        } else {
+          setPrediction(null);
+        }
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
@@ -117,38 +121,69 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
         ) : shipment ? (
           <div className="space-y-6">
             {/* Shipment Summary Panel */}
-            <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-3xl p-6 grid grid-cols-1 md:grid-cols-2 gap-6 shadow-sm">
-              <div className="space-y-3">
-                <div>
-                  <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Tracking Number</span>
-                  <h2 className="text-2xl font-semibold text-foreground mt-0.5">{shipment.trackingNumber}</h2>
+            <div className="bg-white/60 dark:bg-zinc-950/60 backdrop-blur-xl border border-zinc-200/50 dark:border-zinc-800/50 rounded-3xl p-6 shadow-sm">
+              {prediction && shipment.status !== "delivered" && shipment.status !== "failed" ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <div>
+                      <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Tracking Number</span>
+                      <h2 className="text-2xl font-semibold text-foreground mt-0.5">{shipment.trackingNumber}</h2>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Sender Address</span>
+                        <p className="text-sm text-foreground mt-0.5 font-medium">{shipment.senderAddress}</p>
+                      </div>
+                      <div>
+                        <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Recipient Address</span>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <p className="text-sm text-foreground font-medium">{shipment.receiverAddress}</p>
+                          {shipment.status === "delivered" && (
+                            <span className="text-[8px] font-bold px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-full lowercase tracking-normal">
+                              delivered
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* AI Prediction Box */}
+                  <div className="bg-zinc-50/50 dark:bg-zinc-900/40 border border-zinc-200/40 dark:border-zinc-800/60 rounded-2xl p-5 flex flex-col justify-between">
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-1">
+                        <Compass size={11} /> AI Delivery Predictor
+                      </span>
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-550/10 text-emerald-500">
+                        {prediction.confidence} Confidence
+                      </span>
+                    </div>
+                    <div className="mt-4">
+                      <p className="text-3xl font-sans font-light text-foreground">{prediction.estimatedDeliveryDate}</p>
+                      <p className="text-xs text-zinc-400 mt-1">Calculated arrival date based on parcel logistics metrics.</p>
+                    </div>
+                  </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                  <div>
+                    <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Tracking Number</span>
+                    <h2 className="text-2xl font-semibold text-foreground mt-0.5">{shipment.trackingNumber}</h2>
+                  </div>
                   <div>
                     <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Sender Address</span>
                     <p className="text-sm text-foreground mt-0.5 font-medium">{shipment.senderAddress}</p>
                   </div>
                   <div>
                     <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">Recipient Address</span>
-                    <p className="text-sm text-foreground mt-0.5 font-medium">{shipment.receiverAddress}</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* AI Prediction Box */}
-              {prediction && (
-                <div className="bg-zinc-50/50 dark:bg-zinc-900/40 border border-zinc-200/40 dark:border-zinc-800/60 rounded-2xl p-5 flex flex-col justify-between">
-                  <div className="flex items-center justify-between">
-                    <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest flex items-center gap-1">
-                      <Compass size={11} /> AI Delivery Predictor
-                    </span>
-                    <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-emerald-550/10 text-emerald-500">
-                      {prediction.confidence} Confidence
-                    </span>
-                  </div>
-                  <div className="mt-4">
-                    <p className="text-3xl font-sans font-light text-foreground">{prediction.estimatedDeliveryDate}</p>
-                    <p className="text-xs text-zinc-400 mt-1">Calculated arrival date based on parcel logistics metrics.</p>
+                    <div className="flex items-center gap-1.5 mt-0.5">
+                      <p className="text-sm text-foreground font-medium">{shipment.receiverAddress}</p>
+                      {shipment.status === "delivered" && (
+                        <span className="text-[8px] font-bold px-1.5 py-0.5 bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 rounded-full lowercase tracking-normal">
+                          delivered
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
@@ -162,16 +197,15 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
                 {shipment.events.map((event, index) => (
                   <div key={event.id} className="relative">
                     {/* Timeline Node Icon indicator */}
-                    <span className={`absolute -left-[33px] top-0.5 w-4 h-4 rounded-full border-2 ${
-                      index === 0
+                    <span className={`absolute -left-[33px] top-0.5 w-4 h-4 rounded-full border-2 ${index === 0
                         ? "bg-foreground border-foreground animate-ping-subtle"
                         : "bg-background border-zinc-350 dark:border-zinc-700"
-                    }`} />
+                      }`} />
 
                     <div className="space-y-1">
                       <div className="flex items-center justify-between gap-2">
                         <h4 className="text-sm font-semibold text-foreground capitalize">
-                          {event.status.replace("_", " ")}
+                          {event.status.replace(/_/g, " ")}
                         </h4>
                         <span className="text-xs text-zinc-400">
                           {new Date(event.createdAt).toLocaleDateString("en-US", { month: "short", day: "numeric" })}{" "}

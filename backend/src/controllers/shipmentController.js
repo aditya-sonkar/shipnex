@@ -1,4 +1,5 @@
 const prisma = require("../prismaClient");
+const { deleteCache } = require("../utils/redisClient");
 const { sendTrackingEmail } = require("../utils/mailer");
 
 function generateTrackingNumber() {
@@ -71,7 +72,7 @@ const listShipments = async (req, res) => {
 const listByDriver = async (req, res) => {
   const driverId = req.user && req.user.id;
   const tenantId = req.user && req.user.tenantId;
-  
+
   if (!driverId || !tenantId) return res.status(400).json({ error: "Driver identity is required." });
 
   try {
@@ -149,6 +150,10 @@ const updateStatus = async (req, res) => {
       data: { status },
     });
 
+    // Clear tracking cache 
+    await deleteCache(`shipment:tracking:${updated.trackingNumber}`);
+    await deleteCache(`shipment:prediction:${updated.trackingNumber}`);
+
     await prisma.shipmentEvent.create({
       data: {
         shipmentId: shipment.id,
@@ -159,7 +164,7 @@ const updateStatus = async (req, res) => {
     });
 
     if (status === "delivered" && updated.receiverEmail) {
-      await sendTrackingEmail(
+      sendTrackingEmail(
         updated.receiverEmail,
         "Your Package has been Delivered!",
         `<div style="max-width: 600px; margin: 0 auto; font-family: 'Inter', -apple-system, sans-serif; background-color: #ffffff; border: 1px solid #e4e4e7; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
@@ -182,7 +187,7 @@ const updateStatus = async (req, res) => {
               </div>
             </div>
             
-            <a href="http://localhost:3000/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
+            <a href="${process.env.FRONTEND_URL || "http://localhost:3000"}/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
           </div>
           <div style="background-color: #f4f4f5; padding: 24px; text-align: center; border-top: 1px solid #e4e4e7;">
             <p style="color: #a1a1aa; font-size: 12px; margin: 0;">© 2026 ShipNex Logistics. All rights reserved.</p>
@@ -200,7 +205,7 @@ const updateStatus = async (req, res) => {
 const assignHub = async (req, res) => {
   const { assignedHubId } = req.body;
   const tenantId = req.user && req.user.tenantId;
-  
+
   if (!tenantId) return res.status(400).json({ error: "Tenant context is required." });
 
   try {
@@ -214,6 +219,10 @@ const assignHub = async (req, res) => {
       where: { id: req.params.id },
       data: { assignedHubId },
     });
+
+    // Clear tracking cache 
+    await deleteCache(`shipment:tracking:${updated.trackingNumber}`);
+    await deleteCache(`shipment:prediction:${updated.trackingNumber}`);
 
     await prisma.shipmentEvent.create({
       data: {
@@ -260,6 +269,10 @@ const assignAgent = async (req, res) => {
       data: { assignedDriverId, status: "out_for_delivery" },
     });
 
+    // Clear tracking cache 
+    await deleteCache(`shipment:tracking:${updated.trackingNumber}`);
+    await deleteCache(`shipment:prediction:${updated.trackingNumber}`);
+
     await prisma.shipmentEvent.create({
       data: {
         shipmentId: shipment.id,
@@ -299,6 +312,10 @@ const uploadPOD = async (req, res) => {
       where: { id: req.params.id },
       data: { status: "delivered" },
     });
+    // Clear tracking cache
+    await deleteCache(`shipment:tracking:${updated.trackingNumber}`);
+    await deleteCache(`shipment:prediction:${updated.trackingNumber}`);
+
 
     await prisma.shipmentEvent.create({
       data: {
@@ -310,7 +327,7 @@ const uploadPOD = async (req, res) => {
     });
 
     if (updated.receiverEmail) {
-      await sendTrackingEmail(
+      sendTrackingEmail(
         updated.receiverEmail,
         "Your Package has been Delivered!",
         `<div style="max-width: 600px; margin: 0 auto; font-family: 'Inter', -apple-system, sans-serif; background-color: #ffffff; border: 1px solid #e4e4e7; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05);">
@@ -333,7 +350,7 @@ const uploadPOD = async (req, res) => {
               </div>
             </div>
             
-            <a href="http://localhost:3000/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
+            <a href="${process.env.FRONTEND_URL || "http://localhost:3000"}/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
           </div>
           <div style="background-color: #f4f4f5; padding: 24px; text-align: center; border-top: 1px solid #e4e4e7;">
             <p style="color: #a1a1aa; font-size: 12px; margin: 0;">© 2026 ShipNex Logistics. All rights reserved.</p>
