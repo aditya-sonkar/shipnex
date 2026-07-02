@@ -13,11 +13,21 @@ services:
         sync: false
       - key: JWT_SECRET
         sync: false
+      - key: GEMINI_API_KEY
+        sync: false
       - key: FRONTEND_URL
         value: "http://localhost:3000"  # Fallback, user can update in Render UI
       - key: EMAIL_USER
         sync: false
       - key: EMAIL_PASS
+        sync: false
+      - key: SMTP_HOST
+        value: "smtp-relay.brevo.com"
+      - key: SMTP_PORT
+        value: "587"
+      - key: SMTP_SECURE
+        value: "false"
+      - key: SENDER_EMAIL
         sync: false
       - key: REDIS_URL
         sync: false
