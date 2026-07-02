@@ -167,6 +167,7 @@ const updateStatus = async (req, res) => {
     });
 
     if (status === "delivered" && updated.receiverEmail) {
+      console.log(">>> [Mailer Trigger] FRONTEND_URL is:", FRONTEND_URL);
       sendTrackingEmail(
         updated.receiverEmail,
         "Your Package has been Delivered!",
@@ -330,6 +331,7 @@ const uploadPOD = async (req, res) => {
     });
 
     if (updated.receiverEmail) {
+      console.log(">>> [Mailer Trigger] FRONTEND_URL is:", FRONTEND_URL);
       sendTrackingEmail(
         updated.receiverEmail,
         "Your Package has been Delivered!",
