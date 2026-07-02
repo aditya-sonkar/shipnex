@@ -456,7 +456,7 @@ export default function ShipmentsPage() {
 
         {/* Desktop table header */}
         <div className="hidden lg:grid grid-cols-12 gap-4 px-6 py-3 text-[10px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest border-b border-zinc-100 dark:border-zinc-900">
-          <div className="col-span-2">Tracking #</div>
+          <div className="col-span-2">Tracking ID</div>
           <div className="col-span-2">Sender</div>
           <div className="col-span-2">Receiver</div>
           <div className="col-span-2">Status</div>
