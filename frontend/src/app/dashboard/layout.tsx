@@ -250,7 +250,7 @@ export default function DashboardLayout({
   };
 
   return (
-    <div className="min-h-screen flex bg-background text-foreground">
+    <div className="h-screen w-screen flex bg-background text-foreground overflow-hidden">
       {/* Mobile Drawer */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">

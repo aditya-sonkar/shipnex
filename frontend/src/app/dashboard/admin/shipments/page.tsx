@@ -132,6 +132,17 @@ export default function ShipmentsPage() {
     fetchAgents();
   }, []);
 
+  useEffect(() => {
+    if (selectedShipment) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedShipment]);
+
   const handleStatusUpdate = async (id: string, newStatus: string) => {
     setUpdatingStatus(true);
     try {
@@ -284,10 +295,10 @@ export default function ShipmentsPage() {
       {selectedShipment && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
-            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setSelectedShipment(null)}
           />
-          <div className="relative w-full max-w-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5 shadow-2xl">
+          <div className="relative w-full max-w-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5 shadow-2xl z-10">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-sans font-bold tracking-tight text-foreground">
