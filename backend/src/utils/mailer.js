@@ -68,6 +68,7 @@ const sendTrackingEmail = async (to, subject, html) => {
     // Use Brevo HTTP API (HTTPS/443) as Render blocks outbound SMTP ports 25, 465, and 587 by default
     if (smtpHost === "smtp-relay.brevo.com") {
       const apiToken = cleanVal(process.env.BREVO_API_KEY) || emailPass;
+      console.log(">>> [Mailer HTTP] Token Length:", apiToken ? apiToken.length : 0, "Prefix:", apiToken ? apiToken.substring(0, 8) : "none");
       try {
         const response = await fetch("https://api.brevo.com/v3/smtp/email", {
           method: "POST",
