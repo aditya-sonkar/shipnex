@@ -53,25 +53,64 @@ const sendTrackingEmail = async (to, subject, html) => {
   if (!to) return; // Silent return if no email provided
 
   const emailUser = cleanVal(process.env.EMAIL_USER);
+  const emailPass = cleanVal(process.env.EMAIL_PASS);
+  const smtpHost = cleanVal(process.env.SMTP_HOST);
   const senderEmail = cleanVal(process.env.SENDER_EMAIL) || (emailUser && emailUser.includes("@") ? emailUser : "noreply@shipnex.com");
 
-  const mailOptions = {
-    from: `"ShipNex Notifications" <${senderEmail}>`,
-    to,
-    subject,
-    html,
-  };
-
   try {
-    // In local development, if EMAIL_USER isn't set, or if nodemailer isn't installed, we just console log it to avoid crash
-    if (!emailUser || !transporter) {
+    // In local development, if EMAIL_USER isn't set, we just console log it to avoid crash
+    if (!emailUser) {
       console.log(`[Mock Email] To: ${to} | Subject: ${subject}`);
       console.log(`[Mock Email Content]: ${html}`);
       return;
     }
-    
+
+    // Use Brevo HTTP API (HTTPS/443) as Render blocks outbound SMTP ports 25, 465, and 587 by default
+    if (smtpHost === "smtp-relay.brevo.com") {
+      try {
+        const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+          method: "POST",
+          headers: {
+            "accept": "application/json",
+            "content-type": "application/json",
+            "api-key": emailPass,
+          },
+          body: JSON.stringify({
+            sender: {
+              name: "ShipNex Notifications",
+              email: senderEmail,
+            },
+            to: [{ email: to }],
+            subject: subject,
+            htmlContent: html,
+          }),
+        });
+
+        if (response.ok) {
+          console.log(`>>> [Mailer] Email sent successfully via Brevo HTTP API to ${to}`);
+          return;
+        } else {
+          const errText = await response.text();
+          console.warn(`>>> [Mailer] Brevo HTTP API failed (status ${response.status}). Falling back to SMTP. Details: ${errText}`);
+        }
+      } catch (fetchErr) {
+        console.warn(`>>> [Mailer] Brevo HTTP API request failed. Falling back to SMTP. Error: ${fetchErr.message}`);
+      }
+    }
+
+    if (!transporter) {
+      throw new Error("Transporter not initialized.");
+    }
+
+    const mailOptions = {
+      from: `"ShipNex Notifications" <${senderEmail}>`,
+      to,
+      subject,
+      html,
+    };
+
     await transporter.sendMail(mailOptions);
-    console.log(`Email sent to ${to}: ${subject}`);
+    console.log(`>>> [Mailer] Email sent successfully via SMTP to ${to}`);
   } catch (error) {
     console.error("Error sending email: ", error);
   }
