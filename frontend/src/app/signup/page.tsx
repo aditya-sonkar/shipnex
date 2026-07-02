@@ -143,7 +143,7 @@ export default function Signup() {
                     suppressHydrationWarning
                     id="company"
                     type="text"
-                    placeholder="Acme Logistics Corp"
+                    placeholder="Enter company name"
                     value={companyName}
                     onChange={(e) => setCompanyName(e.target.value)}
                     disabled={loading || success}
@@ -151,7 +151,7 @@ export default function Signup() {
                   />
                 </div>
               </div>
-
+ 
               {/* Full Name */}
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider" htmlFor="fullname">
@@ -165,7 +165,7 @@ export default function Signup() {
                     suppressHydrationWarning
                     id="fullname"
                     type="text"
-                    placeholder="Jane Doe"
+                    placeholder="Enter your full name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     disabled={loading || success}
@@ -173,7 +173,7 @@ export default function Signup() {
                   />
                 </div>
               </div>
-
+ 
               {/* Email Address */}
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-zinc-500 dark:text-zinc-400 uppercase tracking-wider" htmlFor="email">
@@ -187,7 +187,7 @@ export default function Signup() {
                     suppressHydrationWarning
                     id="email"
                     type="email"
-                    placeholder="admin.name@company.com"
+                    placeholder="name@example.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     disabled={loading || success}

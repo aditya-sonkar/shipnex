@@ -154,7 +154,7 @@ export default function CreateShipmentPage() {
                   </span>
                   <input
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Enter sender name"
                     value={senderName}
                     onChange={(e) => setSenderName(e.target.value)}
                     disabled={loading}
@@ -172,7 +172,7 @@ export default function CreateShipmentPage() {
                     <MapPin size={14} className="text-zinc-400" />
                   </span>
                   <textarea
-                    placeholder="123 Main Street, City, State, ZIP"
+                    placeholder="Enter sender address"
                     value={senderAddress}
                     onChange={(e) => setSenderAddress(e.target.value)}
                     disabled={loading}
@@ -207,7 +207,7 @@ export default function CreateShipmentPage() {
                   </span>
                   <input
                     type="text"
-                    placeholder="Jane Smith"
+                    placeholder="Enter receiver name"
                     value={receiverName}
                     onChange={(e) => setReceiverName(e.target.value)}
                     disabled={loading}
@@ -226,7 +226,7 @@ export default function CreateShipmentPage() {
                   </span>
                   <input
                     type="email"
-                    placeholder="jane@example.com"
+                    placeholder="name@example.com"
                     value={receiverEmail}
                     onChange={(e) => setReceiverEmail(e.target.value)}
                     disabled={loading}
@@ -244,7 +244,7 @@ export default function CreateShipmentPage() {
                     <MapPin size={14} className="text-zinc-400" />
                   </span>
                   <textarea
-                    placeholder="456 Oak Avenue, City, State, ZIP"
+                    placeholder="Enter receiver address"
                     value={receiverAddress}
                     onChange={(e) => setReceiverAddress(e.target.value)}
                     disabled={loading}

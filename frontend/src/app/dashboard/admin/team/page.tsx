@@ -262,7 +262,7 @@ export default function TeamPage() {
                       </span>
                       <input
                         type="text"
-                        placeholder="Jane Smith"
+                        placeholder="Enter member name"
                         value={formName}
                         onChange={(e) => setFormName(e.target.value)}
                         disabled={formLoading}
@@ -281,7 +281,7 @@ export default function TeamPage() {
                       </span>
                       <input
                         type="email"
-                        placeholder="jane@shipnex.com"
+                        placeholder="email@company.com"
                         value={formEmail}
                         onChange={(e) => setFormEmail(e.target.value)}
                         disabled={formLoading}
