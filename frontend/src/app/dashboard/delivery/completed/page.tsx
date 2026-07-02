@@ -68,7 +68,7 @@ export default function CompletedDeliveriesPage() {
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-600 dark:bg-emerald-950/30 dark:text-emerald-400 uppercase tracking-widest">
                   Delivered
                 </span>
-                <span className="font-mono text-[10px] text-zinc-400">{stop.trackingNumber}</span>
+                <span className="font-sans font-medium text-[10px] text-zinc-400">{stop.trackingNumber}</span>
               </div>
               <div>
                 <p className="text-sm font-medium text-foreground">{stop.receiverAddress}</p>

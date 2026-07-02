@@ -217,7 +217,7 @@ export default function DeliveryMobileDashboard() {
             </h3>
             <div className="flex items-center justify-between text-sm text-zinc-500 dark:text-zinc-400">
               <span className="font-medium text-foreground">{nextStop.recipient}</span>
-              <span className="font-mono text-xs">{nextStop.trackingNumber}</span>
+              <span className="font-sans font-semibold text-xs">{nextStop.trackingNumber}</span>
             </div>
           </div>
 

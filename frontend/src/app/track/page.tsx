@@ -56,7 +56,7 @@ export default function TrackPage() {
                 setError("");
               }}
               placeholder="e.g. SX-12345"
-              className="w-full pl-11 pr-4 py-4 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-foreground text-sm font-mono placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-700 transition-all shadow-sm"
+              className="w-full pl-11 pr-4 py-4 rounded-2xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-foreground text-sm font-sans placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-300 dark:focus:ring-zinc-700 transition-all shadow-sm"
               autoFocus
             />
           </div>

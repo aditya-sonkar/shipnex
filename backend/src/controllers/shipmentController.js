@@ -2,6 +2,9 @@ const prisma = require("../prismaClient");
 const { deleteCache } = require("../utils/redisClient");
 const { sendTrackingEmail } = require("../utils/mailer");
 
+const cleanVal = (val) => val ? val.replace(/^["']|["']$/g, "").trim() : val;
+const FRONTEND_URL = cleanVal(process.env.FRONTEND_URL) || "http://localhost:3000";
+
 function generateTrackingNumber() {
   return "SX-" + Math.floor(10000 + Math.random() * 90000);
 }
@@ -187,7 +190,7 @@ const updateStatus = async (req, res) => {
               </div>
             </div>
             
-            <a href="${process.env.FRONTEND_URL || "http://localhost:3000"}/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
+            <a href="${FRONTEND_URL}/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
           </div>
           <div style="background-color: #f4f4f5; padding: 24px; text-align: center; border-top: 1px solid #e4e4e7;">
             <p style="color: #a1a1aa; font-size: 12px; margin: 0;">© 2026 ShipNex Logistics. All rights reserved.</p>
@@ -350,7 +353,7 @@ const uploadPOD = async (req, res) => {
               </div>
             </div>
             
-            <a href="${process.env.FRONTEND_URL || "http://localhost:3000"}/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
+            <a href="${FRONTEND_URL}/track/${updated.trackingNumber}" style="display: block; width: 100%; box-sizing: border-box; text-align: center; background-color: #09090b; color: #ffffff; text-decoration: none; padding: 16px 0; border-radius: 12px; font-weight: 600; font-size: 15px; transition: opacity 0.2s;">View Tracking Details</a>
           </div>
           <div style="background-color: #f4f4f5; padding: 24px; text-align: center; border-top: 1px solid #e4e4e7;">
             <p style="color: #a1a1aa; font-size: 12px; margin: 0;">© 2026 ShipNex Logistics. All rights reserved.</p>

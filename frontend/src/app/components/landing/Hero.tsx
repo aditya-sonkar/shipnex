@@ -29,7 +29,7 @@ export default function Hero() {
                             transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
                             className="mt-5 text-[15px] text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal max-w-md"
                         >
-                            ShipNex is building the next frontier of logistics software — one where models can route, sort, and manage courier networks to automate global supply chains from local hubs to the doorstep.
+                            ShipNex is building the next frontier of logistics software - one where models can route, sort, and manage courier networks to automate global supply chains from local hubs to the doorstep.
                         </motion.p>
 
                         <motion.div
@@ -145,13 +145,13 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-16 pt-8 border-t border-zinc-100 dark:border-zinc-800/50 grid grid-cols-2 md:grid-cols-4 gap-8 select-none"
+                    className="mt-16 pt-8 border-t border-zinc-100 dark:border-zinc-800/50 grid grid-cols-2 md:grid-cols-4 gap-8 select-none pl-12 md:pl-16"
                 >
                     {[
-                        { value: "99.9%", label: "Uptime SLA" },
-                        { value: "50M+", label: "Shipments Tracked" },
-                        { value: "120+", label: "Countries Served" },
-                        { value: "<200ms", label: "API Response" },
+                        { value: "99.2%", label: "AI ETA Accuracy" },
+                        { value: "<1.2s", label: "Hub Scan Speed" },
+                        { value: "28%", label: "Transit Miles Saved" },
+                        { value: "4.8M+", label: "Packages Dispatched" },
                     ].map(stat => (
                         <div key={stat.label}>
                             <p className="font-sans font-light text-[2.2rem] sm:text-[2.8rem] tracking-tight text-zinc-900 dark:text-white leading-none">

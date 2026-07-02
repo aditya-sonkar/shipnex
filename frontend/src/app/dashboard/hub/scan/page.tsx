@@ -96,7 +96,7 @@ export default function BarcodeScanner() {
             type="text"
             value={barcode}
             onChange={(e) => setBarcode(e.target.value)}
-            className="w-full bg-transparent border-b-2 border-zinc-300 dark:border-zinc-700 text-center text-3xl font-mono py-4 focus:outline-none focus:border-foreground transition-colors"
+            className="w-full bg-transparent border-b-2 border-zinc-300 dark:border-zinc-700 text-center text-3xl font-sans py-4 focus:outline-none focus:border-foreground transition-colors"
             placeholder="Awaiting Scan..."
             autoFocus
           />

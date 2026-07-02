@@ -94,7 +94,7 @@ export default function CreateShipmentPage() {
             <p className="text-sm font-semibold text-foreground">{success}</p>
             <p className="text-xs text-zinc-500 mt-1">
               Tracking Number:{" "}
-              <span className="font-mono font-bold text-foreground">
+              <span className="font-sans font-bold text-foreground">
                 {createdTracking}
               </span>
             </p>

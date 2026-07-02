@@ -247,7 +247,7 @@ export default function ShipmentDetailPage() {
               {currentStatus.label}
             </span>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 font-mono">
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5 font-sans font-medium">
             {shipment.trackingNumber}
           </p>
         </div>

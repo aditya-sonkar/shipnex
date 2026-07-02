@@ -46,7 +46,7 @@ export default function CTA() {
                     </h2>
 
                     {/* Left Column Stacked Links: Sentence Case, Small, Muted */}
-                    <div className="relative lg:absolute lg:left-12 lg:top-1/2 lg:-translate-y-1/2 z-20 flex flex-row flex-wrap justify-center gap-x-5 gap-y-2.5 lg:flex-col lg:gap-4 lg:items-start lg:text-left mt-6 lg:mt-0 w-full lg:w-48 text-center">
+                    <div className="relative lg:absolute lg:left-12 lg:top-1/2 lg:-translate-y-1/2 z-20 flex flex-row flex-wrap justify-center gap-x-8 gap-y-4 lg:flex-col lg:gap-6 lg:items-start lg:text-left mt-6 lg:mt-0 w-full lg:w-48 text-center">
                         {ctaLinks.map((link) => (
                             <Link
                                 key={link.label}

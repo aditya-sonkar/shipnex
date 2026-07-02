@@ -97,7 +97,7 @@ export default function AssignDeliveryPage() {
                   <Package size={20} />
                 </div>
                 <div>
-                  <p className="font-bold font-mono text-sm">{shipment.trackingNumber}</p>
+                  <p className="font-bold font-sans text-sm">{shipment.trackingNumber}</p>
                   <p className="text-xs text-zinc-500 mt-0.5 max-w-sm truncate">
                     To: {shipment.receiverAddress}
                   </p>

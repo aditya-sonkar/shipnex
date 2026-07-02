@@ -290,7 +290,7 @@ export default function ShipmentsPage() {
           <div className="relative w-full max-w-lg bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6 space-y-5 shadow-2xl">
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-heading font-light text-foreground">
+                <h3 className="text-lg font-sans font-bold tracking-tight text-foreground">
                   {selectedShipment.trackingNumber}
                 </h3>
                 <StatusBadge status={selectedShipment.status} />
@@ -481,7 +481,7 @@ export default function ShipmentsPage() {
                 onClick={() => setSelectedShipment(shipment)}
               >
                 <div className="lg:col-span-2">
-                  <p className="text-sm font-semibold text-foreground font-mono">
+                  <p className="text-sm font-semibold text-foreground font-sans">
                     {shipment.trackingNumber}
                   </p>
                 </div>
