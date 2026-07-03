@@ -34,7 +34,7 @@ export default function Features() {
 
         {/* Header Section */}
         <div className="max-w-2xl mb-12">
-          <h2 className="font-heading font-light text-foreground text-[40px] lg:text-[56px] leading-[1.1] tracking-[-0.02em]">
+          <h2 className="font-heading font-light text-foreground text-pretty text-[28px] sm:text-[38px] lg:text-[56px] leading-[1.1] tracking-[-0.02em]">
             Platform Ecosystem
           </h2>
           <p className="mt-6 text-sm lg:text-base text-zinc-600 dark:text-zinc-400 font-normal leading-relaxed text-pretty">
@@ -100,16 +100,6 @@ export default function Features() {
               </div>
             </motion.div>
           ))}
-        </div>
-
-        {/* Bottom Centered Button */}
-        <div className="mt-16 flex justify-center">
-          <Link
-            href="#features"
-            className="inline-flex items-center justify-center rounded-full bg-foreground text-background px-6 py-3 text-sm font-semibold hover:opacity-80 transition-opacity"
-          >
-            Explore Ecosystem &rarr;
-          </Link>
         </div>
 
       </div>

@@ -39,7 +39,7 @@ export default function CTA() {
                     </div>
 
                     {/* Centered Large Top Title: Elegant Serif Sentence Case */}
-                    <h2 className="relative z-10 font-heading text-white text-pretty lg:text-[64px] sm:text-[40px] text-[32px] leading-[1.2] tracking-[-0.05em] text-center max-w-3xl">
+                    <h2 className="relative z-10 font-heading text-white text-pretty text-[26px] sm:text-[38px] lg:text-[64px] leading-[1.2] tracking-[-0.03em] text-center max-w-3xl">
                         Unleash efficiency
                         <br />
                         with ShipNex
@@ -51,7 +51,7 @@ export default function CTA() {
                             <Link
                                 key={link.label}
                                 href={link.href}
-                                className="text-xs font-sans font-medium text-white/90 hover:text-white transition-colors cursor-pointer drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
+                                className="text-xs font-sans font-medium text-white/95 hover:text-white transition-colors cursor-pointer drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)]"
                             >
                                 {link.label}
                             </Link>

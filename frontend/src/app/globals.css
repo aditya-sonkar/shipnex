@@ -23,7 +23,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
-  --font-heading: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-heading: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
   
   /* World Labs colors */
   --color-world-blue: #2a679c;

@@ -77,20 +77,20 @@ export default function Pricing() {
                 {/* Header */}
                 <div className="text-center mb-16 select-none">
                     
-                    <h2 className="mt-6 font-heading font-light text-foreground text-pretty lg:text-[64px] text-[40px] leading-[1.1] tracking-[-0.02em]">
+                    <h2 className="mt-6 font-heading font-light text-foreground text-pretty text-[28px] sm:text-[38px] lg:text-[64px] leading-[1.1] tracking-[-0.02em]">
                         Scale without
                         <br />
-                        <span className="text-zinc-400 dark:text-zinc-500">the surprise bills.</span>
+                        <span className="text-zinc-400 dark:text-zinc-550">the surprise bills.</span>
                     </h2>
                     
-                    <p className="mt-4 max-w-xl mx-auto text-zinc-500 dark:text-zinc-400 text-sm sm:text-base leading-relaxed font-medium">
+                    <p className="mt-4 max-w-xl mx-auto text-zinc-550 dark:text-zinc-400 text-sm sm:text-base leading-relaxed font-medium">
                         Start free. Upgrade when your operational fleet expands. No hidden fees.
                     </p>
                 </div>
 
                 {/* Monthly / Yearly Billing Toggle Switcher */}
                 <div className="flex justify-center items-center gap-3.5 mb-16 select-none">
-                    <span className={`text-xs font-bold uppercase tracking-wider transition-all ${billingCycle === "monthly" ? "text-zinc-900 dark:text-white" : "text-zinc-400"}`}>
+                    <span className={`text-xs font-bold uppercase tracking-wider transition-all ${billingCycle === "monthly" ? "text-zinc-900 dark:text-white" : "text-zinc-450"}`}>
                         Monthly
                     </span>
                     <button 
@@ -105,7 +105,7 @@ export default function Pricing() {
                             transition={{ type: "spring", stiffness: 500, damping: 30 }}
                         />
                     </button>
-                    <span className={`text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${billingCycle === "yearly" ? "text-zinc-900 dark:text-white" : "text-zinc-400"}`}>
+                    <span className={`text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${billingCycle === "yearly" ? "text-zinc-900 dark:text-white" : "text-zinc-450"}`}>
                         Yearly 
                         <span className="bg-emerald-500/10 border border-emerald-500/20 text-[#00e5a3] text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
                             Save 20%
@@ -145,7 +145,7 @@ export default function Pricing() {
                                 )}
 
                                 {/* Plan name */}
-                                <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
+                                <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-450 dark:text-zinc-500">
                                     {plan.name}
                                 </p>
 
@@ -166,7 +166,7 @@ export default function Pricing() {
                                         </AnimatePresence>
                                         
                                         {activePeriod && (
-                                            <span className="text-xs text-zinc-400 dark:text-zinc-500 font-bold uppercase tracking-wider">
+                                            <span className="text-xs text-zinc-450 dark:text-zinc-550 font-bold uppercase tracking-wider">
                                                 {activePeriod}
                                             </span>
                                         )}
@@ -185,7 +185,7 @@ export default function Pricing() {
                                 </div>
 
                                 {/* Description */}
-                                <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6 mt-2 font-medium">
+                                <p className="text-xs text-zinc-550 dark:text-zinc-450 leading-relaxed mb-6 mt-2 font-medium">
                                     {plan.description}
                                 </p>
 
@@ -197,7 +197,7 @@ export default function Pricing() {
                                     {plan.features.map((feature) => (
                                         <li
                                             key={feature}
-                                            className="flex items-start gap-2.5 text-xs text-zinc-700 dark:text-zinc-300 font-medium"
+                                            className="flex items-start gap-2.5 text-xs text-zinc-705 dark:text-zinc-300 font-medium"
                                         >
                                             <Check
                                                 className="w-4 h-4 shrink-0 mt-0.5 text-indigo-500 dark:text-[#00e5a3]"

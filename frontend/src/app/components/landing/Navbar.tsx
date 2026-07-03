@@ -60,6 +60,34 @@ export default function Navbar() {
         }
     };
 
+    const handleNavItemClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        if (href.startsWith("/#") && window.location.pathname === "/") {
+            e.preventDefault();
+            const id = href.replace("/#", "");
+            const element = document.getElementById(id);
+            if (element) {
+                const headerOffset = 80; // height of fixed navbar
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: "smooth"
+                });
+
+                window.history.pushState(null, "", href);
+                setMobileOpen(false);
+            }
+        } else {
+            setMobileOpen(false);
+        }
+    };
+
+    const logoColor = scrolled ? "text-foreground" : "text-white";
+    const linkColor = scrolled ? "text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white" : "text-white/80 hover:text-white";
+    const underlineColor = scrolled ? "bg-zinc-950 dark:bg-white" : "bg-white";
+    const hamburgerColor = scrolled ? "bg-foreground" : "bg-white";
+
     return (
         <header
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled
@@ -73,7 +101,7 @@ export default function Navbar() {
                 <a
                     href="/"
                     onClick={handleLogoClick}
-                    className="text-3xl font-heading font-extrabold tracking-tight flex items-center select-none text-foreground cursor-pointer"
+                    className={`text-3xl font-heading font-extrabold tracking-tight flex items-center select-none cursor-pointer transition-colors ${logoColor}`}
                 >
                     shipnex
                 </a>
@@ -84,10 +112,11 @@ export default function Navbar() {
                         <a
                             key={item.label}
                             href={item.href}
-                            className="relative text-xl font-heading font-bold text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white transition-colors duration-250 group"
+                            onClick={(e) => handleNavItemClick(e, item.href)}
+                            className={`relative text-[11px] font-sans font-medium uppercase tracking-[0.12em] transition-colors duration-250 group ${linkColor}`}
                         >
                             {item.label}
-                            <span className="absolute bottom-[-4px] left-0 w-0 h-[2px] bg-zinc-950 dark:bg-white transition-all duration-300 group-hover:w-full" />
+                            <span className={`absolute bottom-[-4px] left-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full ${underlineColor}`} />
                         </a>
                     ))}
                 </nav>
@@ -100,7 +129,7 @@ export default function Navbar() {
                         <>
                             <button
                                 onClick={handleLogout}
-                                className="hidden sm:inline-flex text-xl font-heading font-bold text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+                                className={`hidden sm:inline-flex text-[11px] font-sans font-medium uppercase tracking-[0.12em] transition-colors cursor-pointer ${linkColor}`}
                             >
                                 Log Out
                             </button>
@@ -116,7 +145,7 @@ export default function Navbar() {
                         <>
                             <Link
                                 href="/login"
-                                className="hidden sm:inline-flex text-xl font-heading font-bold text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white transition-colors"
+                                className={`hidden sm:inline-flex text-[11px] font-sans font-medium uppercase tracking-[0.12em] transition-colors ${linkColor}`}
                             >
                                 Log In
                             </Link>
@@ -137,10 +166,10 @@ export default function Navbar() {
                         aria-label="Toggle menu"
                     >
                         <span
-                            className={`block w-6 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? "rotate-45 translate-y-[4px]" : ""}`}
+                            className={`block w-6 h-0.5 transition-all duration-300 ${hamburgerColor} ${mobileOpen ? "rotate-45 translate-y-[4px]" : ""}`}
                         />
                         <span
-                            className={`block w-6 h-0.5 bg-foreground transition-all duration-300 ${mobileOpen ? "-rotate-45 -translate-y-[4px]" : ""}`}
+                            className={`block w-6 h-0.5 transition-all duration-300 ${hamburgerColor} ${mobileOpen ? "-rotate-45 -translate-y-[4px]" : ""}`}
                         />
                     </button>
                 </div>
@@ -155,8 +184,8 @@ export default function Navbar() {
                             <a
                                 key={item.label}
                                 href={item.href}
-                                onClick={() => setMobileOpen(false)}
-                                className="py-2.5 text-xl font-heading font-bold text-zinc-800 dark:text-zinc-200 border-b border-zinc-150/40 dark:border-zinc-900 last:border-0"
+                                onClick={(e) => handleNavItemClick(e, item.href)}
+                                className="py-3 text-[11px] font-sans font-medium uppercase tracking-[0.12em] text-zinc-800 dark:text-zinc-200 border-b border-zinc-150/40 dark:border-zinc-900 last:border-0 cursor-pointer"
                             >
                                 {item.label}
                             </a>

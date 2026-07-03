@@ -1,64 +1,69 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
     return (
-        <section className="relative overflow-hidden pt-24 pb-12 lg:pt-32 lg:pb-20">
-            <div className="mx-auto w-full max-w-screen-2xl px-8 lg:px-16">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section className="relative w-full h-screen min-h-[650px] overflow-hidden flex flex-col justify-between pt-32 pb-8 md:pb-12 text-white bg-zinc-950 select-none">
+            {/* Background Video with Poster Fallback */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover scale-[1.01]"
+                >
+                    <source src="/videos/truck.mp4" type="video/mp4" />
+                </video>
+                {/* Dark Vignette Overlay for Readability */}
+                <div className="absolute inset-0 bg-black/35 z-10" />
+            </div>
 
-                    {/* Left content column */}
-                    <div className="lg:col-span-6 flex flex-col items-start text-left w-full">
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                            className="font-heading font-light text-foreground text-pretty lg:text-[72px] text-[48px] leading-[1.1] tracking-[-0.02em] select-none"
-                        >
-                            ShipNex
-                            <br />
-                            <span className="text-zinc-400 dark:text-zinc-400">
-                                Logistics Intelligence
-                            </span>
-                        </motion.h1>
+            {/* Massive Red Left Chevron SVG Shape (Lodisna Style) */}
+            <div className="absolute left-0 top-[12%] bottom-[8%] w-[20vw] min-w-[140px] max-w-[340px] z-15 pointer-events-none opacity-85">
+                <svg className="w-full h-full text-[#b81d24]/60" viewBox="0 0 100 200" preserveAspectRatio="none">
+                    <polygon points="0,0 100,100 0,200" fill="currentColor" />
+                </svg>
+            </div>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 16 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-                            className="mt-5 text-[15px] text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal max-w-md"
-                        >
-                            ShipNex is building the next frontier of logistics software - one where models can route, sort, and manage courier networks to automate global supply chains from local hubs to the doorstep.
-                        </motion.p>
+            {/* Top-Left Since Label */}
+            <div className="absolute left-6 md:left-12 lg:left-16 top-[18%] z-20">
+                <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#ef4444] uppercase">
+                    Since 2026
+                </span>
+            </div>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 12 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, delay: 0.22, ease: [0.16, 1, 0.3, 1] }}
-                            className="mt-8 flex items-center gap-3"
-                        >
-                            <a
-                                href="/login"
-                                className="inline-flex items-center justify-center rounded-full bg-foreground text-background px-7 py-3.5 text-[13px] font-semibold leading-none shadow-sm hover:opacity-80 transition-opacity cursor-pointer"
-                            >
-                                Get Started Free
-                            </a>
-                            <a
-                                href="#features"
-                                className="inline-flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 px-7 py-3.5 text-[13px] font-semibold leading-none hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors cursor-pointer text-foreground"
-                            >
-                                Learn More
-                            </a>
-                        </motion.div>
+            {/* Main Content Area - Giant Typography */}
+            <div className="relative z-20 mx-auto w-full max-w-screen-2xl px-6 md:px-12 lg:px-16 flex-grow flex flex-col justify-center pt-16">
+                <div className="w-full">
+                    <motion.h1
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+                        className="font-sans font-extralight uppercase text-[10vw] sm:text-[8vw] lg:text-[8vw] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
+                    >
+                        Logistics
+                        <br />
+                        &amp; Intelligence
+                    </motion.h1>
+                </div>
+            </div>
 
-                        {/* Customer Tracking Input */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 12 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.9, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                            className="mt-8 w-full max-w-sm"
-                        >
+            {/* Bottom Section - Paragraph, Tracking Search & Scroll Down */}
+            <div className="relative z-20 mx-auto w-full max-w-screen-2xl px-6 md:px-12 lg:px-16 mt-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end border-t border-white/10 pt-8 pb-4">
+                    {/* Empty Left Grid to offset content past the red chevron */}
+                    <div className="lg:col-span-2 hidden lg:block" />
+
+                    {/* Middle Column: Description & Glassmorphic Tracking Bar */}
+                    <div className="lg:col-span-7 flex flex-col items-start gap-5">
+                        <p className="text-[13px] md:text-sm text-white/80 leading-relaxed font-normal max-w-2xl text-pretty">
+                            ShipNex is a versatile, constantly evolving logistics intelligence platform. We cover the specific transport, routing, and fleet coordination needs of our clients, meeting the highest standards of speed and efficiency.
+                        </p>
+
+                        <div className="w-full max-w-md bg-white/10 dark:bg-white/5 backdrop-blur-md p-1 rounded-full border border-white/20 shadow-md">
                             <form
                                 onSubmit={(e) => {
                                     e.preventDefault();
@@ -71,99 +76,35 @@ export default function Hero() {
                                     type="text"
                                     name="tracking"
                                     placeholder="Enter Tracking ID (e.g. SX-10473)"
-                                    className="w-full pl-5 pr-24 py-3.5 rounded-full bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 text-sm focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-700 shadow-sm"
+                                    className="w-full pl-5 pr-24 py-2.5 bg-transparent border-0 text-xs focus:outline-none placeholder:text-white/50 text-white"
                                     required
                                 />
                                 <button
                                     type="submit"
-                                    className="absolute right-1.5 top-1.5 bottom-1.5 px-5 bg-foreground text-background rounded-full text-xs font-semibold hover:opacity-90 transition-opacity"
+                                    className="absolute right-1 top-1 bottom-1 px-5 bg-white hover:bg-white/90 text-zinc-950 rounded-full text-[10px] font-bold tracking-wider uppercase transition-all shadow-sm cursor-pointer"
                                 >
                                     Track
                                 </button>
                             </form>
-                        </motion.div>
-                    </div>
-
-                    {/* Right column - Feature card-style Editorial Hero Card */}
-                    <div className="lg:col-span-6 flex justify-center lg:justify-end w-full">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.96, y: 15 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                            className="relative w-full max-w-[620px] min-h-[380px] md:aspect-[4/3] rounded-2xl overflow-hidden border border-zinc-200/50 dark:border-zinc-800/50 bg-zinc-900 shadow-2xl flex flex-col justify-between group cursor-pointer"
-                        >
-                            <div className="absolute inset-0 z-0">
-                                <img
-                                    src="/images/hero.png"
-                                    alt="ShipNex Logistics Intelligence platform preview"
-                                    className="w-full h-full object-cover select-none pointer-events-none group-hover:scale-[1.03] transition-transform duration-[1.2s] ease-out"
-                                />
-                                {/* Overlay gradients for high contrast/readability */}
-                                <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90" />
-                            </div>
-
-                            {/* Top Overlay Content */}
-                            <div className="relative z-10 p-6 lg:p-8 border-b border-white/10">
-                                <h3 className="text-white font-semibold tracking-tight text-lg lg:text-xl">
-                                    Intelligent Route Dispatch
-                                </h3>
-                            </div>
-
-                            {/* Bottom Overlay Content */}
-                            <div className="relative z-10 p-6 lg:p-8 flex flex-col gap-3">
-                                {/* Tags */}
-                                <div className="flex flex-wrap gap-2">
-                                    {["ROUTING MESH", "TRANSIT LOGS", "AI SCHEDULING"].map((tag) => (
-                                        <span
-                                            key={tag}
-                                            className="px-2.5 py-1 rounded bg-white/20 backdrop-blur-md border border-white/10 text-white text-[9px] font-bold tracking-widest uppercase"
-                                        >
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {/* Description */}
-                                <p className="text-sm text-zinc-200 leading-relaxed font-medium text-pretty mt-1">
-                                    Dynamically cluster courier logs and dispatch routes across autonomous hubs.
-                                </p>
-
-                                {/* Explore Link */}
-                                <div
-                                    className="inline-flex items-center text-xs font-bold text-white group-hover:text-[#00e5a3] transition-colors mt-2"
-                                >
-                                    <span className="border-b border-white/30 group-hover:border-[#00e5a3]/50 pb-0.5">Explore System &rarr;</span>
-                                </div>
-                            </div>
-                        </motion.div>
-                    </div>
-
-                </div>
-
-                {/* Stats row */}
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-16 pt-8 border-t border-zinc-100 dark:border-zinc-800/50 grid grid-cols-2 md:grid-cols-4 gap-8 select-none pl-12 md:pl-16"
-                >
-                    {[
-                        { value: "99.2%", label: "AI ETA Accuracy" },
-                        { value: "<1.2s", label: "Hub Scan Speed" },
-                        { value: "28%", label: "Transit Miles Saved" },
-                        { value: "4.8M+", label: "Packages Dispatched" },
-                    ].map(stat => (
-                        <div key={stat.label}>
-                            <p className="font-sans font-light text-[2.2rem] sm:text-[2.8rem] tracking-tight text-zinc-900 dark:text-white leading-none">
-                                {stat.value}
-                            </p>
-                            <p className="mt-2 text-[11px] font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-widest leading-none">
-                                {stat.label}
-                            </p>
                         </div>
-                    ))}
-                </motion.div>
+                    </div>
 
+                    {/* Right Column: Scroll Down Outline Pill */}
+                    <div className="lg:col-span-3 flex justify-end">
+                        <div className="flex items-center gap-3.5">
+                            <div className="flex flex-col items-center gap-0.5 text-[#ef4444] animate-bounce">
+                                <ChevronDown className="w-3.5 h-3.5" />
+                                <ChevronDown className="w-3.5 h-3.5 -mt-2" />
+                            </div>
+                            <a
+                                href="#features"
+                                className="px-5 py-2.5 rounded-full border border-white/30 text-[10px] font-bold tracking-[0.15em] uppercase text-white/90 hover:bg-white hover:text-zinc-950 hover:border-white transition-all duration-300 cursor-pointer"
+                            >
+                                Scroll Down
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     );

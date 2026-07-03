@@ -24,9 +24,9 @@ export default function About() {
         </div>
 
         {/* Right Side: Large Bold Information Card */}
-        <div className="lg:col-span-7 bg-white dark:bg-zinc-900/60 border border-zinc-250/50 dark:border-zinc-800/45 rounded-[32px] p-8 sm:p-12 lg:p-16 shadow-lg flex flex-col justify-center text-left">
+        <div className="lg:col-span-7 bg-white dark:bg-zinc-900/60 border border-zinc-250/50 dark:border-zinc-800/45 rounded-[32px] p-6 sm:p-12 lg:p-16 shadow-lg flex flex-col justify-center text-left">
           
-          <h2 className="font-heading text-foreground text-pretty lg:text-[60px] text-[38px] leading-[1.2] tracking-[-0.05em]">
+          <h2 className="font-heading font-light text-foreground text-pretty text-[24px] sm:text-[32px] md:text-[40px] lg:text-[52px] leading-[1.25] lg:leading-[1.1] tracking-[-0.03em]">
             Logistics intelligence transforms routing into optimization, tracking into reasoning, and dispatching into automation.
           </h2>
 

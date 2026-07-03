@@ -20,13 +20,13 @@ export default function Footer() {
                         <p className="text-[10px] tracking-widest font-mono text-zinc-400 dark:text-zinc-550 uppercase">
                             © 2026 SHIPNEX. ALL RIGHTS RESERVED.
                         </p>
-                        <p className="text-[9px] tracking-widest font-mono text-zinc-500 dark:text-zinc-600 uppercase">
+                        <p className="text-[9px] tracking-widest font-mono text-zinc-550 dark:text-zinc-650 uppercase">
                             SHIPNEX™ IS A TRADEMARK OF ITS RESPECTIVE OWNER.
                         </p>
                     </div>
 
                     {/* Right: Minimal Social Handles (Exact logo icons from screenshot) */}
-                    <div className="flex items-center gap-6 shrink-0 text-zinc-400 dark:text-zinc-500">
+                    <div className="flex items-center gap-6 shrink-0 text-zinc-400 dark:text-zinc-550">
                         {/* X Logo */}
                         <a href="#" aria-label="X" className="hover:text-zinc-900 dark:hover:text-white transition-all hover:scale-105">
                             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
