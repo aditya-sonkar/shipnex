@@ -28,6 +28,7 @@ export default function CTA() {
                             src="/shipping_cta_bg.png"
                             alt="ShipNex Logistics Spatial Landscape Illustration"
                             fill
+                            sizes="100vw"
                             className="object-cover object-center sm:object-center"
                             priority
                             unoptimized
@@ -39,8 +40,8 @@ export default function CTA() {
                     </div>
 
                     {/* Centered Large Top Title: Elegant Serif Sentence Case */}
-                    <h2 className="relative z-10 font-heading text-white text-pretty text-[26px] sm:text-[38px] lg:text-[64px] leading-[1.2] tracking-[-0.03em] text-center max-w-3xl">
-                        Unleash efficiency
+                    <h2 className="relative z-10 font-heading text-white text-pretty text-[28px] sm:text-[38px] lg:text-[52px] leading-[1.2] tracking-[-0.03em] text-center max-w-3xl">
+                        Unleash efficiency{" "}
                         <br />
                         with ShipNex
                     </h2>

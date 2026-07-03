@@ -44,7 +44,7 @@ export default function Hero() {
                         transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
                         className="font-sans font-extralight uppercase text-[10vw] sm:text-[8vw] lg:text-[8vw] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
                     >
-                        Logistics
+                        Logistics{" "}
                         <br />
                         &amp; Intelligence
                     </motion.h1>

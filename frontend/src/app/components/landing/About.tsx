@@ -9,13 +9,14 @@ export default function About() {
     <section className="mx-auto w-full max-w-screen-2xl px-8 lg:px-16 py-12 lg:py-20 relative select-none">
       {/* Container Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-        
+
         {/* Left Side: Rich Visual Graphics Card */}
         <div className="lg:col-span-5 relative w-full min-h-[400px] lg:min-h-[500px] rounded-[32px] overflow-hidden border border-zinc-200/50 dark:border-zinc-800/40 bg-zinc-100 dark:bg-zinc-950 shadow-md">
           <Image
             src="/logistics_about.png"
             alt="ShipNex Logistics Spatial Intelligence Illustration"
             fill
+            sizes="(max-width: 1024px) 100vw, 42vw"
             className="object-cover transition-transform duration-700 hover:scale-102"
             priority
           />
@@ -25,8 +26,8 @@ export default function About() {
 
         {/* Right Side: Large Bold Information Card */}
         <div className="lg:col-span-7 bg-white dark:bg-zinc-900/60 border border-zinc-250/50 dark:border-zinc-800/45 rounded-[32px] p-6 sm:p-12 lg:p-16 shadow-lg flex flex-col justify-center text-left">
-          
-          <h2 className="font-heading font-light text-foreground text-pretty text-[24px] sm:text-[32px] md:text-[40px] lg:text-[52px] leading-[1.25] lg:leading-[1.1] tracking-[-0.03em]">
+
+          <h2 className="font-heading font-normal text-foreground text-pretty text-[20px] sm:text-[28px] md:text-[34px] lg:text-[42px] leading-[1.2] tracking-[-0.02em]">
             Logistics intelligence transforms routing into optimization, tracking into reasoning, and dispatching into automation.
           </h2>
 

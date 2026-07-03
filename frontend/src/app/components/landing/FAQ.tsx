@@ -36,7 +36,7 @@ export default function FAQ() {
                 <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-400 dark:text-zinc-550 block mb-3">
                     SUPPORT DESK
                 </span>
-                <h2 className="font-heading font-light text-zinc-900 dark:text-white text-3xl sm:text-4xl lg:text-[40px] leading-[1.15] tracking-[-0.03em]">
+                <h2 className="font-heading font-light text-zinc-900 dark:text-white text-[28px] sm:text-[38px] lg:text-[52px] leading-[1.15] tracking-[-0.03em]">
                     Frequently Asked Questions
                 </h2>
             </div>

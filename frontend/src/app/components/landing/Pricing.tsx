@@ -73,16 +73,16 @@ export default function Pricing() {
     return (
         <section id="pricing" className="px-8 lg:px-16 pt-10 pb-20 lg:pt-12 lg:pb-32 relative">
             <div className="mx-auto w-full max-w-screen-2xl">
-                
+
                 {/* Header */}
                 <div className="text-center mb-16 select-none">
-                    
-                    <h2 className="mt-6 font-heading font-light text-foreground text-pretty text-[28px] sm:text-[38px] lg:text-[64px] leading-[1.1] tracking-[-0.02em]">
-                        Scale without
+
+                    <h2 className="mt-6 font-heading font-light text-foreground text-pretty text-[28px] sm:text-[38px] lg:text-[52px] leading-[1.15] tracking-[-0.02em]">
+                        Scale without{" "}
                         <br />
-                        <span className="text-zinc-400 dark:text-zinc-550">the surprise bills.</span>
+                        <span className="text-zinc-550 dark:text-zinc-400">the surprise bills.</span>
                     </h2>
-                    
+
                     <p className="mt-4 max-w-xl mx-auto text-zinc-550 dark:text-zinc-400 text-sm sm:text-base leading-relaxed font-medium">
                         Start free. Upgrade when your operational fleet expands. No hidden fees.
                     </p>
@@ -93,7 +93,7 @@ export default function Pricing() {
                     <span className={`text-xs font-bold uppercase tracking-wider transition-all ${billingCycle === "monthly" ? "text-zinc-900 dark:text-white" : "text-zinc-450"}`}>
                         Monthly
                     </span>
-                    <button 
+                    <button
                         onClick={() => setBillingCycle(billingCycle === "monthly" ? "yearly" : "monthly")}
                         className="w-12 h-7 rounded-full bg-zinc-200 dark:bg-zinc-800 p-1 flex items-center transition-all duration-300 cursor-pointer"
                         aria-label="Billing cycle toggle"
@@ -106,7 +106,7 @@ export default function Pricing() {
                         />
                     </button>
                     <span className={`text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${billingCycle === "yearly" ? "text-zinc-900 dark:text-white" : "text-zinc-450"}`}>
-                        Yearly 
+                        Yearly
                         <span className="bg-emerald-500/10 border border-emerald-500/20 text-[#00e5a3] text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
                             Save 20%
                         </span>
@@ -129,11 +129,10 @@ export default function Pricing() {
                                     delay: i * 0.08,
                                     ease: [0.16, 1, 0.3, 1],
                                 }}
-                                className={`relative rounded-3xl p-6 lg:p-8 flex flex-col border transition-all duration-300 ${
-                                    plan.highlighted
+                                className={`relative rounded-3xl p-6 lg:p-8 flex flex-col border transition-all duration-300 ${plan.highlighted
                                         ? "border-zinc-900 dark:border-zinc-100 bg-zinc-50/20 dark:bg-zinc-900/30 shadow-xl scale-[1.02]"
                                         : "border-zinc-200/80 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-950/20 hover:border-zinc-300 dark:hover:border-zinc-700"
-                                }`}
+                                    }`}
                             >
                                 {/* Highlight Badge */}
                                 {plan.highlighted && (
@@ -153,7 +152,7 @@ export default function Pricing() {
                                 <div className="mt-4 mb-2 h-14 flex flex-col justify-center">
                                     <div className="flex items-baseline gap-1">
                                         <AnimatePresence mode="wait">
-                                            <motion.span 
+                                            <motion.span
                                                 key={activePrice}
                                                 initial={{ y: -6, opacity: 0 }}
                                                 animate={{ y: 0, opacity: 1 }}
@@ -164,19 +163,19 @@ export default function Pricing() {
                                                 {activePrice}
                                             </motion.span>
                                         </AnimatePresence>
-                                        
+
                                         {activePeriod && (
                                             <span className="text-xs text-zinc-450 dark:text-zinc-550 font-bold uppercase tracking-wider">
                                                 {activePeriod}
                                             </span>
                                         )}
                                     </div>
-                                    
+
                                     {/* Yearly note annotation */}
                                     {billingCycle === "yearly" && plan.yearlyNote && (
-                                        <motion.p 
-                                            initial={{ opacity: 0 }} 
-                                            animate={{ opacity: 1 }} 
+                                        <motion.p
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
                                             className="text-[9px] font-bold text-[#00e5a3] font-mono mt-1 uppercase tracking-wide"
                                         >
                                             {plan.yearlyNote}
@@ -210,11 +209,10 @@ export default function Pricing() {
                                 {/* CTA Button */}
                                 <Link
                                     href={plan.href}
-                                    className={`w-full text-center py-3.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-250 cursor-pointer ${
-                                        plan.highlighted
+                                    className={`w-full text-center py-3.5 rounded-full text-xs font-bold tracking-wider uppercase transition-all duration-250 cursor-pointer ${plan.highlighted
                                             ? "bg-zinc-950 dark:bg-white hover:bg-zinc-850 dark:hover:bg-zinc-100 text-white dark:text-zinc-950 shadow-lg hover:scale-[1.01]"
                                             : "border border-zinc-250 dark:border-zinc-800 text-zinc-800 dark:text-zinc-300 bg-white/50 dark:bg-zinc-950/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:border-zinc-350 dark:hover:border-zinc-750 hover:scale-[1.01]"
-                                    }`}
+                                        }`}
                                 >
                                     {plan.cta}
                                 </Link>
