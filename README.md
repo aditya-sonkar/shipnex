@@ -29,7 +29,7 @@ ShipNex is a comprehensive, modern logistics and courier management platform. It
 *(Add your screenshots to the `public/screenshots/` folder and they will appear here)*
 | Public Landing Page | Company Admin Dashboard |
 | :---: | :---: |
-| ![Landing Page](./frontend/public/screenshots/landing.png) | ![Admin Dashboard](./frontend/public/screenshots/admin-dashboard.png) |
+| ![Landing Page](./frontend/public/screenshots/landing.png?v=2) | ![Admin Dashboard](./frontend/public/screenshots/admin-dashboard.png) |
 | *Modern public tracking and marketing site* | *Manage shipments, team roles, and platform metrics* |
 
 | Hub Barcode Scanner | Delivery Driver App |
