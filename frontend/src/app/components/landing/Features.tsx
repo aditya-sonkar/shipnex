@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Features() {
   const cards = [
@@ -55,10 +56,12 @@ export default function Features() {
             >
               {/* Background Image */}
               <div className="absolute inset-0 z-0">
-                <img
+                <Image
                   src={card.image}
                   alt={card.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 {/* Gradient Overlays for readability */}
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/90" />

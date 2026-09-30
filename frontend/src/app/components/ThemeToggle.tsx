@@ -19,7 +19,8 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(activeTheme === "dark" ? "light" : "dark")}
-      className="flex h-10 w-10 items-center justify-center rounded-full cursor-pointer"
+      className="flex h-10 w-10 items-center justify-center rounded-full cursor-pointer text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
+      aria-label="Toggle theme"
     >
       {activeTheme === "dark" ? (
         <Sun size={18} />

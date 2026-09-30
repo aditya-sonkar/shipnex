@@ -90,13 +90,15 @@ export default function Pricing() {
 
                 {/* Monthly / Yearly Billing Toggle Switcher */}
                 <div className="flex justify-center items-center gap-3.5 mb-16 select-none">
-                    <span className={`text-xs font-bold uppercase tracking-wider transition-all ${billingCycle === "monthly" ? "text-zinc-900 dark:text-white" : "text-zinc-450"}`}>
+                    <span className={`text-xs font-bold uppercase tracking-wider transition-all ${billingCycle === "monthly" ? "text-zinc-900 dark:text-white" : "text-zinc-500"}`}>
                         Monthly
                     </span>
                     <button
                         onClick={() => setBillingCycle(billingCycle === "monthly" ? "yearly" : "monthly")}
                         className="w-12 h-7 rounded-full bg-zinc-200 dark:bg-zinc-800 p-1 flex items-center transition-all duration-300 cursor-pointer"
                         aria-label="Billing cycle toggle"
+                        role="switch"
+                        aria-checked={billingCycle === "yearly"}
                     >
                         <motion.div
                             layout
@@ -105,7 +107,7 @@ export default function Pricing() {
                             transition={{ type: "spring", stiffness: 500, damping: 30 }}
                         />
                     </button>
-                    <span className={`text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${billingCycle === "yearly" ? "text-zinc-900 dark:text-white" : "text-zinc-450"}`}>
+                    <span className={`text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 ${billingCycle === "yearly" ? "text-zinc-900 dark:text-white" : "text-zinc-500"}`}>
                         Yearly
                         <span className="bg-emerald-500/10 border border-emerald-500/20 text-[#00e5a3] text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
                             Save 20%
@@ -144,7 +146,7 @@ export default function Pricing() {
                                 )}
 
                                 {/* Plan name */}
-                                <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-450 dark:text-zinc-500">
+                                <p className="text-[10px] font-mono font-bold tracking-widest uppercase text-zinc-500">
                                     {plan.name}
                                 </p>
 
@@ -165,7 +167,7 @@ export default function Pricing() {
                                         </AnimatePresence>
 
                                         {activePeriod && (
-                                            <span className="text-xs text-zinc-450 dark:text-zinc-550 font-bold uppercase tracking-wider">
+                                            <span className="text-xs text-zinc-500 dark:text-zinc-550 font-bold uppercase tracking-wider">
                                                 {activePeriod}
                                             </span>
                                         )}

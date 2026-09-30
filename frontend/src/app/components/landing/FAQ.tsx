@@ -50,6 +50,7 @@ export default function FAQ() {
                     >
                         <button 
                             onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                            aria-expanded={openIndex === i}
                             className="w-full flex items-center justify-between text-left cursor-pointer select-none group"
                         >
                             <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">

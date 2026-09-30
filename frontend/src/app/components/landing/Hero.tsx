@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
@@ -13,7 +12,10 @@ export default function Hero() {
                     loop
                     muted
                     playsInline
-                    className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover scale-[1.01]"
+                    preload="auto"
+                    title="Shipnex Logistics Truck Video"
+                    aria-hidden="true"
+                    className="absolute top-1/2 left-1/2 min-w-full min-h-full w-auto h-auto -translate-x-1/2 -translate-y-1/2 object-cover scale-[1.01] bg-zinc-950"
                 >
                     <source src="/videos/truck.mp4" type="video/mp4" />
                 </video>
@@ -38,16 +40,13 @@ export default function Hero() {
             {/* Main Content Area - Giant Typography */}
             <div className="relative z-20 mx-auto w-full max-w-screen-2xl px-6 md:px-12 lg:px-16 flex-grow flex flex-col justify-center pt-16">
                 <div className="w-full">
-                    <motion.h1
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                        className="font-sans font-extralight uppercase text-[10vw] sm:text-[8vw] lg:text-[8vw] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
+                    <h1
+                        className="animate-fade-in-up font-sans font-extralight uppercase text-[10vw] sm:text-[8vw] lg:text-[8vw] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
                     >
                         Logistics{" "}
                         <br />
                         &amp; Intelligence
-                    </motion.h1>
+                    </h1>
                 </div>
             </div>
 
@@ -71,12 +70,15 @@ export default function Hero() {
                                     if (trackingId.trim()) window.location.href = `/track/${trackingId.trim().toUpperCase()}`;
                                 }}
                                 className="relative flex items-center"
+                                aria-label="Tracking Search Form"
                             >
+                                <label htmlFor="tracking" className="sr-only">Tracking ID</label>
                                 <input
                                     type="text"
                                     name="tracking"
+                                    id="tracking"
                                     placeholder="Enter Tracking ID (e.g. SX-10473)"
-                                    className="w-full pl-5 pr-24 py-2.5 bg-transparent border-0 text-xs focus:outline-none placeholder:text-white/50 text-white"
+                                    className="w-full pl-5 pr-24 py-2.5 bg-transparent border-0 text-xs focus:outline-none placeholder:text-white/70 text-white"
                                     required
                                 />
                                 <button
@@ -98,7 +100,8 @@ export default function Hero() {
                             </div>
                             <a
                                 href="#features"
-                                className="px-5 py-2.5 rounded-full border border-white/30 text-[10px] font-bold tracking-[0.15em] uppercase text-white/90 hover:bg-white hover:text-zinc-950 hover:border-white transition-all duration-300 cursor-pointer"
+                                aria-label="Scroll Down to Features"
+                                className="px-5 py-2.5 rounded-full border border-white/40 text-[10px] font-bold tracking-[0.15em] uppercase text-white hover:bg-white hover:text-zinc-950 hover:border-white transition-all duration-300 cursor-pointer"
                             >
                                 Scroll Down
                             </a>

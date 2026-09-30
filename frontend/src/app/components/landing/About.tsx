@@ -18,7 +18,6 @@ export default function About() {
             fill
             sizes="(max-width: 1024px) 100vw, 42vw"
             className="object-cover transition-transform duration-700 hover:scale-102"
-            priority
           />
           {/* Subtle Ambient Vignette Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/20 via-transparent to-transparent pointer-events-none" />

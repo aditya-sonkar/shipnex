@@ -84,7 +84,7 @@ export default function Navbar() {
     };
 
     const logoColor = scrolled ? "text-foreground" : "text-white";
-    const linkColor = scrolled ? "text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white" : "text-white/80 hover:text-white";
+    const linkColor = scrolled ? "text-zinc-800 dark:text-zinc-200 hover:text-zinc-950 dark:hover:text-white" : "text-white/95 hover:text-white";
     const underlineColor = scrolled ? "bg-zinc-950 dark:bg-white" : "bg-white";
     const hamburgerColor = scrolled ? "bg-foreground" : "bg-white";
 
@@ -101,6 +101,7 @@ export default function Navbar() {
                 <a
                     href="/"
                     onClick={handleLogoClick}
+                    aria-label="Shipnex Home"
                     className={`text-3xl font-heading font-extrabold tracking-tight flex items-center select-none cursor-pointer transition-colors ${logoColor}`}
                 >
                     shipnex
@@ -164,6 +165,7 @@ export default function Navbar() {
                         onClick={() => setMobileOpen(!mobileOpen)}
                         className="lg:hidden flex flex-col items-center justify-center w-8 h-8 gap-1.5 cursor-pointer"
                         aria-label="Toggle menu"
+                        aria-expanded={mobileOpen}
                     >
                         <span
                             className={`block w-6 h-0.5 transition-all duration-300 ${hamburgerColor} ${mobileOpen ? "rotate-45 translate-y-[4px]" : ""}`}

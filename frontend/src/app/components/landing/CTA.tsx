@@ -30,9 +30,6 @@ export default function CTA() {
                             fill
                             sizes="100vw"
                             className="object-cover object-center sm:object-center"
-                            priority
-                            unoptimized
-                            quality={100}
                         />
                         {/* High-contrast overlays to guarantee text readability */}
                         <div className="absolute inset-0 bg-zinc-950/40 pointer-events-none" />
