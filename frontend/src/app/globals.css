@@ -24,6 +24,9 @@
   --font-sans: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
   --font-heading: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
+  --font-bastardo: var(--font-bastardo), sans-serif;
+  --font-gangster: var(--font-gangster), sans-serif;
+  --font-outfit: var(--font-outfit), sans-serif;
   
   /* World Labs colors */
   --color-world-blue: #2a679c;
@@ -36,7 +39,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   position: relative;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ─── Dot-grid background (World Labs Spatial Grid theme) ─── */
@@ -120,4 +123,32 @@ body::after {
 /* Custom layout utility classes */
 .max-w-display {
   max-width: 1440px;
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+/* Stable nav link width to prevent layout jitter on font-bold hover */
+.nav-link-stable {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+}
+.nav-link-stable::after {
+  content: attr(data-text);
+  font-weight: 700;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  user-select: none;
+  pointer-events: none;
 }

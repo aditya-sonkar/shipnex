@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'Bastardo Grotesk';
+    src: url('BastardoGrotesk-Regular.eot');
+    src: local('Bastardo Grotesk Regular'), local('BastardoGrotesk-Regular'),
+        url('BastardoGrotesk-Regular.eot?#iefix') format('embedded-opentype'),
+        url('BastardoGrotesk-Regular.woff2') format('woff2'),
+        url('BastardoGrotesk-Regular.woff') format('woff'),
+        url('BastardoGrotesk-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bastardo Grotesk';
+    src: url('BastardoGrotesk-Light.eot');
+    src: local('Bastardo Grotesk Light'), local('BastardoGrotesk-Light'),
+        url('BastardoGrotesk-Light.eot?#iefix') format('embedded-opentype'),
+        url('BastardoGrotesk-Light.woff2') format('woff2'),
+        url('BastardoGrotesk-Light.woff') format('woff'),
+        url('BastardoGrotesk-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bastardo Grotesk';
+    src: url('BastardoGrotesk-Semibold.eot');
+    src: local('Bastardo Grotesk Semibold'), local('BastardoGrotesk-Semibold'),
+        url('BastardoGrotesk-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('BastardoGrotesk-Semibold.woff2') format('woff2'),
+        url('BastardoGrotesk-Semibold.woff') format('woff'),
+        url('BastardoGrotesk-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bastardo Grotesk';
+    src: url('BastardoGrotesk-Bold.eot');
+    src: local('Bastardo Grotesk Bold'), local('BastardoGrotesk-Bold'),
+        url('BastardoGrotesk-Bold.eot?#iefix') format('embedded-opentype'),
+        url('BastardoGrotesk-Bold.woff2') format('woff2'),
+        url('BastardoGrotesk-Bold.woff') format('woff'),
+        url('BastardoGrotesk-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bastardo Grotesk';
+    src: url('BastardoGrotesk-Black.eot');
+    src: local('Bastardo Grotesk Black'), local('BastardoGrotesk-Black'),
+        url('BastardoGrotesk-Black.eot?#iefix') format('embedded-opentype'),
+        url('BastardoGrotesk-Black.woff2') format('woff2'),
+        url('BastardoGrotesk-Black.woff') format('woff'),
+        url('BastardoGrotesk-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bastardo Grotesk';
+    src: url('BastardoGrotesk-Thin.eot');
+    src: local('Bastardo Grotesk Thin'), local('BastardoGrotesk-Thin'),
+        url('BastardoGrotesk-Thin.eot?#iefix') format('embedded-opentype'),
+        url('BastardoGrotesk-Thin.woff2') format('woff2'),
+        url('BastardoGrotesk-Thin.woff') format('woff'),
+        url('BastardoGrotesk-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
