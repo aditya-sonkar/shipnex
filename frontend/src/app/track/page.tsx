@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Search, Package, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import AiShipmentAssistant from "../components/AiShipmentAssistant";
 
 export default function TrackPage() {
   const router = useRouter();
@@ -84,6 +85,9 @@ export default function TrackPage() {
           </Link>
         </div>
       </div>
+
+      {/* AI Shipment Assistant */}
+      <AiShipmentAssistant />
     </main>
   );
 }

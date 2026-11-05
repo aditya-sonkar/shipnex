@@ -1,60 +1,62 @@
 const prisma = require("../prismaClient");
 const { chatWithShipmentAssistant } = require("../services/aiService");
 
-/** 
- * Handle AI Tracking chat
- * Route: POST api/ai/track/:tracking_id/chat
- * Body: { message: "Where is my package?"}
+/**
+ * Handle AI Tracking Chat
+ * Route: POST /api/ai/chat or POST /api/ai/track/:tracking_id/chat
+ * Body: { message: "Where is my package?", history: [], tracking_id?: "SX-12345" }
  */
-
 const chatShipment = async (req, res) => {
-    const { tracking_id } = req.params;
-    const { message, history = [] } = req.body;
+  const { message, history = [] } = req.body;
+  const trackingParam = req.params.tracking_id || req.body.tracking_id;
 
-    //1. Validation: check if the message is empty or not 
+  if (!message || !message.trim()) {
+    return res.status(400).json({ error: "Message is required." });
+  }
 
-    if (!message || !message.trim()) {
-        return res.status(400).json({ error: "Message is required." });
+  try {
+    let shipment = null;
+    let queryCode = trackingParam ? trackingParam.trim().toUpperCase() : null;
+
+    // If tracking code not in param, search inside user message (e.g. "Status of SX-10473")
+    if (!queryCode) {
+      const match = message.match(/\bSX-[A-Za-z0-9]+\b/i);
+      if (match) queryCode = match[0].toUpperCase();
     }
 
-    if (!tracking_id) {
-        return res.status(400).json({ error: "Tracking ID is required" });
+    // Look up real shipment from MongoDB
+    if (queryCode) {
+      shipment = await prisma.shipment.findUnique({
+        where: { trackingNumber: queryCode },
+        include: {
+          events: {
+            orderBy: { createdAt: "desc" },
+          },
+        },
+      });
     }
 
-    try {
-        const cleanTrackingId = tracking_id.trim().toUpperCase();
-        // 2. Database lookup (MongoDB via Prisma)
-        const shipment = await prisma.shipment.findUnique({
-            where: { trackingNumber: cleanTrackingId },
-            include: {
-                events: {
-                    orderBy: { createdAt: "desc" },
-                },
-            },
-        });
+    // Call Gemini LLM with grounded DB data (or as general ShipNex concierge if no code yet)
+    const reply = await chatWithShipmentAssistant({
+      shipment,
+      searchedCode: queryCode,
+      userMessage: message.trim(),
+      history,
+    });
 
-        if (!shipment) {
-            return res.status(400).json({ error: "Consignment tracking code not found." });
-        }
-
-        //3. AI Service Call
-
-        const reply = await chatWithShipmentAssistant({
-            shipment,
-            userMessage: message.trim(), history
-        });
-
-        // 4. Response to client
-
-        return res.status(200).json({ reply });
-    } catch (error) {
-        console.error(">>> [AI Controller Error]:", error);
-        return res.status(500).json({
-            error: "Unable to process AI inquiry at this moment.",
-            details: error.message
-        });
-    }
+    return res.status(200).json({
+      reply,
+      trackingNumber: queryCode || (shipment ? shipment.trackingNumber : null),
+    });
+  } catch (error) {
+    console.error(">>> [AI Controller Error]:", error);
+    return res.status(500).json({
+      error: "Unable to process AI inquiry at this moment.",
+      details: error.message,
+    });
+  }
 };
+
 module.exports = {
-    chatShipment,
+  chatShipment,
 };

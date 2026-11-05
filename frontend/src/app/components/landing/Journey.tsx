@@ -44,8 +44,8 @@ C 625 3680 645 3780 670 3900
 
 // Mobile checkpoint coordinates and milestones
 const MOBILE_STAGES = [
-    { id: "po", x: 60, y: 170, label: "Order Placed", progress: 0.059, icon: Package },
-    { id: "pickup", x: 60, y: 460, label: "Package Pickup", progress: 0.151, icon: MapPin },
+    { id: "po", x: 70, y: 170, label: "Order Placed", progress: 0.059, icon: Package },
+    { id: "pickup", x: 70, y: 460, label: "Package Pickup", progress: 0.151, icon: MapPin },
     { id: "source", x: 175, y: 730, label: "Origin Hub", progress: 0.243, icon: Factory },
     { id: "customs", x: 255, y: 920, label: "Export Customs", progress: 0.309, icon: Zap },
     { id: "vis", x: 270, y: 1160, label: "In Transit", progress: 0.384, icon: Eye },
@@ -60,9 +60,9 @@ const MOBILE_STAGES = [
 
 const MOBILE_PATH = `
 M 140 0
-C 110 55 75 110 60 170
-C 45 250 45 360 60 460
-C 80 560 125 650 175 730
+C 115 55 85 110 70 170
+C 55 250 55 360 70 460
+C 90 560 130 650 175 730
 C 210 790 245 860 255 920
 C 265 1000 275 1080 270 1160
 C 265 1240 245 1320 215 1400
@@ -236,9 +236,12 @@ export default function Journey() {
         const innerR = isMobile ? 14 : 19;
         const iconOffset = isMobile ? -6 : -8;
         const iconSize = isMobile ? 12 : 16;
-        const foWidth = isMobile ? 135 : 210;
-        const foX = -foWidth / 2;
-        const foY = isMobile ? 28 : 44;
+        const badgeWidth = isMobile
+            ? Math.max(76, s.label.length * 6.5 + 16)
+            : Math.max(92, s.label.length * 7.8 + 22);
+        const badgeHeight = isMobile ? 22 : 28;
+        const badgeY = isMobile ? 26 : 38;
+        const textY = badgeY + badgeHeight / 2;
 
         return (
             <g transform={`translate(${s.x},${s.y})`} className="pointer-events-auto">
@@ -254,19 +257,32 @@ export default function Journey() {
                 <g transform={`translate(${iconOffset},${iconOffset})`} className="pointer-events-none">
                     <Icon size={iconSize} className="text-[#353A95] stroke-[2.2]" />
                 </g>
-                <foreignObject x={foX} y={foY} width={foWidth} height="46">
-                    <div className="flex justify-center w-full">
-                        <span
-                            className={`px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-sm font-outfit font-bold whitespace-nowrap transition-all duration-300 ${isMobile ? "text-[9.5px]" : "text-xs"
-                                } ${hit
-                                    ? "bg-[#F0EA6F] text-zinc-950 border border-amber-300 shadow-sm scale-105"
-                                    : "bg-white/[0.08] backdrop-blur-md text-white/90 border border-white/20"
-                                }`}
-                        >
-                            {s.label}
-                        </span>
-                    </div>
-                </foreignObject>
+                {/* Native SVG Badge below checkpoint (100% Safari iOS / WebKit compatible) */}
+                <g className="pointer-events-none transition-all duration-300">
+                    <rect
+                        x={-badgeWidth / 2}
+                        y={badgeY}
+                        width={badgeWidth}
+                        height={badgeHeight}
+                        rx={isMobile ? 4 : 6}
+                        fill={hit ? "#F0EA6F" : "rgba(255, 255, 255, 0.12)"}
+                        stroke={hit ? "#fde047" : "rgba(255, 255, 255, 0.25)"}
+                        strokeWidth={hit ? 1.5 : 1}
+                    />
+                    <text
+                        x="0"
+                        y={textY}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fill={hit ? "#09090b" : "#ffffff"}
+                        fillOpacity={hit ? 1 : 0.95}
+                        fontSize={isMobile ? "9.5" : "12"}
+                        fontWeight="700"
+                        style={{ fontFamily: "var(--font-outfit), sans-serif" }}
+                    >
+                        {s.label}
+                    </text>
+                </g>
             </g>
         );
     };

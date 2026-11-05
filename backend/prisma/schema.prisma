@@ -41,9 +41,9 @@ model Shipment {
     receiverAddress  String
     weight           Float
     status           String          @default("pending") // pending, picked_up, at_sorting, in_transit, out_for_delivery, delivered, failed
-    tenantId         String          @db.ObjectId
-    tenant           Tenant          @relation(fields: [tenantId], references: [id])
-    createdById      String          @db.ObjectId
+    tenantId         String?         @db.ObjectId
+    tenant           Tenant?         @relation(fields: [tenantId], references: [id])
+    createdById      String?         @db.ObjectId
     assignedHubId    String?         @db.ObjectId
     assignedDriverId String?         @db.ObjectId
     createdAt        DateTime        @default(now())

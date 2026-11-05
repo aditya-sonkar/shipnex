@@ -4,6 +4,7 @@ import { useEffect, useState, use } from "react";
 import Link from "next/link";
 import { Package, MapPin, Calendar, Clock, Truck, ShieldAlert, ArrowLeft, Loader2, Navigation, Compass } from "lucide-react";
 import ThemeToggle from "../../components/ThemeToggle";
+import AiShipmentAssistant from "../../components/AiShipmentAssistant";
 
 interface Event {
   id: string;
@@ -233,6 +234,21 @@ export default function PublicTrackerPage({ params }: { params: Promise<{ id: st
       <footer className="w-full text-center text-[11px] text-zinc-550 z-10 py-8 mt-12 border-t border-zinc-200/10">
         © {new Date().getFullYear()} ShipNex Inc. All rights reserved.
       </footer>
+
+      {/* AI Shipment Assistant */}
+      <AiShipmentAssistant
+        trackingNumber={shipment?.trackingNumber || trackingId}
+        shipmentData={
+          shipment
+            ? {
+                status: shipment.status,
+                senderAddress: shipment.senderAddress,
+                receiverAddress: shipment.receiverAddress,
+                weight: shipment.weight,
+              }
+            : undefined
+        }
+      />
     </main>
   );
 }
