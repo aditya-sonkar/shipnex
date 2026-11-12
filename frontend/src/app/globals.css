@@ -21,9 +21,11 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-dm-sans), var(--font-inter), "DM Sans", system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
-  --font-heading: var(--font-geist-sans), "Inter", system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-dm-sans), "DM Sans", system-ui, -apple-system, sans-serif;
+  --font-dm: var(--font-dm-sans), "DM Sans", sans-serif;
+  --font-inter: var(--font-inter), "Inter", sans-serif;
   --font-bastardo: var(--font-bastardo), sans-serif;
   --font-gangster: var(--font-gangster), sans-serif;
   --font-outfit: var(--font-outfit), sans-serif;
@@ -77,17 +79,9 @@ body::after {
 
 /* Smooth theme toggling — backgrounds fade, text stays instant */
 html,
-body,
-header,
-footer,
-button,
-a,
-input,
-[class*="bg-"],
-[class*="border-"] {
+body {
   transition: background-color 0.2s ease-in-out,
-              border-color 0.2s ease-in-out,
-              box-shadow 0.2s ease-in-out;
+              border-color 0.2s ease-in-out;
 }
 
 body::before,
@@ -125,6 +119,14 @@ body::after {
   max-width: 1440px;
 }
 
+/* GSAP pin-spacer fix: main bg se dark strip na aaye About/Info sections ke beech */
+.gsap-marker-start,
+.gsap-marker-end,
+.gsap-marker-scroller-start,
+.gsap-marker-scroller-end {
+  display: none !important;
+}
+
 /* Hide scrollbar utility */
 .no-scrollbar::-webkit-scrollbar {
   display: none !important;
@@ -151,4 +153,11 @@ body::after {
   visibility: hidden;
   user-select: none;
   pointer-events: none;
+}
+
+/* Slashed-zero display numerals (font loaded lazily when #services enters proximity) */
+.font-slashed {
+  font-family: "InterSlashed", var(--font-inter), "Inter", sans-serif;
+  font-variant-numeric: slashed-zero tabular-nums;
+  font-feature-settings: "zero" 1, "tnum" 1;
 }

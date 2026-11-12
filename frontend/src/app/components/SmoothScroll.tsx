@@ -9,52 +9,68 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    let cleanup: (() => void) | null = null;
+    let cancelled = false;
 
-    // Initialize Lenis
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-      autoResize: true,
-    });
-    lenisRef.current = lenis;
+    const init = () => {
+      if (cancelled || cleanup) return;
 
-    // 1. Synchronize Lenis scroll with GSAP ScrollTrigger
-    lenis.on("scroll", ScrollTrigger.update);
+      gsap.registerPlugin(ScrollTrigger);
 
-    // 2. Add Lenis RAF loop to GSAP's ticker (official standard)
-    const updateTicker = (time: number) => {
-      lenis.raf(time * 1000);
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+        autoResize: true,
+      });
+      lenisRef.current = lenis;
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      const updateTicker = (time: number) => {
+        lenis.raf(time * 1000);
+      };
+      gsap.ticker.add(updateTicker);
+      gsap.ticker.lagSmoothing(0);
+
+      let lastHeight = document.body.scrollHeight;
+      let refreshTimer: ReturnType<typeof setTimeout> | null = null;
+
+      const resizeObserver = new ResizeObserver(() => {
+        const nextHeight = document.body.scrollHeight;
+        if (nextHeight === lastHeight) return;
+        lastHeight = nextHeight;
+
+        if (refreshTimer) clearTimeout(refreshTimer);
+        refreshTimer = setTimeout(() => {
+          lenis.resize();
+          ScrollTrigger.refresh();
+        }, 250);
+      });
+      resizeObserver.observe(document.body);
+
+      cleanup = () => {
+        resizeObserver.disconnect();
+        if (refreshTimer) clearTimeout(refreshTimer);
+        gsap.ticker.remove(updateTicker);
+        lenis.destroy();
+      };
     };
-    gsap.ticker.add(updateTicker);
-    gsap.ticker.lagSmoothing(0);
 
-    // 3. Keep Lenis scroll limit in sync with dynamic Next.js DOM changes
-    const resizeObserver = new ResizeObserver(() => {
-      lenis.resize();
-      ScrollTrigger.refresh();
-    });
-    resizeObserver.observe(document.body);
-
-    const timer1 = setTimeout(() => {
-      lenis.resize();
-      ScrollTrigger.refresh();
-    }, 400);
-
-    const timer2 = setTimeout(() => {
-      lenis.resize();
-      ScrollTrigger.refresh();
-    }, 1200);
+    const timer = setTimeout(init, 6000);
+    window.addEventListener("wheel", init, { once: true, passive: true });
+    window.addEventListener("touchstart", init, { once: true, passive: true });
+    window.addEventListener("keydown", init, { once: true, passive: true });
 
     return () => {
-      resizeObserver.disconnect();
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      gsap.ticker.remove(updateTicker);
-      lenis.destroy();
+      cancelled = true;
+      clearTimeout(timer);
+      window.removeEventListener("wheel", init);
+      window.removeEventListener("touchstart", init);
+      window.removeEventListener("keydown", init);
+      cleanup?.();
     };
   }, []);
 

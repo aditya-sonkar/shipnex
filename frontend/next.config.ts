@@ -15,13 +15,21 @@ try {
     fs.copyFileSync(src, dest);
     console.log(">>> [ShipNex Setup] Background image copied successfully.");
   }
-} catch (e: any) {
-  console.error(">>> [ShipNex Setup] Background copy failed:", e.message);
+} catch (e: unknown) {
+  console.error(">>> [ShipNex Setup] Background copy failed:", e instanceof Error ? e.message : String(e));
 }
 
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
   turbopack: {
     root: __dirname,
   },

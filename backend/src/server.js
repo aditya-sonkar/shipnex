@@ -14,6 +14,7 @@ const shipmentRoutes = require("./routes/shipmentRoutes");
 const trackRoutes = require("./routes/trackRoutes");
 const hubRoutes = require("./routes/hubRoutes");
 const aiRoutes = require("./routes/aiRoutes");
+const partnerRoutes = require("./routes/partnerRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,6 +40,7 @@ app.use("/api/shipments", shipmentRoutes);
 app.use("/api/track", trackRoutes);
 app.use("/api/hubs", hubRoutes);
 app.use("/api/ai", aiRoutes);
+app.use("/api/partners", partnerRoutes);
 
 // Start listening
 app.listen(PORT, () => {

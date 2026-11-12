@@ -70,3 +70,15 @@ model Hub {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
 }
+
+model Partner {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    city      String
+    lat       Float
+    lng       Float
+    hubType   String
+    isActive  Boolean  @default(true)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}

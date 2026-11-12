@@ -1,320 +1,164 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
+import { useSectionReveal } from "./useSectionReveal";
 
-type Item = {
-  tab: string;
-  title: string;
-  sub: string;
-  text: string;
-  image: string;
-  chips: string[];
-};
+interface Feature {
+    id: string;
+    title: string;
+    description: string;
+    icon: string;
+    href: string;
+}
 
-type Panel = {
-  id: string;
-  number: string;
-  title: string;
-  color: string;
-  isLight: boolean;
-  items: Item[];
-};
-
-const panels: Panel[] = [
-  {
-    id: "tracking",
-    number: ".01",
-    title: "Real-Time Shipment Tracking",
-    color: "#e5e7fc",
-    isLight: true,
-    items: [
-      {
-        tab: "Shipment Tracking",
-        title: "Real-Time Shipment Tracking",
-        sub: "Live Telemetry & Milestone Intelligence",
-        text: "ShipNex coordinates continuous real-time tracking across multi-modal delivery corridors. Automated geofence milestones, predictive delay detection, and live status verification give dispatchers complete operational transparency across partner networks.",
-        image: "/images/spatial_routing.png",
-        chips: [
-          "Instant Shipment Status Updates",
-          "End-to-End Supply Chain Visibility",
-          "Predictive Delay Notifications",
-          "Accurate Dynamic ETA Tracking",
-          "Customer Portal Transparency",
-        ],
-      },
-    ],
-  },
-  {
-    id: "routing",
-    number: ".02",
-    title: "Smart Route Optimization",
-    color: "#bcc2f7",
-    isLight: true,
-    items: [
-      {
-        tab: "Route Optimization",
-        title: "Smart Route Optimization",
-        sub: "AI Dynamic Corridor Routing",
-        text: "Dynamic algorithmic routing models evaluate physical transit conditions, border queues, and weather disruptions to formulate self-healing, cost-optimized delivery corridors across nations.",
-        image: "/images/clean_hero_bg.webp",
-        chips: [
-          "Dynamic Multi-Modal Pathing",
-          "Fuel & Mileage Optimization",
-          "Real-Time Traffic Rerouting",
-          "Customs Clearance Synchronization",
-          "Decarbonized Corridor Selection",
-        ],
-      },
-    ],
-  },
-  {
-    id: "intake",
-    number: ".03",
-    title: "Smart Parcel Intake",
-    color: "#9ba4f4",
-    isLight: true,
-    items: [
-      {
-        tab: "Parcel Intake",
-        title: "Smart Parcel Intake",
-        sub: "Dock Ingestion & Digital Logging",
-        text: "Scan incoming parcels, verify destinations, and automatically register shipments into your warehouse inventory with sub-second optical scanning and zero-touch digital logging.",
-        image: "/images/data_ingestion.png",
-        chips: [
-          "Sub-Second Optical Intake",
-          "Automated Weight Verification",
-          "Instant Warehouse Manifest Sync",
-          "Damage & Discrepancy Diagnostics",
-          "Zero-Touch Automated Dock Logging",
-        ],
-      },
-    ],
-  },
-  {
-    id: "fleet",
-    number: ".04",
-    title: "Centralized Fleet Control",
-    color: "#6a75e8",
-    isLight: false,
-    items: [
-      {
-        tab: "Fleet Control",
-        title: "Centralized Fleet Control",
-        sub: "Autonomous Telemetry & Dispatch",
-        text: "Manage drivers, assign high-priority routes, and monitor vehicle telemetry health from a centralized autonomous dispatch dashboard with end-to-end operational control.",
-        image: "/images/global_fleets.png",
-        chips: [
-          "Live Driver Telematics & GPS Stream",
-          "Autonomous Load & Route Balancing",
-          "Preventative Diagnostic Alerts",
-          "Digital Proof of Delivery (e-POD)",
-          "Centralized Driver Communication Hub",
-        ],
-      },
-    ],
-  },
-  {
-    id: "customs",
-    number: ".05",
-    title: "Documents & Compliance",
-    color: "#353A95",
-    isLight: false,
-    items: [
-      {
-        tab: "Compliance",
-        title: "Documents & Compliance",
-        sub: "Automated Digital Customs Filing",
-        text: "Automate cross-border regulatory compliance, tariff classifications, and single-window digital filing to clear customs hours ahead of port arrivals with zero manual paperwork.",
-        image: "/images/warehouse.jpg",
-        chips: [
-          "Automated HS Code Classification",
-          "Single-Window Digital Declarations",
-          "Real-Time Customs Port Queues",
-          "Duty & Tariff Pre-Calculations",
-          "Zero-Friction Border Clearance",
-        ],
-      },
-    ],
-  },
+const features: Feature[] = [
+    {
+        id: "01",
+        title: "Instant Quote Calculator",
+        description:
+            "Enter origin, destination, and weight to get a transparent cost estimate in seconds, no back-and-forth emails.",
+        icon: "/images/svg/coolicons--calculator.svg",
+        href: "/quote",
+    },
+    {
+        id: "02",
+        title: "Proactive Delay Alerts",
+        description:
+            "If something changes weather, port congestion, a customs hold you'll be notified before it becomes a problem.",
+        icon: "/images/svg/siren-20-bold.svg",
+        href: "/alerts",
+    },
+    {
+        id: "03",
+        title: "Digital Document Hub",
+        description:
+            "Bill of lading, customs declarations, invoices all stored, organized, and accessible in one secure place.",
+        icon: "/images/svg/ri--file-list-line.svg",
+        href: "/documents",
+    },
+    {
+        id: "04",
+        title: "Real-Time Tracking",
+        description:
+            "Enter origin, destination, and weight to get a transparent cost estimate in seconds, no back-and-forth emails.",
+        icon: "/images/svg/andrsrxn--route-map-box.svg",
+        href: "/tracking",
+    },
 ];
 
 export default function Features() {
-  const [active, setActive] = useState(0);
+    const sectionRef = useRef<HTMLElement>(null);
+    const tagRef = useRef<HTMLSpanElement>(null);
+    const headingRef = useRef<HTMLHeadingElement>(null);
+    const descRef = useRef<HTMLParagraphElement>(null);
+    const gridRef = useRef<HTMLDivElement>(null);
 
-  const activePanel = panels[active];
-  const activeItem = activePanel.items[0];
+    useSectionReveal({ sectionRef, tagRef, headingRef, descRef, itemsRef: gridRef });
 
-  return (
-    <section
-      id="features"
-      style={{ backgroundColor: activePanel.color }}
-      className="relative z-20 w-full transition-colors duration-500 ease-out overflow-hidden select-none"
-    >
-      {/* Desktop horizontal accordion */}
-      <div className="hidden md:flex w-full min-h-[720px] lg:min-h-[780px] xl:min-h-[820px] items-stretch overflow-hidden">
-        {panels.map((p, idx) => {
-          const isActive = idx === active;
+    return (
+        <section id="features" ref={sectionRef} className="bg-white px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-12">
+            {/* Header */}
+            <div className="mb-10 grid grid-cols-1 gap-6 sm:mb-14 sm:gap-8 md:grid-cols-2 lg:mb-20">
+                <div>
+                    <span ref={tagRef} className="mb-4 sm:mb-6 lg:mb-8 flex items-center gap-2 text-xs font-medium tracking-wider text-neutral-500 uppercase">
+                        <span className="h-1.5 w-1.5 bg-neutral-500" />
+                        FEATURES
+                    </span>
 
-          return (
-            <div
-              key={p.id}
-              onClick={() => setActive(idx)}
-              style={{
-                backgroundColor: p.color,
-                width: isActive ? "calc(100% - 320px)" : "80px",
-                flexShrink: 0,
-                transition: "width 550ms cubic-bezier(0.16, 1, 0.3, 1), background-color 500ms ease",
-              }}
-              className={`self-stretch relative overflow-hidden select-none ${
-                isActive
-                  ? "cursor-default"
-                  : "cursor-pointer hover:brightness-105 border-x border-black/5"
-              }`}
-            >
-              {isActive ? (
-                /* Active panel content */
-                <motion.div
-                  key={`content-${p.id}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.18, ease: "easeOut" }}
-                  className="w-full h-full overflow-y-auto no-scrollbar py-10 lg:py-14 px-8 sm:px-12 lg:px-16 xl:px-20 min-w-[650px] lg:min-w-[800px]"
-                >
-                  <div className="max-w-4xl mx-auto flex flex-col">
-                    <h2
-                      className={`font-gangster font-extrabold tracking-[-0.03em] text-3xl sm:text-4xl lg:text-[40px] leading-tight mb-6 lg:mb-8 ${
-                        p.isLight ? "text-zinc-950" : "text-white"
-                      }`}
-                    >
-                      {p.number} {p.title}
+                    <h2 ref={headingRef} className="max-w-none text-3xl sm:text-4xl md:text-5xl lg:text-[4.2vw] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em]">
+                        Built around what<br />shippers actually need.
                     </h2>
+                </div>
 
-                    <div className="w-full relative overflow-hidden rounded-2xl shadow-2xl border border-black/10 bg-zinc-900 mb-6 lg:mb-8">
-                      <img
-                        src={activeItem.image}
-                        alt={activeItem.title}
-                        className="w-full max-h-[440px] lg:max-h-[480px] object-cover object-top block"
-                      />
-                    </div>
-
-                    <p
-                      className={`font-outfit text-sm sm:text-base lg:text-[16px] leading-[1.68] font-normal mb-6 max-w-3xl ${
-                        p.isLight ? "text-zinc-800" : "text-white/90"
-                      }`}
-                    >
-                      {activeItem.text}
-                    </p>
-
-                    <ul className="flex flex-wrap items-center gap-2.5 sm:gap-3 m-0 p-0 list-none">
-                      {activeItem.chips.map((chip) => (
-                        <li
-                          key={chip}
-                          className="px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-[13.5px] font-outfit font-semibold text-zinc-950 bg-[#d0e834] rounded-lg shadow-sm select-none hover:brightness-105 transition-all"
-                        >
-                          {chip}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              ) : (
-                /* Inactive vertical bar */
-                <motion.div
-                  key={`strip-${p.id}`}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.25, delay: 0.18 }}
-                  className="w-full h-full flex flex-col items-center justify-between py-10 lg:py-14"
-                >
-                  <span
-                    className={`font-gangster font-bold text-lg sm:text-xl lg:text-2xl ${
-                      p.isLight ? "text-zinc-950" : "text-white"
-                    }`}
-                  >
-                    {p.number}
-                  </span>
-
-                  <span
-                    className={`[writing-mode:vertical-rl] font-gangster font-bold text-sm sm:text-base lg:text-lg tracking-tight whitespace-nowrap mt-8 ${
-                      p.isLight ? "text-zinc-950" : "text-white"
-                    }`}
-                  >
-                    {p.title}
-                  </span>
-
-                  <span
-                    className={`w-2 h-2 rounded-full ${
-                      p.isLight ? "bg-zinc-900/30" : "bg-white/40"
-                    }`}
-                  />
-                </motion.div>
-              )}
+                <p ref={descRef} className="max-w-md text-sm sm:text-base leading-[1.6] text-neutral-700 md:ml-auto md:mt-12 md:self-start lg:mt-16">
+                    Flexible logistics solutions built around your cargo, timing
+                    and requirements, across Europe and beyond.
+                </p>
             </div>
-          );
-        })}
-      </div>
 
-      {/* Mobile view */}
-      <div
-        style={{ backgroundColor: activePanel.color }}
-        className="md:hidden w-full transition-colors duration-300 ease-out"
-      >
-        <div className="flex gap-2 overflow-x-auto no-scrollbar px-4 pt-6 pb-3 border-b border-black/5">
-          {panels.map((p, idx) => {
-            const isSelected = idx === active;
-            return (
-              <button
-                key={p.id}
-                onClick={() => setActive(idx)}
-                style={{ backgroundColor: p.color }}
-                className={`shrink-0 px-4 py-2 rounded-xl text-xs font-gangster font-bold transition-all shadow-sm ${
-                  p.isLight ? "text-zinc-950" : "text-white"
-                } ${isSelected ? "ring-2 ring-zinc-950 scale-105 font-extrabold" : "opacity-80"}`}
-              >
-                {p.number}
-              </button>
-            );
-          })}
-        </div>
+            <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-[2fr_0.9fr_2fr_2fr]">
+                {/* Truck IMG */}
+                <div className="relative aspect-square sm:aspect-[2/1] lg:aspect-auto lg:h-full overflow-hidden order-1 lg:order-1 col-span-2 lg:col-span-2">
+                    <Image
+                        src="/images/truck_img.webp"
+                        alt="Logistics truck"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 40vw"
+                        className="object-cover"
+                    />
+                </div>
 
-        <div className="px-5 py-8">
-          <h2
-            className={`font-gangster font-extrabold tracking-[-0.03em] text-2xl sm:text-3xl leading-tight mb-6 ${
-              activePanel.isLight ? "text-zinc-950" : "text-white"
-            }`}
-          >
-            {activePanel.number} {activePanel.title}
-          </h2>
+                {features.map((feature) => (
+                    <div
+                        key={feature.id}
+                        className={`group flex flex-col justify-between border border-neutral-200 p-3.5 sm:p-5 lg:p-6 transition-colors hover:bg-neutral-50/50 aspect-square lg:aspect-[5/4] ${feature.id === "01"
+                            ? "order-2 lg:order-2 col-span-1 aspect-square"
+                            : feature.id === "02"
+                                ? "order-3 lg:order-3 col-span-1 aspect-square"
+                                : feature.id === "03"
+                                    ? "order-6 lg:order-4 col-span-1 aspect-square"
+                                    : "order-5 lg:order-5 col-span-1 lg:col-span-2 aspect-square lg:aspect-auto lg:h-full"
+                            }`}
+                    >
+                        <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center bg-neutral-100">
+                            <img
+                                src={feature.icon}
+                                alt=""
+                                className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
+                            />
+                        </div>
 
-          <div className="w-full relative overflow-hidden rounded-xl shadow-lg border border-black/5 mb-6">
-            <img
-              src={activeItem.image}
-              alt={activeItem.title}
-              className="w-full aspect-[4/3] object-cover block"
-            />
-          </div>
+                        <div className="mt-2 sm:mt-4">
+                            <h3 className="mb-1 sm:mb-2 text-xs sm:text-base lg:text-lg xl:text-xl font-semibold uppercase tracking-[-0.02em] leading-snug">
+                                {feature.title}
+                            </h3>
 
-          <p
-            className={`font-outfit text-sm leading-relaxed mb-6 ${
-              activePanel.isLight ? "text-zinc-800" : "text-white/90"
-            }`}
-          >
-            {activeItem.text}
-          </p>
+                            <p className="text-[11px] sm:text-sm leading-relaxed text-black/70 max-w-sm line-clamp-3 sm:line-clamp-4 lg:line-clamp-none">
+                                {feature.description}
+                            </p>
 
-          <ul className="flex flex-wrap items-center gap-2 m-0 p-0 list-none">
-            {activeItem.chips.map((chip) => (
-              <li
-                key={chip}
-                className="px-3.5 py-1.5 text-xs font-outfit font-semibold text-zinc-950 bg-[#d0e834] rounded-lg shadow-sm"
-              >
-                {chip}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
+                            <a
+                                href={feature.href}
+                                aria-label={`Learn more about ${feature.title}`}
+                                className="mt-2.5 sm:mt-4 flex items-center justify-between group/link"
+                            >
+                                <span className="bg-black text-white px-2.5 py-1 sm:px-4 sm:py-2 text-[9px] sm:text-[10px] font-medium tracking-wide transition-colors group-hover:bg-neutral-800">
+                                    LEARN MORE
+                                    <span className="sr-only"> about {feature.title}</span>
+                                </span>
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    strokeWidth="1.8"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                                >
+                                    <path d="M7 17 17 7" />
+                                    <path d="M7 7h10v10" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                ))}
+
+                {/* Cargo Handling IMG */}
+                <div className="relative aspect-square sm:aspect-[2/1] lg:aspect-auto lg:h-full overflow-hidden order-4 lg:order-6 col-span-2 lg:col-span-1">
+                    <Image
+                        src="/images/cargo_freight.png"
+                        alt="Cargo handling"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 25vw"
+                        className="object-cover"
+                    />
+                </div>
+            </div>
+        </section>
+    );
 }

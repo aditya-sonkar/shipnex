@@ -34,11 +34,11 @@ export default function Impact() {
             {/* Newsletter section */}
             <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-12 lg:px-20 py-20 sm:py-28 lg:py-32">
                 <div className="max-w-3xl">
-                    <h2 className="font-gangster font-extrabold text-3xl sm:text-4xl lg:text-[52px] leading-[1.08] tracking-[-0.03em] text-white drop-shadow-md">
+                    <h2 className="font-dm font-extrabold text-3xl sm:text-4xl lg:text-[52px] leading-[1.08] tracking-[-0.03em] text-white drop-shadow-md">
                         Our Strategic Advantage?
                     </h2>
 
-                    <p className="mt-4 text-sm sm:text-base lg:text-[17px] font-outfit text-white leading-relaxed max-w-2xl font-normal drop-shadow-sm">
+                    <p className="mt-4 text-sm sm:text-base lg:text-[17px] font-dm text-white leading-relaxed max-w-2xl font-normal drop-shadow-sm">
                         Redefining logistics through innovation, insight, and unparalleled commitment
                     </p>
 
@@ -49,13 +49,13 @@ export default function Impact() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="Enter your email"
-                            className="w-full bg-white text-zinc-900 rounded-md px-5 py-3.5 sm:py-4 text-sm sm:text-base font-outfit shadow-xl focus:outline-none focus:ring-2 focus:ring-[#353A95]"
+                            className="w-full bg-white text-zinc-900 rounded-md px-5 py-3.5 sm:py-4 text-sm sm:text-base font-inter shadow-xl focus:outline-none focus:ring-2 focus:ring-[#353A95]"
                         />
 
                         <button
                             type="submit"
                             disabled={subscribed}
-                            className="mt-4 inline-flex items-center justify-center gap-2 px-8 sm:px-9 py-3.5 sm:py-4 rounded-md bg-[#353A95] hover:bg-[#4349ab] active:scale-[0.98] text-white font-outfit font-bold text-sm sm:text-base tracking-wide transition-all shadow-xl hover:shadow-2xl cursor-pointer disabled:opacity-75"
+                            className="mt-4 inline-flex items-center justify-center gap-2 px-8 sm:px-9 py-3.5 sm:py-4 rounded-md bg-[#353A95] hover:bg-[#4349ab] active:scale-[0.98] text-white font-inter font-bold text-sm sm:text-base tracking-wide transition-all shadow-xl hover:shadow-2xl cursor-pointer disabled:opacity-75"
                         >
                             <span>{subscribed ? "Subscribed!" : "Subscribe to Newsletter"}</span>
                             <span className="font-bold tracking-tighter text-sm sm:text-base">&gt;&gt;</span>

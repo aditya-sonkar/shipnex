@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   X,
   RotateCcw,
@@ -31,43 +31,54 @@ interface AiShipmentAssistantProps {
   };
 }
 
-// ── Nexi AI Brand Emblem ─────────────────────────────────
-function NexiLogo({ size = 26 }: { size?: number }) {
+const FULL_LABEL = "Ask Nexi";
+
+const SUGGESTIONS = [
+  "Where is my package right now?",
+  "When will it be delivered?",
+  "What was the latest status update?",
+  "Who is the sender & receiver?",
+];
+
+function getCurrentTime() {
+  return new Date().toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+}
+
+function getGreeting(id?: string) {
+  if (id) {
+    return `Hi! I'm Nexi. I have your details for shipment ${id}. You can ask me about its current status, estimated arrival, or transit history.`;
+  }
+  return `Hi! I'm Nexi, your ShipNex AI assistant. Enter a tracking number or ask anything about your delivery.`;
+}
+
+function NexiLogo({ size = 20, className = "" }: { size?: number; className?: string }) {
   return (
-    <div
+    <svg
+      viewBox="0 0 1024 1024"
+      fill="currentColor"
       style={{ width: size, height: size }}
-      className="relative shrink-0 rounded-lg bg-zinc-900 dark:bg-zinc-800 border border-white/10 flex items-center justify-center shadow-sm select-none"
+      className={`shrink-0 select-none ${className}`}
+      aria-hidden="true"
     >
-      <svg viewBox="0 0 32 32" fill="none" className="w-[70%] h-[70%]">
-        {/* 3D Freight Cube */}
-        <path d="M16 6.5L8.5 11L16 15.5L23.5 11Z" fill="#34d399" />
-        <path d="M8 12.5V21.5L15 25.5V16.5Z" fill="#059669" />
-        <path d="M24 12.5V21.5L17 25.5V16.5Z" fill="#10b981" />
-        {/* AI Sparkle */}
-        <path
-          d="M25 4C25 5.5 26.2 6.5 27.5 6.8C26.2 7.1 25 8.1 25 9.5C25 8.1 23.8 7.1 22.5 6.8C23.8 6.5 25 5.5 25 4Z"
-          fill="#d0e834"
-        />
-      </svg>
-    </div>
+      <path d="M273.5 736H800a64 64 0 0 0 64-64V256a64 64 0 0 0-64-64H224a64 64 0 0 0-64 64v570.9zm22.5 64L148 918.4a32 32 0 0 1-52-25V256a128 128 0 0 1 128-128h576a128 128 0 0 1 128 128v416a128 128 0 0 1-128 128z" />
+    </svg>
   );
 }
 
 export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssistantProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [labelText, setLabelText] = useState(FULL_LABEL);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [copiedId, setCopiedId] = useState<string | null>(null);
   const [isListening, setIsListening] = useState(false);
   const [activeCode, setActiveCode] = useState<string | undefined>(trackingNumber);
-
-  const getGreeting = (id?: string) => {
-    if (id) {
-      return `Hi! I'm Nexi. I have your details for shipment ${id}. You can ask me about its current status, estimated arrival, or transit history.`;
-    }
-    return `Hi! I'm Nexi, your ShipNex AI assistant. Enter a tracking number or ask anything about your delivery.`;
-  };
 
   const [messages, setMessages] = useState<Message[]>([
     {
@@ -81,6 +92,30 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const recognitionRef = useRef<any>(null);
+
+  // Typewriter backspace erasing effect
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout | null = null;
+
+    const startDelay = setTimeout(() => {
+      let currentLen = FULL_LABEL.length;
+
+      intervalId = setInterval(() => {
+        currentLen--;
+        if (currentLen >= 0) {
+          setLabelText(FULL_LABEL.slice(0, currentLen));
+        } else {
+          if (intervalId) clearInterval(intervalId);
+          setIsCollapsed(true);
+        }
+      }, 70);
+    }, 2200);
+
+    return () => {
+      clearTimeout(startDelay);
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, []);
 
   useEffect(() => {
     if (trackingNumber) {
@@ -126,14 +161,6 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
     }
   }, []);
 
-  function getCurrentTime() {
-    return new Date().toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
-  }
-
   const toggleVoice = () => {
     if (!recognitionRef.current) return;
     if (isListening) {
@@ -170,7 +197,6 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
     const text = (manualText || input).trim();
     if (!text || loading) return;
 
-    // Check if user provided or updated a tracking number
     const extracted = text.match(/\bSX-[A-Za-z0-9]+\b/i)?.[0]?.toUpperCase();
     const currentCode = extracted || activeCode || trackingNumber;
 
@@ -190,7 +216,6 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
     setLoading(true);
 
     try {
-      // Send directly to LLM endpoint
       const res = await fetch("/api/ai/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -231,28 +256,27 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
     }
   };
 
-  const suggestions = [
-    "Where is my package right now?",
-    "When will it be delivered?",
-    "What was the latest status update?",
-    "Who is the sender & receiver?",
-  ];
-
   return (
     <>
-      {/* ── Launcher Button ──────────────────────────────────── */}
+      {/* Launcher Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
           aria-label="Open assistant"
-          className="fixed bottom-6 right-6 z-50 h-12 px-4 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2.5 text-xs font-semibold cursor-pointer border border-zinc-700/20"
+          className={`fixed bottom-6 right-6 z-50 h-12 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-900 shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300 ease-out flex items-center cursor-pointer border border-zinc-700/20 overflow-hidden ${
+            !isCollapsed ? "px-4 gap-2.5" : "w-12 justify-center p-0"
+          }`}
         >
           <NexiLogo size={20} />
-          <span>Ask Nexi</span>
+          {!isCollapsed && (
+            <span className="whitespace-nowrap text-xs font-semibold tracking-tight transition-all">
+              {labelText}
+            </span>
+          )}
         </button>
       )}
 
-      {/* ── Chat Modal ────────────────────────────────────────── */}
+      {/* Chat Modal */}
       {isOpen && (
         <div
           className={`fixed z-50 flex flex-col bg-white dark:bg-zinc-950 text-foreground border border-zinc-200 dark:border-zinc-800 shadow-2xl transition-all duration-200 ${
@@ -264,7 +288,7 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
           {/* Header */}
           <div className="px-4 py-3 border-b border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between shrink-0">
             <div className="flex items-center gap-2.5">
-              <NexiLogo size={26} />
+              <NexiLogo size={18} />
               <h3 className="font-semibold text-xs tracking-tight text-foreground">
                 Nexi AI
               </h3>
@@ -347,14 +371,14 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
               </div>
             )}
 
-            {/* Quick Suggestions (Prompts that send straight to LLM) */}
+            {/* Quick Suggestions */}
             {messages.length <= 2 && !loading && (
               <div className="pt-2 space-y-1.5">
                 <p className="text-[10px] text-zinc-400 font-medium px-1">
                   Suggested Questions
                 </p>
                 <div className="flex flex-wrap gap-1.5">
-                  {suggestions.map((chip) => (
+                  {SUGGESTIONS.map((chip) => (
                     <button
                       key={chip}
                       type="button"
