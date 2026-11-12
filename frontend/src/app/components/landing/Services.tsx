@@ -115,8 +115,8 @@ export default function Services() {
             clipPath: "inset(0 0% 0 0)",
             opacity: 1,
             x: 0,
-            duration: 1.1,
-            stagger: 0.18,
+            duration: 0.9,
+            stagger: 0.14,
             ease: "power3.out",
             scrollTrigger: {
               trigger: headingRef.current,
@@ -160,7 +160,7 @@ export default function Services() {
           initReveal();
         }
       },
-      { rootMargin: "450px 0px" }
+      { rootMargin: "400px 0px" }
     );
     observer.observe(sectionEl);
 
@@ -332,6 +332,7 @@ export default function Services() {
                         src={service.image}
                         alt={service.title}
                         fill
+                        loading="lazy"
                         sizes="(max-width: 768px) 100vw, 85vw"
                         className="object-cover object-center"
                       />

@@ -9,6 +9,7 @@ export default function CTA() {
                 src="/images/CTA.jpg"
                 alt=""
                 fill
+                loading="lazy"
                 sizes="100vw"
                 className="pointer-events-none origin-top-left scale-[1.45] object-cover object-left-top sm:scale-[1.35] lg:scale-100 lg:object-left-top xl:object-center"
             />

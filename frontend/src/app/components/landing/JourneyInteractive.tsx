@@ -135,33 +135,83 @@ function buildMotionTimeline(
             const pt = totalLen > 0 ? motionEl.getPointAtLength(tl.progress() * totalLen) : null;
             onProgress(pt ? { x: pt.x, y: pt.y } : null);
         },
-        scrollTrigger: { trigger: secEl, start: cfg.scrollStart, end: cfg.scrollEnd, scrub: 0.6 },
+        scrollTrigger: { trigger: secEl, start: cfg.scrollStart, end: cfg.scrollEnd, scrub: 0.4 },
     });
 
-    const innerImg = boxEl.querySelector("image");
-    gsap.set(boxEl, { transformOrigin: "50% 50%", autoAlpha: 1 });
-    if (innerImg) gsap.set(innerImg, { transformOrigin: "50% 50%", scale: 1 });
+    const cube = boxEl.querySelector<SVGGElement>(".box-cube");
+    gsap.set(boxEl, { x: cfg.boxStartX, y: -200, transformOrigin: "50% 50%", autoAlpha: 1 });
+    if (cube) gsap.set(cube, { transformOrigin: "50% 50%", scale: 1 });
 
     tl.to(boxEl, { motionPath: { path: motionEl, align: motionEl, alignOrigin: [0.5, 0.5], autoRotate: false }, ease: "none", duration: 10 }, 0);
 
-    if (innerImg && totalLen > 0) {
+    if (cube && totalLen > 0) {
         for (const s of STAGES) {
             const stageP = (cfg.startPad + (isMobile ? s.m.p : s.d.p) * visibleLen) / totalLen;
             const t = Math.max(0, stageP * 10 - 0.2);
-            tl.to(innerImg, { scale: 1.15, duration: 0.2, ease: "sine.inOut" }, t)
-                .to(innerImg, { scale: 1, duration: 0.2, ease: "sine.inOut" }, t + 0.2);
+            tl.to(cube, { scale: 1.15, duration: 0.2, ease: "sine.inOut" }, t)
+                .to(cube, { scale: 1, duration: 0.2, ease: "sine.inOut" }, t + 0.2);
         }
     }
 }
 
-function StageNode({ stage, isHit, showLines, isMobile }: { stage: Stage; isHit: boolean; showLines: boolean; isMobile: boolean }) {
+function StageBadgeNode({ stage, isHit, showLines, isMobile }: { stage: Stage; isHit: boolean; showLines: boolean; isMobile: boolean }) {
     const cfg = (isMobile ? TRACKS.mobile : TRACKS.desktop).node;
     const pos = isMobile ? stage.m : stage.d;
     const label = isMobile && "mLabel" in stage ? stage.mLabel : stage.label;
-    const line1 = isMobile && "mLine1" in stage ? stage.mLine1 : stage.line1;
-    const Icon = stage.icon;
-
     const badgeW = Math.max(cfg.badgeMinW, label.length * cfg.charW + cfg.badgePadW);
+    const highlighted = isHit || showLines;
+
+    return (
+        <g transform={`translate(${pos.x},${pos.y})`} style={INTER_FONT} className="pointer-events-none">
+            <rect
+                x={-badgeW / 2} y={cfg.badgeY} width={badgeW} height={cfg.badgeH} rx={cfg.rx}
+                fill={highlighted ? "#F0EA6F" : "rgba(255, 255, 255, 0.10)"}
+                stroke={highlighted ? "#f59e0b" : "#facc15"}
+                strokeWidth={highlighted ? 2 : 1.25}
+                className="transition-colors duration-300 drop-shadow-sm"
+            />
+            <text
+                x={0} y={cfg.badgeY + cfg.badgeH / 2} textAnchor="middle" dominantBaseline="central"
+                fill={highlighted ? "#09090b" : "#ffffff"} fillOpacity={highlighted ? 1 : 0.98}
+                fontSize={cfg.badgeFs} fontWeight="700"
+            >
+                {label}
+            </text>
+        </g>
+    );
+}
+
+function StageCircleNode({ stage, isHit, showLines, isMobile }: { stage: Stage; isHit: boolean; showLines: boolean; isMobile: boolean }) {
+    const cfg = (isMobile ? TRACKS.mobile : TRACKS.desktop).node;
+    const pos = isMobile ? stage.m : stage.d;
+    const Icon = stage.icon;
+    const highlighted = isHit || showLines;
+
+    return (
+        <g transform={`translate(${pos.x},${pos.y})`} style={INTER_FONT} className="pointer-events-none">
+            <circle
+                r={cfg.ringR} fill="none" stroke="#fde047" strokeWidth={cfg.ringStroke}
+                style={{ opacity: highlighted ? 1 : 0, transform: highlighted ? "scale(1)" : "scale(0.85)" }}
+                className="transition-all duration-300 ease-out"
+            />
+            <circle r={cfg.outerR} fill="#FDE68A" className="drop-shadow-sm" />
+            <circle r={cfg.innerR} fill="#ffffff" />
+            <g transform={`translate(${-cfg.iconSize / 2},${-cfg.iconSize / 2})`}>
+                <Icon
+                    size={cfg.iconSize}
+                    className="text-[#E22D22] stroke-[2] transition-colors duration-300"
+                    fill={highlighted ? "rgba(226, 45, 34, 0.16)" : "none"}
+                />
+            </g>
+        </g>
+    );
+}
+
+function StageCardNode({ stage, showLines, isMobile }: { stage: Stage; showLines: boolean; isMobile: boolean }) {
+    const cfg = (isMobile ? TRACKS.mobile : TRACKS.desktop).node;
+    const pos = isMobile ? stage.m : stage.d;
+    const line1 = isMobile && "mLine1" in stage ? stage.mLine1 : stage.line1;
+
     const dropBelowMobilePo = isMobile && stage.id === "po";
     const alignLeft = !dropBelowMobilePo && (pos.x > cfg.midX || (!isMobile && stage.id === "origin"));
     const dir = alignLeft ? -1 : 1;
@@ -189,13 +239,13 @@ function StageNode({ stage, isHit, showLines, isMobile }: { stage: Stage; isHit:
             gsap.fromTo(
                 cardEl,
                 { x: slideOffset, autoAlpha: 0, force3D: false },
-                { x: 0, autoAlpha: 1, duration: 0.36, ease: "power3.out", force3D: false, overwrite: "auto" }
+                { x: 0, autoAlpha: 1, duration: 0.25, ease: "power3.out", force3D: false, overwrite: "auto" }
             );
         } else {
             gsap.to(cardEl, {
                 x: showLines ? 0 : slideOffset,
                 autoAlpha: showLines ? 1 : 0,
-                duration: showLines ? 0.36 : 0.22,
+                duration: showLines ? 0.25 : 0.18,
                 ease: showLines ? "power3.out" : "power2.in",
                 force3D: false,
                 overwrite: "auto",
@@ -207,40 +257,8 @@ function StageNode({ stage, isHit, showLines, isMobile }: { stage: Stage; isHit:
         };
     }, [showLines, slideOffset]);
 
-    const highlighted = isHit || showLines;
-
     return (
         <g transform={`translate(${pos.x},${pos.y})`} style={INTER_FONT} className="pointer-events-none">
-            <circle
-                r={cfg.ringR} fill="none" stroke="#fde047" strokeWidth={cfg.ringStroke}
-                style={{ opacity: highlighted ? 1 : 0, transform: highlighted ? "scale(1)" : "scale(0.85)" }}
-                className="transition-all duration-300 ease-out"
-            />
-            <circle r={cfg.outerR} fill="#FDE68A" className="drop-shadow-sm" />
-            <circle r={cfg.innerR} fill="#ffffff" />
-            <g transform={`translate(${-cfg.iconSize / 2},${-cfg.iconSize / 2})`}>
-                <Icon
-                    size={cfg.iconSize}
-                    className="text-[#E22D22] stroke-[2] transition-colors duration-300"
-                    fill={highlighted ? "rgba(226, 45, 34, 0.16)" : "none"}
-                />
-            </g>
-
-            <rect
-                x={-badgeW / 2} y={cfg.badgeY} width={badgeW} height={cfg.badgeH} rx={cfg.rx}
-                fill={highlighted ? "#F0EA6F" : "rgba(255, 255, 255, 0.10)"}
-                stroke={highlighted ? "#f59e0b" : "#facc15"}
-                strokeWidth={highlighted ? 2 : 1.25}
-                className="transition-colors duration-300 drop-shadow-sm"
-            />
-            <text
-                x={0} y={cfg.badgeY + cfg.badgeH / 2} textAnchor="middle" dominantBaseline="central"
-                fill={highlighted ? "#09090b" : "#ffffff"} fillOpacity={highlighted ? 1 : 0.98}
-                fontSize={cfg.badgeFs} fontWeight="700"
-            >
-                {label}
-            </text>
-
             <g ref={cardRef} style={INITIAL_CALLOUT_STYLE}>
                 <rect x={cardX} y={cardY} width={cardW} height={cfg.cardH} rx={cfg.cardRx} fill="#ffffff" fillOpacity={1} className="drop-shadow-md" />
                 <text x={cardX + cfg.padX} y={cardY + cfg.ty1} fill="#09090b" fontSize={cfg.fs1} fontWeight="600">{line1}</text>
@@ -251,24 +269,64 @@ function StageNode({ stage, isHit, showLines, isMobile }: { stage: Stage; isHit:
 }
 
 function RouteSvg({
-    isMobile, motionRef, boxRef, scroll,
+    isMobile, motionRef, boxRef, scroll, variant,
 }: {
     isMobile: boolean;
     motionRef: RefObject<SVGPathElement | null>;
     boxRef: RefObject<SVGGElement | null>;
     scroll: ScrollState;
+    variant: "desktop" | "mobile";
 }) {
     const cfg = isMobile ? TRACKS.mobile : TRACKS.desktop;
+    const gradPrefix = `shipnex-box-${variant}`;
+
     return (
         <div className="relative z-20 w-full flex justify-center overflow-visible pointer-events-none">
             <svg viewBox={cfg.viewBox} className={`w-full ${cfg.maxW} overflow-visible h-auto`} preserveAspectRatio="xMidYMin meet">
+                <defs>
+                    <linearGradient id={`${gradPrefix}-0`} x1="4.74458" y1="1.68496" x2="22.1828" y2="3.08125" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#B12D13" />
+                        <stop offset="1" stopColor="#CF531D" />
+                    </linearGradient>
+                    <linearGradient id={`${gradPrefix}-1`} x1="4.95555" y1="1.67412" x2="23.157" y2="3.20619" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#A31D15" />
+                        <stop offset="1" stopColor="#D02A2A" />
+                    </linearGradient>
+                    <linearGradient id={`${gradPrefix}-2`} x1="4.7688" y1="1.71881" x2="22.2993" y2="3.10188" gradientUnits="userSpaceOnUse">
+                        <stop stopColor="#D94F4F" />
+                        <stop offset="1" stopColor="#C93724" />
+                    </linearGradient>
+                </defs>
+
+                {/* 1. Milestone Path Tracks */}
                 <path ref={motionRef} d={cfg.motionPath} fill="none" stroke="none" />
                 <path d={cfg.visiblePath} fill="none" stroke="#B2BEB5" strokeWidth={cfg.strokeW} strokeDasharray={cfg.dash} strokeLinecap="butt" strokeLinejoin="round" />
-                <g ref={boxRef} transform={`translate(${cfg.boxStartX}, -200)`}>
-                    <image href="/images/shipnex-box.svg" x={-cfg.boxW / 2} y={-cfg.boxH / 2} width={cfg.boxW} height={cfg.boxH} />
+
+                {/* 2. Cargo Box (Glides along route track, UNDER milestone circles & badges) */}
+                <g ref={boxRef} className="pointer-events-none">
+                    <g className="box-cube">
+                        <g transform={`translate(${-cfg.boxW / 2}, ${-cfg.boxH / 2}) scale(${cfg.boxW / 58})`}>
+                            <rect width="22.1464" height="22.6632" transform="matrix(0.998445 -0.0557446 0.547499 0.836807 6.35547 31.0669)" fill={`url(#${gradPrefix}-0)`} />
+                            <rect width="23.1311" height="22.5174" transform="matrix(0.450946 -0.892551 0.547499 0.836807 28.5469 29.9576)" fill={`url(#${gradPrefix}-1)`} />
+                            <rect width="22.2594" height="23.1185" transform="matrix(0.998445 -0.0557446 -0.450946 0.892551 16.7539 10.5552)" fill="#E0772C" />
+                            <rect width="22.2594" height="23.1185" transform="matrix(0.998445 -0.0557446 -0.450946 0.892551 16.7539 10.5552)" fill={`url(#${gradPrefix}-2)`} />
+                        </g>
+                    </g>
                 </g>
+
+                {/* 3. Milestone Stage Name Badges (ON TOP of box so box NEVER covers rectangle or text!) */}
                 {STAGES.map((s, idx) => (
-                    <StageNode key={s.id} stage={s} isHit={idx < scroll.passedCount} showLines={scroll.hoveringId === s.id} isMobile={isMobile} />
+                    <StageBadgeNode key={s.id} stage={s} isHit={idx < scroll.passedCount} showLines={scroll.hoveringId === s.id} isMobile={isMobile} />
+                ))}
+
+                {/* 4. Milestone Icon Circles (ON TOP of box so box NEVER covers circle!) */}
+                {STAGES.map((s, idx) => (
+                    <StageCircleNode key={s.id} stage={s} isHit={idx < scroll.passedCount} showLines={scroll.hoveringId === s.id} isMobile={isMobile} />
+                ))}
+
+                {/* 5. Milestone SLA / Manifest Callout Cards (Popup over everything) */}
+                {STAGES.map((s) => (
+                    <StageCardNode key={s.id} stage={s} showLines={scroll.hoveringId === s.id} isMobile={isMobile} />
                 ))}
             </svg>
         </div>
@@ -307,6 +365,6 @@ export default function JourneyInteractive({ sectionRef, variant }: JourneyInter
         };
     }, [sectionRef, isMobile]);
 
-    return <RouteSvg isMobile={isMobile} motionRef={motionRef} boxRef={boxRef} scroll={scroll} />;
+    return <RouteSvg isMobile={isMobile} motionRef={motionRef} boxRef={boxRef} scroll={scroll} variant={variant} />;
 }
 

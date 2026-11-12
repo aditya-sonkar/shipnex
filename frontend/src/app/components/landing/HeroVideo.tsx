@@ -9,35 +9,52 @@ export default function HeroVideo() {
         const video = videoRef.current;
         if (!video) return;
 
-        let started = false;
+        // Force mobile muted autoplay compliance
+        video.defaultMuted = true;
+        video.muted = true;
+        video.playsInline = true;
+
         const startVideo = () => {
-            if (started) return;
-            started = true;
-            video.src = "/videos/truck.mp4";
-            video.load();
+            if (!video.getAttribute("src")) {
+                video.src = "/videos/truck.mp4";
+            }
             const playPromise = video.play();
             if (playPromise) {
                 playPromise.catch(() => {
-                    // Ignore autoplay restrictions
+                    // Autoplay restriction fallback
                 });
             }
         };
 
-        const timer = setTimeout(startVideo, 6000);
-        const onInteract = () => startVideo();
-        window.addEventListener("pointerdown", onInteract, { once: true, passive: true });
-        window.addEventListener("pointermove", onInteract, { once: true, passive: true });
+        // Start video playback seamlessly after initial page load & paint settles
+        const scheduleStart = () => {
+            if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+                (window as unknown as { requestIdleCallback: (cb: () => void, opts?: { timeout: number }) => void }).requestIdleCallback(
+                    startVideo,
+                    { timeout: 1200 }
+                );
+            } else {
+                setTimeout(startVideo, 800);
+            }
+        };
+
+        if (document.readyState === "complete") {
+            scheduleStart();
+        } else {
+            window.addEventListener("load", scheduleStart, { once: true });
+        }
+
+        // Backup for mobile user interaction
+        const onInteract = () => {
+            startVideo();
+        };
         window.addEventListener("touchstart", onInteract, { once: true, passive: true });
-        window.addEventListener("keydown", onInteract, { once: true, passive: true });
-        window.addEventListener("scroll", onInteract, { once: true, passive: true });
+        window.addEventListener("pointerdown", onInteract, { once: true, passive: true });
 
         return () => {
-            clearTimeout(timer);
-            window.removeEventListener("pointerdown", onInteract);
-            window.removeEventListener("pointermove", onInteract);
+            window.removeEventListener("load", scheduleStart);
             window.removeEventListener("touchstart", onInteract);
-            window.removeEventListener("keydown", onInteract);
-            window.removeEventListener("scroll", onInteract);
+            window.removeEventListener("pointerdown", onInteract);
         };
     }, []);
 

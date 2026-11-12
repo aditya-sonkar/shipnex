@@ -41,6 +41,7 @@ export default function Footer() {
                                 alt="ShipNex"
                                 width={26}
                                 height={26}
+                                loading="lazy"
                                 className="pointer-events-none select-none"
                             />
                         </div>

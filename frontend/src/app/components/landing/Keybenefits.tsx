@@ -104,6 +104,8 @@ export default function Benefits() {
                             <img
                                 src={benefit.icon}
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                                 className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
                             />
                         </div>
@@ -123,6 +125,7 @@ export default function Benefits() {
                         src="/images/freight_benefits.jpg"
                         alt="Cargo Delivery"
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                     />
@@ -133,6 +136,7 @@ export default function Benefits() {
                         src="/images/flight_benefits.jpg"
                         alt=""
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                     />

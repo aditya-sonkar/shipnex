@@ -109,7 +109,7 @@ export default function AiShipmentAssistant({ trackingNumber }: AiShipmentAssist
           setIsCollapsed(true);
         }
       }, 70);
-    }, 2200);
+    }, 6000);
 
     return () => {
       clearTimeout(startDelay);

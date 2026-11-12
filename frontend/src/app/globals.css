@@ -101,8 +101,8 @@ body::after {
 
 @keyframes fade-in-up {
   from {
-    opacity: 0;
-    transform: translateY(30px);
+    opacity: 0.7;
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -111,7 +111,7 @@ body::after {
 }
 
 .animate-fade-in-up {
-  animation: fade-in-up 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fade-in-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Custom layout utility classes */

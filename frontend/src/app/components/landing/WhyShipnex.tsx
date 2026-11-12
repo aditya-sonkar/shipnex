@@ -105,6 +105,8 @@ export default function WhyShipnex() {
                             <img
                                 src={service.icon}
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                                 className="h-4 w-4 object-contain"
                             />
                         </div>
@@ -124,6 +126,7 @@ export default function WhyShipnex() {
                         src="/images/deliveryman.jpg"
                         alt="Cargo Delivery"
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                     />
@@ -134,6 +137,7 @@ export default function WhyShipnex() {
                         src="/images/railfreight.jpg"
                         alt=""
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                     />

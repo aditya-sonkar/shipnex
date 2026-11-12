@@ -28,7 +28,7 @@ export function useSectionReveal({ sectionRef, tagRef, headingRef, descRef, item
                     const tl = gsap.timeline({
                         scrollTrigger: {
                             trigger: sectionEl,
-                            start: "top 75%",
+                            start: "top 90%",
                             once: true,
                         },
                     });
@@ -36,7 +36,7 @@ export function useSectionReveal({ sectionRef, tagRef, headingRef, descRef, item
                     if (tagRef.current) {
                         tl.fromTo(
                             tagRef.current,
-                            { opacity: 0, x: -15 },
+                            { opacity: 0, x: -12 },
                             { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }
                         );
                     }
@@ -45,16 +45,16 @@ export function useSectionReveal({ sectionRef, tagRef, headingRef, descRef, item
                     if (textElements.length > 0) {
                         tl.fromTo(
                             textElements,
-                            { clipPath: "inset(0 100% 0 0)", opacity: 0, x: -25 },
+                            { clipPath: "inset(0 100% 0 0)", opacity: 0, x: -18 },
                             {
                                 clipPath: "inset(0 0% 0 0)",
                                 opacity: 1,
                                 x: 0,
-                                duration: 1.1,
-                                stagger: 0.18,
+                                duration: 0.85,
+                                stagger: 0.12,
                                 ease: "power3.out",
                             },
-                            "-=0.3"
+                            "-=0.25"
                         );
                     }
 
@@ -66,17 +66,17 @@ export function useSectionReveal({ sectionRef, tagRef, headingRef, descRef, item
                     if (items.length > 0) {
                         tl.fromTo(
                             items,
-                            { y: 70, opacity: 0, willChange: "transform, opacity" },
+                            { y: 30, opacity: 0, willChange: "transform, opacity" },
                             {
                                 y: 0,
                                 opacity: 1,
-                                duration: 0.85,
-                                stagger: 0.1,
+                                duration: 0.65,
+                                stagger: 0.08,
                                 ease: "power2.out",
                                 force3D: true,
                                 clearProps: "transform,willChange",
                             },
-                            "-=0.6"
+                            "-=0.35"
                         );
                     }
                 }, sectionRef);
@@ -90,7 +90,7 @@ export function useSectionReveal({ sectionRef, tagRef, headingRef, descRef, item
                     initReveal();
                 }
             },
-            { rootMargin: "350px 0px" }
+            { rootMargin: "300px 0px" }
         );
         observer.observe(sectionEl);
 

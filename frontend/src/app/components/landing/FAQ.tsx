@@ -42,7 +42,7 @@ const faqs = [
 ];
 export default function FAQ() {
 
-    const [openIndex, setOpenIndex] = useState<number | null>(1);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
     const sectionRef = useRef<HTMLElement>(null);
     const tagRef = useRef<HTMLSpanElement>(null);
     const headingRef = useRef<HTMLHeadingElement>(null);

@@ -84,6 +84,7 @@ export default function Features() {
                         src="/images/truck_img.webp"
                         alt="Logistics truck"
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 40vw"
                         className="object-cover"
                     />
@@ -105,6 +106,8 @@ export default function Features() {
                             <img
                                 src={feature.icon}
                                 alt=""
+                                loading="lazy"
+                                decoding="async"
                                 className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
                             />
                         </div>
@@ -154,6 +157,7 @@ export default function Features() {
                         src="/images/cargo_freight.png"
                         alt="Cargo handling"
                         fill
+                        loading="lazy"
                         sizes="(max-width: 1024px) 100vw, 25vw"
                         className="object-cover"
                     />

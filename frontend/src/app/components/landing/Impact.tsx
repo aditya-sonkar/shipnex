@@ -27,6 +27,8 @@ export default function Impact() {
                 <img
                     src="/images/cargoship_img.webp"
                     alt="Aerial Cargo Ship"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover object-center"
                 />
             </div>

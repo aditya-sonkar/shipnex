@@ -1,11 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState, type ComponentType } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ComponentType } from "react";
 import type { JourneyInteractiveProps } from "./JourneyInteractive";
+
+function subscribeMediaQuery(callback: () => void) {
+    const mq = window.matchMedia("(min-width: 768px)");
+    mq.addEventListener("change", callback);
+    return () => mq.removeEventListener("change", callback);
+}
+
+function getDesktopSnapshot() {
+    return window.matchMedia("(min-width: 768px)").matches;
+}
+
+function getServerSnapshot() {
+    return false;
+}
 
 export default function Journey() {
     const sectionRef = useRef<HTMLElement>(null);
     const [TrackComponent, setTrackComponent] = useState<ComponentType<JourneyInteractiveProps> | null>(null);
+    const isDesktop = useSyncExternalStore(subscribeMediaQuery, getDesktopSnapshot, getServerSnapshot);
 
     useEffect(() => {
         const secEl = sectionRef.current;
@@ -50,7 +65,7 @@ export default function Journey() {
                     <span className="text-[16vw] font-inter font-black uppercase text-white/5 tracking-tighter whitespace-nowrap">Corridors</span>
                 </div>
 
-                {TrackComponent ? (
+                {TrackComponent && isDesktop ? (
                     <TrackComponent sectionRef={sectionRef} variant="desktop" />
                 ) : (
                     <div className="relative z-20 w-full flex justify-center overflow-visible pointer-events-none">
@@ -75,7 +90,7 @@ export default function Journey() {
                     <span className="text-[17vw] font-inter font-black uppercase text-white/5 tracking-tighter whitespace-nowrap">Corridors</span>
                 </div>
 
-                {TrackComponent ? (
+                {TrackComponent && !isDesktop ? (
                     <TrackComponent sectionRef={sectionRef} variant="mobile" />
                 ) : (
                     <div className="relative z-20 w-full flex justify-center overflow-visible pointer-events-none">

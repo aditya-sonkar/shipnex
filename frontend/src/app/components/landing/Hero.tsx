@@ -13,6 +13,7 @@ export default function Hero() {
                     alt=""
                     fill
                     priority
+                    loading="eager"
                     fetchPriority="high"
                     sizes="100vw"
                     aria-hidden="true"
@@ -41,7 +42,7 @@ export default function Hero() {
             <div className="relative z-20 mx-auto w-full max-w-screen-2xl px-6 md:px-12 lg:px-16 flex-grow flex flex-col justify-center pt-12 md:pt-16">
                 <div className="w-full">
                     <h1
-                        className="animate-fade-in-up font-dm font-light uppercase text-[clamp(44px,7.8vw,140px)] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
+                        className="font-dm font-light uppercase text-[clamp(44px,7.8vw,140px)] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
                     >
                         Logistics
                         <br />
