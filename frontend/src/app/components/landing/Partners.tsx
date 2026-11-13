@@ -104,15 +104,16 @@ export default function Partners() {
     };
 
     return (
-        <section id="partners" ref={sectionRef} className="bg-white px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-12">
-            {/* Header */}
+        <section id="partners" ref={sectionRef} className="bg-white px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-10">
+            <div className="mx-auto w-full max-w-[1720px]">
+                {/* Header */}
             <div className="mb-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:items-end lg:mb-14">
                 <div>
                     <span className="mb-4 flex items-center gap-2 text-xs font-medium tracking-wider text-neutral-600 uppercase">
                         <span className="h-1.5 w-1.5 bg-neutral-600" />
                         OUR PARTNERS
                     </span>
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[4vw] font-semibold leading-[1.05] tracking-[-0.04em]">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-[clamp(3.25rem,4.2vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.04em]">
                         Global partner network.
                     </h2>
                 </div>
@@ -176,6 +177,7 @@ export default function Partners() {
                         />
                     )}
                 </div>
+            </div>
             </div>
         </section>
     );

@@ -5,7 +5,7 @@ import HeroVideo from "./HeroVideo";
 
 export default function Hero() {
     return (
-        <section className="relative z-20 isolate w-full h-screen min-h-[680px] overflow-hidden flex flex-col justify-between pt-28 pb-8 md:pb-12 text-white bg-zinc-950 select-none">
+        <section className="relative z-20 isolate w-full h-screen min-h-[680px] overflow-hidden flex flex-col justify-between px-4 sm:px-8 md:px-10 lg:px-12 pt-28 pb-8 md:pb-12 text-white bg-zinc-950 select-none">
             {/* Background Video with Poster Fallback */}
             <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden z-0">
                 <Image
@@ -39,7 +39,7 @@ export default function Hero() {
             </div>
 
             {/* Main Content Area - Giant Typography */}
-            <div className="relative z-20 mx-auto w-full max-w-screen-2xl px-6 md:px-12 lg:px-16 flex-grow flex flex-col justify-center pt-12 md:pt-16">
+            <div className="relative z-20 mx-auto w-full max-w-[1720px] flex-grow flex flex-col justify-center pt-12 md:pt-16">
                 <div className="w-full">
                     <h1
                         className="font-dm font-light uppercase text-[clamp(44px,7.8vw,140px)] leading-[0.88] tracking-[-0.01em] text-white/95 text-left"
@@ -52,23 +52,23 @@ export default function Hero() {
             </div>
 
             {/* Bottom Section - Paragraph & Action Buttons */}
-            <div className="relative z-20 mx-auto w-full max-w-screen-2xl px-6 md:px-12 lg:px-16 mt-auto pb-6 md:pb-10">
-                <div className="flex flex-col items-start gap-4 max-w-xl">
-                    <p className="font-dm text-xs sm:text-sm text-white/85 leading-relaxed font-normal text-pretty">
+            <div className="relative z-20 mx-auto w-full max-w-[1720px] mt-auto pb-6 md:pb-10">
+                <div className="flex flex-col items-start gap-4 max-w-xl lg:max-w-2xl">
+                    <p className="font-dm text-xs sm:text-sm lg:text-[clamp(14px,0.85vw+4px,18px)] text-white/85 leading-relaxed font-normal text-pretty">
                         ShipNex is a versatile logistics intelligence platform covering dynamic routing, fleet telemetry, and real-time corridor orchestration at scale.
                     </p>
 
                     <div className="flex flex-wrap items-center gap-3.5 pt-1">
                         <Link
                             href="/track"
-                            className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-white text-zinc-950 font-inter font-bold text-xs uppercase tracking-widest hover:bg-[#fde047] transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
+                            className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 lg:px-8 lg:py-3.5 rounded-full bg-white text-zinc-950 font-inter font-bold text-xs lg:text-[clamp(11px,0.7vw+3px,13px)] uppercase tracking-widest hover:bg-[#fde047] transition-all shadow-xl hover:scale-[1.02] active:scale-[0.98]"
                         >
                             <Search className="w-3.5 h-3.5" />
                             Track Shipment »
                         </Link>
                         <a
                             href="#journey"
-                            className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 rounded-full bg-white/[0.08] hover:bg-white/[0.16] backdrop-blur-md border border-white/20 text-white font-inter font-semibold text-xs uppercase tracking-widest transition-all hover:border-white/40 active:scale-[0.98]"
+                            className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 lg:px-8 lg:py-3.5 rounded-full bg-white/[0.08] hover:bg-white/[0.16] backdrop-blur-md border border-white/20 text-white font-inter font-semibold text-xs lg:text-[clamp(11px,0.7vw+3px,13px)] uppercase tracking-widest transition-all hover:border-white/40 active:scale-[0.98]"
                         >
                             Explore Platform »
                         </a>

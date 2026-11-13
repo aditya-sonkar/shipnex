@@ -127,7 +127,7 @@ export default function Navbar() {
             }}
             className="fixed top-0 left-0 right-0 z-50 pointer-events-none py-3 sm:py-4"
         >
-            <div className="relative mx-auto flex w-full h-12 sm:h-14 items-center justify-between px-4 sm:px-6 md:px-10 lg:px-14">
+            <div className="relative flex w-full h-12 sm:h-14 items-center justify-between px-4 sm:px-6 md:px-10 lg:px-14 2xl:px-16">
                 {/* Left Section: Logo (Vertically centered) */}
                 <div className={`flex items-center gap-3 sm:gap-6 pointer-events-auto shrink-0 transition-opacity duration-300 ${isScrolled ? "opacity-0 pointer-events-none" : "opacity-100"}`}>
                     <a

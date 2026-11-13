@@ -19,28 +19,28 @@ const benefits: BenefitItem[] = [
         icon: "/images/svg/insurance.svg",
         title: "INSURANCE COVERAGE",
         description:
-            "Protecting your shipments with reliable coverage, ensuring peace of mind throughout every stage of transit.",
+            "Comprehensive cargo coverage protecting shipments against transit loss and damage.",
     },
     {
         id: "02",
         icon: "/images/svg/vehicle_time.svg",
         title: "ON-TIME GUARANTEED",
         description:
-            "We ensure timely deliveries with reliable transportation across global destinations.",
+            "Punctual arrivals guaranteed with optimized route schedules and priority dispatch.",
     },
     {
         id: "03",
         icon: "/images/svg/call_support.svg",
-        title: "24/7 SUPPORT",
+        title: "24/7 DEDICATED SUPPORT",
         description:
-            "Our dedicated support team is always within reach, ready to assist with queries and resolve concerns anytime.",
+            "Dedicated logistics support available around the clock to resolve any urgent inquiry.",
     },
     {
         id: "04",
         icon: "/images/svg/paperwork.svg",
-        title: "HASSLEFREE PAPERWORK",
+        title: "HASSLE-FREE PAPERWORK",
         description:
-            "Every shipment is backed by streamlined digital documentation, reducing manual work, avoiding errors, and keeping the process smooth.",
+            "Automated customs filing and digital clearances to eliminate export delays.",
     },
 ];
 
@@ -57,9 +57,10 @@ export default function Benefits() {
     return (
         <section
             ref={sectionRef}
-            className="bg-[#F9F9FB] px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-12"
+            className="overflow-hidden bg-[#F9F9FB] px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-10"
         >
-            {/* Header */}
+            <div className="mx-auto w-full max-w-[1720px]">
+                {/* Header */}
             <div className="mb-10 grid grid-cols-1 gap-6 sm:mb-14 sm:gap-8 md:grid-cols-2 lg:mb-20">
                 <div>
                     <span
@@ -72,7 +73,7 @@ export default function Benefits() {
 
                     <h2
                         ref={headingRef}
-                        className="max-w-none text-3xl sm:text-4xl md:text-5xl lg:text-[4.2vw] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em] will-change-[clip-path,transform]"
+                        className="max-w-none text-3xl sm:text-4xl md:text-5xl lg:text-[clamp(3.25rem,4.2vw,4.5rem)] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em] will-change-[clip-path,transform]"
                     >
                         Benefits of our all freight services
                     </h2>
@@ -86,11 +87,11 @@ export default function Benefits() {
                 </p>
             </div>
 
-            <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-[1fr_0.7fr_0.3fr_0.7fr_1fr]">
+            <div ref={gridRef} className="grid grid-cols-2 lg:grid-cols-[1fr_0.7fr_0.3fr_0.7fr_1fr] w-full min-w-0">
                 {benefits.map((benefit) => (
                     <div
                         key={benefit.id}
-                        className={`group flex flex-col justify-between border border-neutral-200 bg-white p-3.5 sm:p-5 lg:p-6 transition-colors hover:bg-neutral-50/50 aspect-square lg:aspect-[5/4] ${benefit.id === "01"
+                        className={`group flex flex-col justify-between border border-neutral-200 bg-white p-3.5 sm:p-5 lg:p-6 transition-colors hover:bg-neutral-50/50 w-full min-w-0 max-w-full aspect-square lg:aspect-[5/4] ${benefit.id === "01"
                             ? "order-2 lg:order-2 col-span-1 lg:col-span-2"
                             : benefit.id === "02"
                                 ? "order-3 lg:order-3 col-span-1 lg:col-span-1"
@@ -100,16 +101,16 @@ export default function Benefits() {
                                     "order-6 lg:order-5 col-span-1 lg:col-span-2"
                             }`}
                     >
-                        <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center bg-neutral-100">
+                        <div className="flex h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 items-center justify-center bg-neutral-100">
                             <img
                                 src={benefit.icon}
                                 alt=""
                                 loading="lazy"
                                 decoding="async"
-                                className="h-4 w-4 sm:h-5 sm:w-5 object-contain"
+                                className="h-3.5 w-3.5 sm:h-4 sm:w-4 object-contain"
                             />
                         </div>
-                        <div className="mt-2">
+                        <div className="mt-2 sm:mt-auto">
                             <h3 className="mb-1 sm:mb-2 text-xs sm:text-base lg:text-lg xl:text-xl font-semibold uppercase tracking-[-0.02em] leading-snug">
                                 {benefit.title}
                             </h3>
@@ -141,6 +142,7 @@ export default function Benefits() {
                         className="object-cover"
                     />
                 </div>
+            </div>
             </div>
         </section>
     )

@@ -26,14 +26,14 @@ const PLATFORM_LINKS = [
 
 export default function Footer() {
     return (
-        <footer id="contact" className="relative z-20 w-full border-t border-neutral-200 bg-white px-4 pt-14 pb-8 font-dm text-black select-none sm:px-8 md:px-10 lg:px-12">
-            <div className="w-full">
+        <footer id="contact" className="relative z-20 w-full border-t border-neutral-200 bg-white px-4 py-8 font-dm text-black select-none sm:px-8 md:px-10 lg:px-12 lg:py-10">
+            <div className="mx-auto w-full max-w-[1720px]">
                 {/* Main Content Grid */}
-                <div className="grid grid-cols-2 gap-8 pb-12 md:grid-cols-12 lg:gap-12">
+                <div className="grid grid-cols-2 gap-8 pb-12 md:grid-cols-12 lg:gap-12 xl:gap-16">
                     {/* Brand & Contact Column */}
                     <div className="col-span-2 flex flex-col gap-3.5 md:col-span-5">
                         <div className="flex items-center gap-2.5">
-                            <Link href="/" className="font-inter text-3xl font-extrabold tracking-tight text-black transition-opacity hover:opacity-90">
+                            <Link href="/" className="font-inter text-3xl lg:text-[clamp(28px,1.8vw+10px,36px)] font-extrabold tracking-tight text-black transition-opacity hover:opacity-90">
                                 shipnex
                             </Link>
                             <Image
@@ -46,11 +46,11 @@ export default function Footer() {
                             />
                         </div>
 
-                        <p className="max-w-sm font-dm text-xs leading-relaxed text-neutral-700 sm:text-sm">
+                        <p className="max-w-md font-dm text-xs leading-relaxed text-neutral-700 sm:text-sm lg:text-[clamp(13px,0.75vw+4px,16px)]">
                             Autonomous multi-modal freight forwarding, predictive customs clearance, and real-time corridor orchestration across 140+ countries.
                         </p>
 
-                        <div className="pt-0.5 font-inter text-xs text-neutral-700">
+                        <div className="pt-0.5 font-inter text-xs lg:text-[clamp(12px,0.7vw+3px,15px)] text-neutral-700">
                             <a href="mailto:support@shipnex.com" className="transition-colors hover:text-black hover:underline underline-offset-4">
                                 support@shipnex.com
                             </a>
@@ -112,11 +112,11 @@ export default function Footer() {
 
                     {/* Services Column */}
                     <div className="col-span-1 flex flex-col gap-2.5 md:col-span-3">
-                        <h3 className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-900">
+                        <h3 className="mb-1 text-xs lg:text-[clamp(11px,0.65vw+3px,14px)] font-semibold uppercase tracking-wider text-neutral-900">
                             Services
                         </h3>
                         {SERVICE_LINKS.map((item) => (
-                            <Link key={item.label} href={item.href} className="text-xs text-neutral-700 transition-colors hover:text-black sm:text-sm">
+                            <Link key={item.label} href={item.href} className="text-xs text-neutral-700 transition-colors hover:text-black sm:text-sm lg:text-[clamp(12px,0.7vw+4px,15px)]">
                                 {item.label}
                             </Link>
                         ))}
@@ -124,11 +124,11 @@ export default function Footer() {
 
                     {/* Company Column */}
                     <div className="col-span-1 flex flex-col gap-2.5 md:col-span-2">
-                        <h3 className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-900">
+                        <h3 className="mb-1 text-xs lg:text-[clamp(11px,0.65vw+3px,14px)] font-semibold uppercase tracking-wider text-neutral-900">
                             Company
                         </h3>
                         {COMPANY_LINKS.map((item) => (
-                            <Link key={item.label} href={item.href} className="text-xs text-neutral-700 transition-colors hover:text-black sm:text-sm">
+                            <Link key={item.label} href={item.href} className="text-xs text-neutral-700 transition-colors hover:text-black sm:text-sm lg:text-[clamp(12px,0.7vw+4px,15px)]">
                                 {item.label}
                             </Link>
                         ))}
@@ -136,11 +136,11 @@ export default function Footer() {
 
                     {/* Platform & Support Column */}
                     <div className="col-span-2 flex flex-col gap-2.5 md:col-span-2">
-                        <h3 className="mb-1 text-xs font-semibold uppercase tracking-wider text-neutral-900">
+                        <h3 className="mb-1 text-xs lg:text-[clamp(11px,0.65vw+3px,14px)] font-semibold uppercase tracking-wider text-neutral-900">
                             Platform
                         </h3>
                         {PLATFORM_LINKS.map((item) => (
-                            <Link key={item.label} href={item.href} className="text-xs text-neutral-700 transition-colors hover:text-black sm:text-sm">
+                            <Link key={item.label} href={item.href} className="text-xs text-neutral-700 transition-colors hover:text-black sm:text-sm lg:text-[clamp(12px,0.7vw+4px,15px)]">
                                 {item.label}
                             </Link>
                         ))}
@@ -148,7 +148,7 @@ export default function Footer() {
                 </div>
 
                 {/* Sub-Footer Strip */}
-                <div className="flex flex-col items-start justify-between gap-2 border-t border-neutral-200 pt-6 pr-16 text-xs text-neutral-700 sm:flex-row sm:items-center sm:pr-20 sm:text-sm">
+                <div className="flex flex-col items-start justify-between gap-2 border-t border-neutral-200 pt-6 pr-16 text-xs text-neutral-700 sm:flex-row sm:items-center sm:pr-20 sm:text-sm lg:text-[clamp(12px,0.65vw+3px,14px)]">
                     <p>© {new Date().getFullYear()} ShipNex. All rights reserved.</p>
                     <p className="text-neutral-700">Multi-modal freight, customs &amp; tracking</p>
                 </div>

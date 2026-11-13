@@ -20,7 +20,7 @@ export default function Impact() {
     return (
         <section
             id="purpose"
-            className="relative w-full min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] flex items-center select-none overflow-hidden"
+            className="relative w-full min-h-[480px] sm:min-h-[540px] lg:min-h-[600px] flex items-center select-none overflow-hidden px-4 sm:px-8 md:px-10 lg:px-12"
         >
             {/* Aerial cargo ship hero image */}
             <div className="absolute inset-0 z-0">
@@ -34,9 +34,9 @@ export default function Impact() {
             </div>
 
             {/* Newsletter section */}
-            <div className="relative z-10 mx-auto w-full max-w-screen-2xl px-6 sm:px-12 lg:px-20 py-20 sm:py-28 lg:py-32">
+            <div className="relative z-10 mx-auto w-full max-w-[1720px] py-20 sm:py-28 lg:py-32">
                 <div className="max-w-3xl">
-                    <h2 className="font-dm font-extrabold text-3xl sm:text-4xl lg:text-[52px] leading-[1.08] tracking-[-0.03em] text-white drop-shadow-md">
+                    <h2 className="font-dm font-extrabold text-3xl sm:text-4xl lg:text-[clamp(3rem,3.8vw,4.5rem)] leading-[1.08] tracking-[-0.03em] text-white drop-shadow-md">
                         Our Strategic Advantage?
                     </h2>
 

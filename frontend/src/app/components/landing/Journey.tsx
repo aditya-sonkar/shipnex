@@ -49,20 +49,20 @@ export default function Journey() {
     return (
         <section ref={sectionRef} id="journey" className="relative z-10 w-full bg-[#E22D22] text-white select-none overflow-hidden">
             {/* Desktop view */}
-            <div className="hidden md:block relative pb-0">
-                <div className="absolute top-8 lg:top-10 right-8 lg:right-14 max-w-md lg:max-w-xl xl:max-w-2xl z-10 pointer-events-none">
-                    <h2 className="font-dm text-3xl sm:text-4xl md:text-5xl lg:text-[4.2vw] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em] text-white">
+            <div className="hidden md:block relative pb-0 mx-auto w-full max-w-[1720px]">
+                <div className="absolute top-8 lg:top-12 right-8 lg:right-14 2xl:right-24 max-w-md lg:max-w-xl xl:max-w-2xl z-10 pointer-events-none">
+                    <h2 className="font-dm text-3xl sm:text-4xl md:text-5xl lg:text-[clamp(3rem,3.8vw,4.5rem)] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em] text-white">
                         Every Mile, <span className="text-[#fde047]">Tracked.</span>
                         <br />Every Border, Cleared
                     </h2>
-                    <p className="font-dm mt-3.5 text-base lg:text-lg text-white/85 leading-relaxed max-w-xl">
+                    <p className="font-dm mt-3.5 text-base lg:text-[clamp(15px,0.85vw+3px,17.5px)] text-white/85 leading-relaxed max-w-xl">
                         Autonomous multi-modal telemetry, predictive customs clearance, and self-healing delivery corridors across 140+ countries.
                     </p>
                 </div>
 
-                <div className="absolute top-[900px] right-8 lg:right-14 text-right pointer-events-none -z-10 flex flex-col items-end leading-[0.80]">
-                    <span className="text-[16vw] font-inter font-black uppercase text-white/5 tracking-tighter whitespace-nowrap">Global</span>
-                    <span className="text-[16vw] font-inter font-black uppercase text-white/5 tracking-tighter whitespace-nowrap">Corridors</span>
+                <div className="absolute top-[850px] lg:top-[900px] right-8 lg:right-14 2xl:right-24 text-right pointer-events-none -z-10 flex flex-col items-end leading-[0.80]">
+                    <span className="text-[clamp(4.5rem,8vw,10rem)] font-inter font-black uppercase text-white/5 tracking-tighter whitespace-nowrap">Global</span>
+                    <span className="text-[clamp(4.5rem,8vw,10rem)] font-inter font-black uppercase text-white/5 tracking-tighter whitespace-nowrap">Corridors</span>
                 </div>
 
                 {TrackComponent && isDesktop ? (

@@ -162,7 +162,7 @@ export function About() {
                 shipnex
             </div>
 
-            <div className="relative z-10">
+            <div className="relative z-10 mx-auto w-full max-w-[1720px]">
 
                 {/* ── MOBILE LAYOUT (hidden on md+) ── */}
                 <div className="md:hidden">
@@ -200,11 +200,11 @@ export function About() {
                                 key={service.number}
                                 className="w-[74vw] max-w-[275px] min-h-[175px] shrink-0 snap-start flex flex-col justify-between gap-6 border border-neutral-200/70 bg-white p-5"
                             >
-                                <div className="flex h-9 w-9 items-center justify-center bg-neutral-100">
+                                <div className="flex h-9 w-9 items-center justify-center bg-neutral-100 p-2">
                                     <img
                                         src={service.icon}
                                         alt=""
-                                        className="h-4.5 w-4.5 object-contain"
+                                        className="h-full w-full object-contain"
                                     />
                                 </div>
                                 <div>
@@ -250,7 +250,7 @@ export function About() {
                         </div>
 
                         <div className="col-span-8">
-                            <h2 className="text-3xl lg:text-4xl xl:text-[38px] font-normal leading-[1.2] tracking-[-0.03em] text-neutral-900">
+                            <h2 className="text-3xl lg:text-4xl xl:text-[clamp(34px,2.5vw,40px)] font-normal leading-[1.2] tracking-[-0.03em] text-neutral-900">
                                 We help businesses streamline global logistics with{" "}
                                 <span className="text-[#dc2626] font-medium">reliable, efficient,</span>{" "}
                                 and scalable solutions that keep supply chains moving forward.
@@ -267,11 +267,11 @@ export function About() {
                                     key={service.number}
                                     className="flex min-h-[168px] flex-col justify-between gap-6 border border-neutral-200/60 bg-[#FAFAFA]/70 p-5 transition-colors hover:bg-neutral-50"
                                 >
-                                    <div className="flex h-9 w-9 items-center justify-center bg-white border border-neutral-200/60">
+                                    <div className="flex h-9 w-9 items-center justify-center bg-white border border-neutral-200/60 p-2">
                                         <img
                                             src={service.icon}
                                             alt=""
-                                            className="h-4 w-4 object-contain"
+                                            className="h-full w-full object-contain"
                                         />
                                     </div>
                                     <div>

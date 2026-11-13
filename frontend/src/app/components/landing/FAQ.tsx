@@ -51,8 +51,8 @@ export default function FAQ() {
     useSectionReveal({ sectionRef, tagRef, headingRef, descRef, itemsRef });
 
     return (
-        <section id="faq" ref={sectionRef} className="bg-white px-4 py-10 text-black sm:px-8 md:px-10 lg:px-12 lg:py-12">
-            <div>
+        <section id="faq" ref={sectionRef} className="overflow-hidden bg-white px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-10">
+            <div className="mx-auto w-full max-w-[1720px]">
                 <div>
                     <span
                         ref={tagRef}
@@ -62,14 +62,15 @@ export default function FAQ() {
                         FREQUENTLY ASKED QUESTIONS
                     </span>
                 </div>
-                <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
+                <div className="grid grid-cols-1 gap-6 sm:gap-8 lg:grid-cols-12 lg:gap-12 xl:gap-16">
                     <div className="flex flex-col justify-between lg:col-span-5">
-                        <h2 ref={headingRef} className="max-w-sm text-4xl font-semibold leading-[1.03] tracking-[-0.04em] sm:text-5xl lg:text-[3.5rem]">
+                        <h2 ref={headingRef} className="max-w-md text-4xl font-semibold leading-[1.03] tracking-[-0.04em] sm:text-5xl lg:text-[clamp(3.25rem,4.2vw,4.5rem)]">
                             Got questions? we’ve got answers.
                         </h2>
 
-                        <div className="mt-10 lg:mt-0">
-                            <p ref={descRef} className="mb-5 max-w-[270px] text-sm leading-relaxed text-neutral-700">
+                        {/* Desktop CTA (pinned to bottom of left column) */}
+                        <div className="hidden lg:block mt-10 lg:mt-0">
+                            <p ref={descRef} className="mb-5 max-w-[320px] text-sm lg:text-[15px] leading-relaxed text-neutral-700">
                                 Can&apos;t find your answer? No worries, ask our team, and we&apos;ll get back to you right away.
                             </p>
                             <a
@@ -85,39 +86,56 @@ export default function FAQ() {
                         </div>
                     </div>
 
-                    <div ref={itemsRef} className="flex flex-col gap-2.5 lg:col-span-7">
-                        {faqs.map((faq, i) => {
-                            const isOpen = openIndex === i;
-                            return (
-                                <div
-                                    key={faq.question}
-                                    className="border border-neutral-200 bg-white"
-                                >
-                                    <button
-                                        type="button"
-                                        aria-expanded={isOpen}
-                                        onClick={() => setOpenIndex(isOpen ? null : i)}
-                                        className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left sm:px-6"
+                    <div className="flex flex-col lg:col-span-7">
+                        <div ref={itemsRef} className="flex flex-col gap-2.5">
+                            {faqs.map((faq, i) => {
+                                const isOpen = openIndex === i;
+                                return (
+                                    <div
+                                        key={faq.question}
+                                        className="border border-neutral-200 bg-white"
                                     >
-                                        <span className="text-[15px] font-medium text-neutral-900">
-                                            {faq.question}
-                                        </span>
-                                        {isOpen ? (
-                                            <Minus className="h-4 w-4 shrink-0 text-neutral-700" />
-                                        ) : (
-                                            <Plus className="h-4 w-4 shrink-0 text-neutral-700" />
-                                        )}
-                                    </button>
-                                    <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
-                                        <div className="overflow-hidden">
-                                            <p className="px-5 pb-4 text-sm leading-relaxed text-neutral-500 sm:px-6 sm:pb-5">
-                                                {faq.answer}
-                                            </p>
+                                        <button
+                                            type="button"
+                                            aria-expanded={isOpen}
+                                            onClick={() => setOpenIndex(isOpen ? null : i)}
+                                            className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left sm:px-6 lg:py-5"
+                                        >
+                                            <span className="text-[15px] lg:text-[clamp(15px,0.8vw+6px,18px)] font-medium text-neutral-900">
+                                                {faq.question}
+                                            </span>
+                                            {isOpen ? (
+                                                <Minus className="h-4 w-4 shrink-0 text-neutral-700" />
+                                            ) : (
+                                                <Plus className="h-4 w-4 shrink-0 text-neutral-700" />
+                                            )}
+                                        </button>
+                                        <div className={`grid transition-all duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                                            <div className="overflow-hidden">
+                                                <p className="px-5 pb-4 text-sm lg:text-[clamp(13px,0.75vw+4px,16px)] leading-relaxed text-neutral-500 sm:px-6 sm:pb-5">
+                                                    {faq.answer}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            );
-                        })}
+                                );
+                            })}
+                        </div>
+
+                        {/* Mobile CTA (shown at the end of the FAQ list) */}
+                        <div className="mt-8 lg:hidden">
+                            <p className="mb-4 max-w-sm text-sm leading-relaxed text-neutral-700">
+                                Can&apos;t find your answer? No worries, ask our team, and we&apos;ll get back to you right away.
+                            </p>
+                            <a
+                                href="#contact"
+                                className="inline-flex items-center gap-2.5 bg-black px-5 py-3 text-xs font-medium tracking-wider text-white uppercase transition-colors hover:bg-neutral-800"
+                            >
+                                <span className="h-1.5 w-1.5 bg-white" />
+                                ASK QUESTIONS
+                                <CornerDownRight className="h-3.5 w-3.5" />
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

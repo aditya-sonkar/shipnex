@@ -75,14 +75,6 @@ export default function Services() {
 
     let ctx: gsap.Context | null = null;
     const initReveal = () => {
-      if (typeof document !== "undefined" && "fonts" in document && !document.getElementById("inter-slashed-font")) {
-        const style = document.createElement("style");
-        style.id = "inter-slashed-font";
-        style.textContent =
-          '@font-face{font-family:"InterSlashed";src:url("/fonts/inter/InterVariable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+0030-0039;}';
-        document.head.appendChild(style);
-      }
-
       gsap.registerPlugin(ScrollTrigger);
       ctx = gsap.context(() => {
         if (tagRef.current) {
@@ -210,9 +202,10 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative z-20 bg-[#F9F9FB] px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-12"
+      className="relative z-20 bg-[#F9F9FB] px-4 py-8 text-black sm:px-8 md:px-10 lg:px-12 lg:py-10"
     >
-      {/* Header */}
+      <div className="mx-auto w-full max-w-[1720px]">
+        {/* Header */}
       <div className="mb-10 grid grid-cols-1 gap-6 sm:mb-14 sm:gap-8 md:grid-cols-2 lg:mb-20">
         <div>
           <span
@@ -225,7 +218,7 @@ export default function Services() {
 
           <h2
             ref={headingRef}
-            className="max-w-none text-3xl sm:text-4xl md:text-5xl lg:text-[4.2vw] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em] will-change-[clip-path,transform]"
+            className="max-w-none text-3xl sm:text-4xl md:text-5xl lg:text-[clamp(3.25rem,4.2vw,4.5rem)] font-semibold leading-[1.05] lg:leading-[0.95] tracking-[-0.04em] will-change-[clip-path,transform]"
           >
             Logistics solutions for your business.
           </h2>
@@ -262,9 +255,9 @@ export default function Services() {
                 onClick={() =>
                   setActiveIndex(isActive ? -1 : index)
                 }
-                className={`grid w-full grid-cols-[50px_1fr_24px] items-start gap-4 px-5 text-left md:grid-cols-[90px_1fr_24px] md:px-8 ${isActive ? "pt-6 pb-5 md:pt-7 md:pb-6" : "py-6 md:py-7"}`}
+                className={`grid w-full grid-cols-[38px_1fr_24px] sm:grid-cols-[48px_1fr_24px] md:grid-cols-[64px_1fr_24px] items-start gap-3 sm:gap-4 px-5 text-left md:px-8 ${isActive ? "pt-6 pb-5 md:pt-7 md:pb-6" : "py-6 md:py-7"}`}
               >
-                <span className="font-slashed text-3xl font-light">
+                <span className={`font-dm text-base sm:text-lg md:text-xl font-medium tracking-tight pt-0.5 tabular-nums ${isActive ? "text-neutral-400" : "text-neutral-400"}`}>
                   {service.number}
                 </span>
 
@@ -284,9 +277,9 @@ export default function Services() {
                 </div>
 
                 {isActive ? (
-                  <Minus size={22} strokeWidth={1.5} />
+                  <Minus size={22} strokeWidth={1.5} className="mt-0.5 shrink-0" />
                 ) : (
-                  <Plus size={22} strokeWidth={1.5} />
+                  <Plus size={22} strokeWidth={1.5} className="mt-0.5 shrink-0" />
                 )}
               </button>
 
@@ -305,7 +298,7 @@ export default function Services() {
                 }}
               >
                 {/* Uses the exact same 3-column grid as the header: [number | content | icon] */}
-                <div className="grid w-full grid-cols-[50px_1fr_24px] gap-4 px-5 pb-6 text-left md:grid-cols-[90px_1fr_24px] md:px-8 md:pb-8">
+                <div className="grid w-full grid-cols-[38px_1fr_24px] sm:grid-cols-[48px_1fr_24px] md:grid-cols-[64px_1fr_24px] gap-3 sm:gap-4 px-5 pb-6 text-left md:px-8 md:pb-8">
                   {/* Col 1: Empty spacer under the number */}
                   <div />
 
@@ -327,7 +320,7 @@ export default function Services() {
                     </div>
 
                     {/* Image: Aligned with the heading and spans smoothly */}
-                    <div className="relative aspect-[16/10] sm:aspect-[16/9] md:aspect-[1.85/1] w-full overflow-hidden">
+                    <div className="relative aspect-[16/10] sm:aspect-[16/9] md:aspect-[2/1] w-full overflow-hidden">
                       <Image
                         src={service.image}
                         alt={service.title}
@@ -343,6 +336,7 @@ export default function Services() {
             </div>
           );
         })}
+      </div>
       </div>
     </section>
   );

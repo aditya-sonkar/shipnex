@@ -155,9 +155,4 @@ body::after {
   pointer-events: none;
 }
 
-/* Slashed-zero display numerals (font loaded lazily when #services enters proximity) */
-.font-slashed {
-  font-family: "InterSlashed", var(--font-inter), "Inter", sans-serif;
-  font-variant-numeric: slashed-zero tabular-nums;
-  font-feature-settings: "zero" 1, "tnum" 1;
-}
+

@@ -25,27 +25,27 @@ export default function LandingPage() {
             <About />
           </Suspense>
           <Suspense>
-            <Features />
+            <Services />
           </Suspense>
         </div>
         <Suspense>
+          <Features />
+        </Suspense>
+        <Suspense>
           <Journey />
-        </Suspense>
-        <Suspense>
-          <Services />
-        </Suspense>
-        <Suspense>
-          <Keybenefits />
         </Suspense>
         <Suspense>
           <WhyShipnex />
         </Suspense>
         <Suspense>
+          <Keybenefits />
+        </Suspense>
+        <Suspense>
           <Partners />
         </Suspense>
-        <CTA />
+        <FAQ />
         <Suspense>
-          <FAQ />
+          <CTA />
         </Suspense>
         <Footer />
         <Suspense>
